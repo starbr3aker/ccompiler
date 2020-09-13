@@ -10,6 +10,7 @@
 	#define ANSI_COLOR_MAGENTA	"\x1b[35m"
 	#define ANSI_COLOR_CYAN		"\x1b[36m"
 	#define ANSI_COLOR_RESET	"\x1b[0m"
+	#define tablesize 			1007
 
 	struct symboltable
 	{
@@ -19,14 +20,14 @@
 		char value[100];
 		int lineno;
 		int length;
-	}ST[1007];
+	}ST[tablesize];
 
 	struct constanttable
 	{
 		char name[100];
 		char type[100];
 		int length;
-	}CT[1007];
+	}CT[tablesize];
 
 	int hash(char *str)
 	{
@@ -34,9 +35,9 @@
 		for(int i = 0 ; i < strlen(str) ; i++)
 		{
 			value = 10*value + (str[i] - 'A');
-			value = value % 1007;
+			value = value % tablesize;
 			while(value < 0)
-				value = value + 1007;
+				value = value + tablesize;
 		}
 		return value;
 	}
@@ -54,7 +55,7 @@
 		}
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1007)
+			for(int i = value + 1 ; i!=value ; i = (i+1)%tablesize)
 			{
 				if(strcmp(ST[i].name,str)==0)
 				{
@@ -74,7 +75,7 @@
 			return 1;
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1007)
+			for(int i = value + 1 ; i!=value ; i = (i+1)%tablesize)
 			{
 				if(strcmp(CT[i].name,str)==0)
 				{
@@ -105,7 +106,7 @@
 
 			int pos = 0;
 
-			for (int i = value + 1 ; i!=value ; i = (i+1)%1007)
+			for (int i = value + 1 ; i!=value ; i = (i+1)%tablesize)
 			{
 				if(ST[i].length == 0)
 				{
@@ -122,7 +123,7 @@
 
 	void insertSTtype(char *str1, char *str2)
 	{
-		for(int i = 0 ; i < 1007 ; i++)
+		for(int i = 0 ; i < tablesize ; i++)
 		{
 			if(strcmp(ST[i].name,str1)==0)
 			{
@@ -133,7 +134,7 @@
 
 	void insertSTvalue(char *str1, char *str2)
 	{
-		for(int i = 0 ; i < 1007 ; i++)
+		for(int i = 0 ; i < tablesize ; i++)
 		{
 			if(strcmp(ST[i].name,str1)==0)
 			{
@@ -144,7 +145,7 @@
 
 	void insertSTline(char *str1, int line)
 	{
-		for(int i = 0 ; i < 1007 ; i++)
+		for(int i = 0 ; i < tablesize ; i++)
 		{
 			if(strcmp(ST[i].name,str1)==0)
 			{
@@ -170,7 +171,7 @@
 
 			int pos = 0;
 
-			for (int i = value + 1 ; i!=value ; i = (i+1)%1007)
+			for (int i = value + 1 ; i!=value ; i = (i+1)%tablesize)
 			{
 				if(CT[i].length == 0)
 				{
@@ -192,7 +193,7 @@
 			printf("-");
 		}
 		printf("\n");
-		for(int i = 0 ; i < 1007 ; i++)
+		for(int i = 0 ; i < tablesize ; i++)
 		{
 			if(ST[i].length == 0)
 			{
@@ -210,7 +211,7 @@
 			printf("-");
 		}
 		printf("\n");
-		for(int i = 0 ; i < 1007 ; i++)
+		for(int i = 0 ; i < tablesize ; i++)
 		{
 			if(CT[i].length == 0)
 				continue;
