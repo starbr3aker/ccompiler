@@ -677,7 +677,7 @@ static const char *const yytname[] =
   "')'", "'.'", "$accept", "code", "decl_list", "D", "decl", "var_decl",
   "var_decl_list", "V", "var_decl_identifier", "$@1",
   "var_decl_identification", "identifier_array_type",
-  "initilization_params", "initilization", "type_specifier",
+  "initialization_params", "initialization", "type_specifier",
   "unsigned_grammar", "signed_grammar", "long_grammar", "short_grammar",
   "struct_decl", "$@2", "V1", "structure_decl", "funct_decl",
   "funct_decl_type", "funct_decl_params", "params", "parameters_list",
@@ -685,7 +685,7 @@ static const char *const yytname[] =
   "param_identifier", "$@3", "param_identifier_parts", "stmt",
   "compound_stmt", "statment_list", "expression_stmt", "conditional_stmt",
   "conditional_stmt_parts", "iterative_stmt", "flow_stmt",
-  "string_initilization", "array_initialization", "array_int_decl",
+  "string_initialization", "array_initiaalization", "array_int_decl",
   "array_int_decl_parts", "expression", "expression_parts",
   "simple_expression", "simple_expression_parts", "and_expression",
   "and_expression_parts", "unary_relation_expression",
@@ -1934,7 +1934,7 @@ int main(int argc , char **argv)
 
 	if(flag == 0)
 	{
-		printf(TERM_GRN "21Parsing completed succesfully" TERM_DEF "\n");
+		printf(TERM_GRN "Parsing  succesfully" TERM_DEF "\n");
 		printf(TERM_CYN "SYMBOL TABLE" TERM_DEF "\n", " ");
 
 		printST();

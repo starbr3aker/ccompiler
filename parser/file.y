@@ -96,16 +96,16 @@ var_decl_identification
 			| assignment_operator expression ; 
 
 identifier_array_type
-			: '[' initilization_params
+			: '[' initialization_params
 			| ;
 
-initilization_params
-			: integer_constant ']' initilization
-			| ']' string_initilization;
+initialization_params
+			: integer_constant ']' initialization
+			| ']' string_initialization;
 
-initilization
-			: string_initilization
-			| array_initialization
+initialization
+			: string_initialization
+			| array_initiaalization
 			| ;
 
 storage_class_specifier
@@ -216,10 +216,10 @@ flow_stmt
 			| RETURN ';'
 			| RETURN expression ';'
 
-string_initilization
+string_initialization
 			: assignment_operator string_constant { insV(); };
 
-array_initialization
+array_initiaalization
 			: assignment_operator '{' array_int_decl '}';
 
 array_int_decl
