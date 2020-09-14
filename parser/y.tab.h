@@ -66,47 +66,48 @@ extern int yydebug;
     FOR = 272,
     DO = 273,
     BREAK = 274,
-    ENDIF = 275,
-    identifier = 276,
-    integer_constant = 277,
-    string_constant = 278,
-    float_constant = 279,
-    character_constant = 280,
-    ELSE = 281,
-    leftshift_assignment_operator = 282,
-    rightshift_assignment_operator = 283,
-    XOR_assignment_operator = 284,
-    OR_assignment_operator = 285,
-    AND_assignment_operator = 286,
-    modulo_assignment_operator = 287,
-    multiplication_assignment_operator = 288,
-    division_assignment_operator = 289,
-    addition_assignment_operator = 290,
-    subtraction_assignment_operator = 291,
-    assignment_operator = 292,
-    OR_operator = 293,
-    AND_operator = 294,
-    pipe_operator = 295,
-    caret_operator = 296,
-    amp_operator = 297,
-    equality_operator = 298,
-    inequality_operator = 299,
-    lessthan_assignment_operator = 300,
-    lessthan_operator = 301,
-    greaterthan_assignment_operator = 302,
-    greaterthan_operator = 303,
-    leftshift_operator = 304,
-    rightshift_operator = 305,
-    add_operator = 306,
-    subtract_operator = 307,
-    multiplication_operator = 308,
-    division_operator = 309,
-    modulo_operator = 310,
-    SIZEOF = 311,
-    tilde_operator = 312,
-    exclamation_operator = 313,
-    increment_operator = 314,
-    decrement_operator = 315
+    CONTINUE = 275,
+    ENDIF = 276,
+    identifier = 277,
+    integer_constant = 278,
+    string_constant = 279,
+    float_constant = 280,
+    character_constant = 281,
+    ELSE = 282,
+    leftshift_assignment_operator = 283,
+    rightshift_assignment_operator = 284,
+    XOR_assignment_operator = 285,
+    OR_assignment_operator = 286,
+    AND_assignment_operator = 287,
+    modulo_assignment_operator = 288,
+    multiplication_assignment_operator = 289,
+    division_assignment_operator = 290,
+    addition_assignment_operator = 291,
+    subtraction_assignment_operator = 292,
+    assignment_operator = 293,
+    OR_operator = 294,
+    AND_operator = 295,
+    pipe_operator = 296,
+    caret_operator = 297,
+    amp_operator = 298,
+    equality_operator = 299,
+    inequality_operator = 300,
+    leq_operator = 301,
+    le_operator = 302,
+    geq_operator = 303,
+    ge_operator = 304,
+    leftshift_operator = 305,
+    rightshift_operator = 306,
+    add_operator = 307,
+    subtract_operator = 308,
+    multiplication_operator = 309,
+    division_operator = 310,
+    modulo_operator = 311,
+    SIZEOF = 312,
+    tilde_operator = 313,
+    exclamation_operator = 314,
+    increment_operator = 315,
+    decrement_operator = 316
   };
 #endif
 /* Tokens.  */
@@ -127,47 +128,48 @@ extern int yydebug;
 #define FOR 272
 #define DO 273
 #define BREAK 274
-#define ENDIF 275
-#define identifier 276
-#define integer_constant 277
-#define string_constant 278
-#define float_constant 279
-#define character_constant 280
-#define ELSE 281
-#define leftshift_assignment_operator 282
-#define rightshift_assignment_operator 283
-#define XOR_assignment_operator 284
-#define OR_assignment_operator 285
-#define AND_assignment_operator 286
-#define modulo_assignment_operator 287
-#define multiplication_assignment_operator 288
-#define division_assignment_operator 289
-#define addition_assignment_operator 290
-#define subtraction_assignment_operator 291
-#define assignment_operator 292
-#define OR_operator 293
-#define AND_operator 294
-#define pipe_operator 295
-#define caret_operator 296
-#define amp_operator 297
-#define equality_operator 298
-#define inequality_operator 299
-#define lessthan_assignment_operator 300
-#define lessthan_operator 301
-#define greaterthan_assignment_operator 302
-#define greaterthan_operator 303
-#define leftshift_operator 304
-#define rightshift_operator 305
-#define add_operator 306
-#define subtract_operator 307
-#define multiplication_operator 308
-#define division_operator 309
-#define modulo_operator 310
-#define SIZEOF 311
-#define tilde_operator 312
-#define exclamation_operator 313
-#define increment_operator 314
-#define decrement_operator 315
+#define CONTINUE 275
+#define ENDIF 276
+#define identifier 277
+#define integer_constant 278
+#define string_constant 279
+#define float_constant 280
+#define character_constant 281
+#define ELSE 282
+#define leftshift_assignment_operator 283
+#define rightshift_assignment_operator 284
+#define XOR_assignment_operator 285
+#define OR_assignment_operator 286
+#define AND_assignment_operator 287
+#define modulo_assignment_operator 288
+#define multiplication_assignment_operator 289
+#define division_assignment_operator 290
+#define addition_assignment_operator 291
+#define subtraction_assignment_operator 292
+#define assignment_operator 293
+#define OR_operator 294
+#define AND_operator 295
+#define pipe_operator 296
+#define caret_operator 297
+#define amp_operator 298
+#define equality_operator 299
+#define inequality_operator 300
+#define leq_operator 301
+#define le_operator 302
+#define geq_operator 303
+#define ge_operator 304
+#define leftshift_operator 305
+#define rightshift_operator 306
+#define add_operator 307
+#define subtract_operator 308
+#define multiplication_operator 309
+#define division_operator 310
+#define modulo_operator 311
+#define SIZEOF 312
+#define tilde_operator 313
+#define exclamation_operator 314
+#define increment_operator 315
+#define decrement_operator 316
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

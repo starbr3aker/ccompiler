@@ -9,9 +9,9 @@
 	void insV();
 	int flag=0;
 
-	#define TERM_RED		"\x1b[31m"
+	#define TERM_RED	"\x1b[31m"
 	#define TERM_GRN	"\x1b[32m"
-	#define TERM_CYN		"\x1b[36m"
+	#define TERM_CYN	"\x1b[36m"
 	#define TERM_DEF	"\x1b[0m"
 
 	extern char curid[20];
@@ -25,7 +25,7 @@
 %token RETURN MAIN
 %token VOID
 %token WHILE FOR DO 
-%token BREAK
+%token BREAK CONTINUE
 %token ENDIF
 %expect 2
 
@@ -47,7 +47,7 @@
 %left caret_operator
 %left amp_operator
 %left equality_operator inequality_operator
-%left lessthan_assignment_operator lessthan_operator greaterthan_assignment_operator greaterthan_operator
+%left leq_operator le_operator geq_operator ge_operator
 %left leftshift_operator rightshift_operator 
 %left add_operator subtract_operator
 %left multiplication_operator division_operator modulo_operator
@@ -57,10 +57,10 @@
 %left increment_operator decrement_operator 
 
 
-%start program
+%start code
 
 %%
-program
+code
 			: declaration_list;
 
 declaration_list
@@ -71,22 +71,22 @@ D
 			| ;
 
 declaration
-			: variable_declaration 
-			| function_declaration
-			| structure_definition;
+			: var_declaration 
+			| func_declaration
+			| struct_declaration;
 
-variable_declaration
-			: type_specifier variable_declaration_list ';' 
+var_declaration
+			: type_specifier var_declaration_list ';' 
 			| structure_declaration;
 
-variable_declaration_list
-			: variable_declaration_identifier V;
+var_declaration_list
+			: var_declaration_identifier V;
 
 V
-			: ',' variable_declaration_list 
+			: ',' var_declaration_list 
 			| ;
 
-variable_declaration_identifier 
+var_declaration_identifier 
 			: identifier { ins(); } vdi;
 
 vdi : identifier_array_type | assignment_operator expression ; 
@@ -105,7 +105,10 @@ initilization
 			| ;
 
 type_specifier 
-			: INT | CHAR | FLOAT | DOUBLE 
+			: INT 
+			| CHAR 
+			| FLOAT 
+			| DOUBLE 
 			| LONG long_grammar 
 			| SHORT short_grammar
 			| UNSIGNED unsigned_grammar 
@@ -124,22 +127,22 @@ long_grammar
 short_grammar 
 			: INT | ;
 
-structure_definition
+struct_declaration
 			: STRUCT identifier { ins(); } '{' V1  '}' ';';
 
-V1 : variable_declaration V1 | ;
+V1 : var_declaration V1 | ;
 
 structure_declaration 
-			: STRUCT identifier variable_declaration_list;
+			: STRUCT identifier var_declaration_list;
 
 
-function_declaration
-			: function_declaration_type function_declaration_param_statement;
+func_declaration
+			: func_declaration_type func_declaration_param_statement;
 
-function_declaration_type
+func_declaration_type
 			: type_specifier identifier '('  { ins();};
 
-function_declaration_param_statement
+func_declaration_param_statement
 			: params ')' statement;
 
 params 
@@ -163,10 +166,12 @@ param_identifier_breakup
 			| ;
 
 statement 
-			: expression_statment | compound_statement 
-			| conditional_statements | iterative_statements 
-			| return_statement | break_statement 
-			| variable_declaration;
+			: expression_statment 
+			| compound_statement 
+			| conditional_statements 
+			| iterative_statements 
+			| flow_statement
+			| var_declaration;
 
 compound_statement 
 			: '{' statment_list '}' ;
@@ -191,15 +196,11 @@ iterative_statements
 			| FOR '(' expression ';' simple_expression ';' expression ')' 
 			| DO statement WHILE '(' simple_expression ')' ';';
 
-return_statement 
-			: RETURN return_statement_breakup;
-
-return_statement_breakup
-			: ';' 
-			| expression ';' ;
-
-break_statement 
-			: BREAK ';' ;
+flow_statement
+			: CONTINUE ';'
+			| BREAK ';'
+			| RETURN ';'
+			| RETURN expression ';'
 
 string_initilization
 			: assignment_operator string_constant { insV(); };
@@ -253,8 +254,12 @@ regular_expression_breakup
 			| ;
 
 relational_operators 
-			: greaterthan_assignment_operator | lessthan_assignment_operator | greaterthan_operator 
-			| lessthan_operator | equality_operator | inequality_operator ;
+			: geq_operator 
+			| leq_operator 
+			| ge_operator 
+			| le_operator 
+			| equality_operator 
+			| inequality_operator ;
 
 sum_expression 
 			: sum_expression sum_operators term 
@@ -269,10 +274,13 @@ term
 			| factor ;
 
 MULOP 
-			: multiplication_operator | division_operator | modulo_operator ;
+			: multiplication_operator 
+			| division_operator 
+			| modulo_operator ;
 
 factor 
-			: immutable | mutable ;
+			: immutable 
+			| mutable ;
 
 mutable 
 			: identifier 
@@ -323,13 +331,12 @@ int main(int argc , char **argv)
 
 	if(flag == 0)
 	{
-		printf(TERM_GRN "Status: Parsing Complete - Valid" TERM_DEF "\n");
-		printf("%30s" TERM_CYN "SYMBOL TABLE" TERM_DEF "\n", " ");
-		printf("%30s %s\n", " ", "------------");
+		printf(TERM_GRN "Parsing completed succesfully" TERM_DEF "\n");
+		printf(TERM_CYN "SYMBOL TABLE" TERM_DEF "\n", " ");
+
 		printST();
 
-		printf("\n\n%30s" TERM_CYN "CONSTANT TABLE" TERM_DEF "\n", " ");
-		printf("%30s %s\n", " ", "--------------");
+		printf("\n\n" TERM_CYN "CONSTANT TABLE" TERM_DEF "\n");
 		printCT();
 	}
 }
@@ -338,7 +345,7 @@ void yyerror(char *s)
 {
 	printf("%d %s %s\n", yylineno, s, yytext);
 	flag=1;
-	printf(TERM_RED "Status: Parsing Failed - Invalid\n" TERM_DEF);
+	printf(TERM_RED "Parsing Failed: Invalid input\n" TERM_DEF);
 }
 
 void ins()

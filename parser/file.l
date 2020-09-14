@@ -10,22 +10,22 @@
 	#define TERM_MGT	"\x1b[35m"
 	#define TERM_CYN	"\x1b[36m"
 	#define TERM_DEF	"\x1b[0m"
-	#define tablesize 			1007
+	#define tablesize 	1007
 
 	struct symboltable
 	{
-		char name[100];
-		char class[100];
-		char type[100];
-		char value[100];
+		char name[20];
+		char class[20];
+		char type[20];
+		char value[20];
 		int lineno;
 		int length;
 	}ST[tablesize];
 
 	struct constanttable
 	{
-		char name[100];
-		char type[100];
+		char name[20];
+		char type[20];
 		int length;
 	}CT[tablesize];
 
@@ -246,34 +246,40 @@ IN "include"
 ":"				{ return(':'); }
 "."				{ return('.'); }
 
-"char"			{ strcpy(curtype,yytext); insertST(yytext, "Keyword"); return CHAR;}
-"double"		{ strcpy(curtype,yytext); insertST(yytext, "Keyword"); return DOUBLE;}
-"else"			{ insertSTline(yytext, yylineno); insertST(yytext, "Keyword"); return ELSE;}
-"float"			{ strcpy(curtype,yytext); insertST(yytext, "Keyword");return FLOAT;}
-"while"			{ insertST(yytext, "Keyword"); return WHILE;}
-"do"			{ insertST(yytext, "Keyword"); return DO;}
-"for"			{ insertST(yytext, "Keyword"); return FOR;}
-"if"			{ insertST(yytext, "Keyword"); return IF;}
-"int"			{ strcpy(curtype,yytext); insertST(yytext, "Keyword");return INT;}
-"long"			{ strcpy(curtype,yytext); insertST(yytext, "Keyword");  return LONG;}
-"return"		{ insertST(yytext, "Keyword");  return RETURN;}
-"short"			{ strcpy(curtype,yytext); insertST(yytext, "Keyword");  return SHORT;}
-"signed"		{ strcpy(curtype,yytext); insertST(yytext, "Keyword");  return SIGNED;}
-"sizeof" 		{ insertST(yytext, "Keyword");  return SIZEOF;}
-"struct"		{ strcpy(curtype,yytext); insertST(yytext, "Keyword");  return STRUCT;}
-"unsigned"		{ insertST(yytext, "Keyword");  return UNSIGNED;}
-"void"			{ strcpy(curtype,yytext); insertST(yytext, "Keyword");  return VOID;}
-"break"			{ insertST(yytext, "Keyword");  return BREAK;}
 
+"int"			{ strcpy(curtype,yytext); insertST(yytext, "keyword");return INT;}
+"char"			{ strcpy(curtype,yytext); insertST(yytext, "keyword"); return CHAR;}
+"float"			{ strcpy(curtype,yytext); insertST(yytext, "keyword");return FLOAT;}
+"double"		{ strcpy(curtype,yytext); insertST(yytext, "keyword"); return DOUBLE;}
+"void"			{ strcpy(curtype,yytext); insertST(yytext, "keyword");  return VOID;}
+
+"long"			{ strcpy(curtype,yytext); insertST(yytext, "keyword");  return LONG;}
+"short"			{ strcpy(curtype,yytext); insertST(yytext, "keyword");  return SHORT;}
+"signed"		{ strcpy(curtype,yytext); insertST(yytext, "keyword");  return SIGNED;}
+"unsigned"		{ insertST(yytext, "keyword");  return UNSIGNED;}
+
+"if"			{ insertST(yytext, "keyword"); return IF;}
+"else"			{ insertSTline(yytext, yylineno); insertST(yytext, "keyword"); return ELSE;}
+
+"while"			{ insertST(yytext, "keyword"); return WHILE;}
+"do"			{ insertST(yytext, "keyword"); return DO;}
+"for"			{ insertST(yytext, "keyword"); return FOR;}
+
+"break"			{ insertST(yytext, "keyword"); return BREAK;}
+"continue"		{ insertST(yytext, "keyword"); return CONTINUE;}
+"return"		{ insertST(yytext, "keyword");  return RETURN;}
+
+"sizeof" 		{ insertST(yytext, "keyword");  return SIZEOF;}
+"struct"		{ strcpy(curtype,yytext); insertST(yytext, "keyword");  return STRUCT;}
 
 "++"			{ return increment_operator; }
 "--"			{ return decrement_operator; }
 "<<"			{ return leftshift_operator; }
 ">>"			{ return rightshift_operator; }
-"<="			{ return lessthan_assignment_operator; }
-"<"				{ return lessthan_operator; }
-">="			{ return greaterthan_assignment_operator; }
-">"				{ return greaterthan_operator; }
+"<="			{ return leq_operator; }
+"<"				{ return le_operator; }
+">="			{ return geq_operator; }
+">"				{ return ge_operator; }
 "=="			{ return equality_operator; }
 "!="			{ return inequality_operator; }
 "&&"			{ return AND_operator; }
@@ -298,14 +304,14 @@ IN "include"
 "/"				{ return division_operator; }
 "%"				{ return modulo_operator; }
 "|"				{ return pipe_operator; }
-\=				{ return assignment_operator;}
+"="				{ return assignment_operator;}
 
-\"[^\n]*\"/[;|,|\)] 			{strcpy(curval,yytext); insertCT(yytext,"String Constant"); return string_constant;}
-\'[A-Z|a-z]\'/[;|,|\)|:] 		{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); return character_constant;}
-[a-z|A-Z]([a-z|A-Z]|[0-9])*/\[ 	{strcpy(curid,yytext); insertST(yytext, "Array Identifier");  return identifier;}
-[1-9][0-9]*|0/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\]|\}|:|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Number Constant"); return integer_constant;}
-([0-9]*)\.([0-9]+)/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); return float_constant;}
-[A-Za-z_][A-Za-z_0-9]* {strcpy(curid,yytext);insertST(yytext,"Identifier");  return identifier;}
+\"[^\n]*\"/[;|,|\)] 			{strcpy(curval,yytext); insertCT(yytext,"string constant"); return string_constant;}
+\'[A-Z|a-z]\'/[;|,|\)|:] 		{strcpy(curval,yytext); insertCT(yytext,"character constant"); return character_constant;}
+[a-z|A-Z]([a-z|A-Z]|[0-9])*/\[ 	{strcpy(curid,yytext); insertST(yytext, "array Identifier");  return identifier;}
+[1-9][0-9]*|0/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\]|\}|:|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "number constant"); return integer_constant;}
+([0-9]*)\.([0-9]+)/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "floating constant"); return float_constant;}
+[A-Za-z_][A-Za-z_0-9]* {strcpy(curid,yytext);insertST(yytext,"identifier");  return identifier;}
 
 (.?) {
 		if(yytext[0]=='#')
