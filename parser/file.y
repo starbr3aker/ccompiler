@@ -20,9 +20,12 @@
 
 %}
 
-%nonassoc IF
 %token INT CHAR FLOAT DOUBLE LONG SHORT SIGNED UNSIGNED STRUCT
 %token RETURN MAIN
+%token AUTO 
+%token REGISTER
+%token EXTERN
+%token STATIC
 %token VOID
 %token WHILE FOR DO 
 %token BREAK CONTINUE
@@ -32,11 +35,10 @@
 %token identifier
 %token integer_constant string_constant float_constant character_constant
 
+%nonassoc IF
 %nonassoc ELSE
 
-%right leftshift_assignment_operator rightshift_assignment_operator
-%right XOR_assignment_operator OR_assignment_operator
-%right AND_assignment_operator modulo_assignment_operator
+%right modulo_assignment_operator
 %right multiplication_assignment_operator division_assignment_operator
 %right addition_assignment_operator subtraction_assignment_operator
 %right assignment_operator
@@ -61,35 +63,37 @@
 
 %%
 code
-			: declaration_list;
+			: decl_list;
 
-declaration_list
-			: declaration D 
+decl_list
+			: decl D 
 
 D
-			: declaration_list
+			: decl_list
 			| ;
 
-declaration
-			: var_declaration 
-			| func_declaration
-			| struct_declaration;
+decl
+			: var_decl 
+			| funct_decl
+			| struct_decl;
 
-var_declaration
-			: type_specifier var_declaration_list ';' 
-			| structure_declaration;
+var_decl
+			: type_specifier var_decl_list ';' 
+			| structure_decl;
 
-var_declaration_list
-			: var_declaration_identifier V;
+var_decl_list
+			: var_decl_identifier V;
 
 V
-			: ',' var_declaration_list 
+			: ',' var_decl_list 
 			| ;
 
-var_declaration_identifier 
-			: identifier { ins(); } vdi;
+var_decl_identifier 
+			: identifier { ins(); } var_decl_identification;
 
-vdi : identifier_array_type | assignment_operator expression ; 
+var_decl_identification
+			: identifier_array_type 
+			| assignment_operator expression ; 
 
 identifier_array_type
 			: '[' initilization_params
@@ -104,6 +108,13 @@ initilization
 			| array_initialization
 			| ;
 
+storage_class_specifier
+			: AUTO 
+			| STATIC
+			| EXTERN
+			| REGISTER 
+			| ;
+
 type_specifier 
 			: INT 
 			| CHAR 
@@ -116,7 +127,10 @@ type_specifier
 			| VOID ;
 
 unsigned_grammar 
-			: INT | LONG long_grammar | SHORT short_grammar | ;
+			: INT 
+			| LONG long_grammar 
+			| SHORT short_grammar 
+			| ;
 
 signed_grammar 
 			: INT | LONG long_grammar | SHORT short_grammar | ;
@@ -127,23 +141,23 @@ long_grammar
 short_grammar 
 			: INT | ;
 
-struct_declaration
+struct_decl
 			: STRUCT identifier { ins(); } '{' V1  '}' ';';
 
-V1 : var_declaration V1 | ;
+V1 : var_decl V1 | ;
 
-structure_declaration 
-			: STRUCT identifier var_declaration_list;
+structure_decl 
+			: STRUCT identifier var_decl_list;
 
 
-func_declaration
-			: func_declaration_type func_declaration_param_statement;
+funct_decl
+			: funct_decl_type funct_decl_params;
 
-func_declaration_type
+funct_decl_type
 			: type_specifier identifier '('  { ins();};
 
-func_declaration_param_statement
-			: params ')' statement;
+funct_decl_params
+			: params ')' stmt;
 
 params 
 			: parameters_list | ;
@@ -152,51 +166,51 @@ parameters_list
 			: type_specifier parameters_identifier_list;
 
 parameters_identifier_list 
-			: param_identifier parameters_identifier_list_breakup;
+			: param_identifier parameters_identifier_list_parts;
 
-parameters_identifier_list_breakup
+parameters_identifier_list_parts
 			: ',' parameters_list 
 			| ;
 
 param_identifier 
-			: identifier { ins(); } param_identifier_breakup;
+			: identifier { ins(); } param_identifier_parts;
 
-param_identifier_breakup
+param_identifier_parts
 			: '[' ']'
 			| ;
 
-statement 
-			: expression_statment 
-			| compound_statement 
-			| conditional_statements 
-			| iterative_statements 
-			| flow_statement
-			| var_declaration;
+stmt 
+			: expression_stmt 
+			| compound_stmt 
+			| conditional_stmt
+			| iterative_stmt
+			| flow_stmt
+			| var_decl;
 
-compound_statement 
+compound_stmt 
 			: '{' statment_list '}' ;
 
 statment_list 
-			: statement statment_list 
+			: stmt statment_list 
 			| ;
 
-expression_statment 
+expression_stmt 
 			: expression ';' 
 			| ';' ;
 
-conditional_statements 
-			: IF '(' simple_expression ')' statement conditional_statements_breakup;
+conditional_stmt 
+			: IF '(' simple_expression ')' stmt conditional_stmt_parts;
 
-conditional_statements_breakup
-			: ELSE statement
+conditional_stmt_parts
+			: ELSE stmt
 			| ;
 
-iterative_statements 
-			: WHILE '(' simple_expression ')' statement 
+iterative_stmt 
+			: WHILE '(' simple_expression ')' stmt 
 			| FOR '(' expression ';' simple_expression ';' expression ')' 
-			| DO statement WHILE '(' simple_expression ')' ';';
+			| DO stmt WHILE '(' simple_expression ')' ';';
 
-flow_statement
+flow_stmt
 			: CONTINUE ';'
 			| BREAK ';'
 			| RETURN ';'
@@ -206,20 +220,20 @@ string_initilization
 			: assignment_operator string_constant { insV(); };
 
 array_initialization
-			: assignment_operator '{' array_int_declarations '}';
+			: assignment_operator '{' array_int_decl '}';
 
-array_int_declarations
-			: integer_constant array_int_declarations_breakup;
+array_int_decl
+			: integer_constant array_int_decl_parts;
 
-array_int_declarations_breakup
-			: ',' array_int_declarations 
+array_int_decl_parts
+			: ',' array_int_decl 
 			| ;
 
 expression 
-			: mutable expression_breakup
+			: mutable expression_parts
 			| simple_expression ;
 
-expression_breakup
+expression_parts
 			: assignment_operator expression 
 			| addition_assignment_operator expression 
 			| subtraction_assignment_operator expression 
@@ -230,16 +244,16 @@ expression_breakup
 			| decrement_operator ;
 
 simple_expression 
-			: and_expression simple_expression_breakup;
+			: and_expression simple_expression_parts;
 
-simple_expression_breakup 
-			: OR_operator and_expression simple_expression_breakup | ;
+simple_expression_parts 
+			: OR_operator and_expression simple_expression_parts | ;
 
 and_expression 
-			: unary_relation_expression and_expression_breakup;
+			: unary_relation_expression and_expression_parts;
 
-and_expression_breakup
-			: AND_operator unary_relation_expression and_expression_breakup
+and_expression_parts
+			: AND_operator unary_relation_expression and_expression_parts
 			| ;
 
 unary_relation_expression 
@@ -247,9 +261,9 @@ unary_relation_expression
 			| regular_expression ;
 
 regular_expression 
-			: sum_expression regular_expression_breakup;
+			: sum_expression regular_expression_parts;
 
-regular_expression_breakup
+regular_expression_parts
 			: relational_operators sum_expression 
 			| ;
 
@@ -284,9 +298,9 @@ factor
 
 mutable 
 			: identifier 
-			| mutable mutable_breakup;
+			| mutable mutable_parts;
 
-mutable_breakup
+mutable_parts
 			: '[' expression ']' 
 			| '.' identifier;
 
@@ -301,17 +315,17 @@ arguments
 			: arguments_list | ;
 
 arguments_list 
-			: expression A;
+			: expression E;
 
-A
-			: ',' expression A 
+E
+			: ',' expression E
 			| ;
 
 constant 
-			: integer_constant 	{ insV(); } 
-			| string_constant	{ insV(); } 
-			| float_constant	{ insV(); } 
-			| character_constant{ insV(); };
+			: integer_constant 		{ insV(); } 
+			| string_constant		{ insV(); } 
+			| float_constant		{ insV(); } 
+			| character_constant	{ insV(); };
 
 %%
 

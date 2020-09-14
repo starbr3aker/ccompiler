@@ -246,12 +246,12 @@ IN "include"
 ":"				{ return(':'); }
 "."				{ return('.'); }
 
-
-"int"			{ strcpy(curtype,yytext); insertST(yytext, "keyword");return INT;}
+"int"			{ strcpy(curtype,yytext); insertST(yytext, "keyword"); return INT;}
 "char"			{ strcpy(curtype,yytext); insertST(yytext, "keyword"); return CHAR;}
-"float"			{ strcpy(curtype,yytext); insertST(yytext, "keyword");return FLOAT;}
+"float"			{ strcpy(curtype,yytext); insertST(yytext, "keyword"); return FLOAT;}
 "double"		{ strcpy(curtype,yytext); insertST(yytext, "keyword"); return DOUBLE;}
-"void"			{ strcpy(curtype,yytext); insertST(yytext, "keyword");  return VOID;}
+"void"			{ strcpy(curtype,yytext); insertST(yytext, "keyword"); return VOID;}
+
 
 "long"			{ strcpy(curtype,yytext); insertST(yytext, "keyword");  return LONG;}
 "short"			{ strcpy(curtype,yytext); insertST(yytext, "keyword");  return SHORT;}
@@ -272,6 +272,7 @@ IN "include"
 "sizeof" 		{ insertST(yytext, "keyword");  return SIZEOF;}
 "struct"		{ strcpy(curtype,yytext); insertST(yytext, "keyword");  return STRUCT;}
 
+
 "++"			{ return increment_operator; }
 "--"			{ return decrement_operator; }
 "<<"			{ return leftshift_operator; }
@@ -290,11 +291,6 @@ IN "include"
 "%="			{ return modulo_assignment_operator; }
 "+="			{ return addition_assignment_operator; }
 "-="			{ return subtraction_assignment_operator; }
-"<<="			{ return leftshift_assignment_operator; }
-">>="			{ return rightshift_assignment_operator; }
-"&="			{ return AND_assignment_operator; }
-"^="			{ return XOR_assignment_operator; }
-"|="			{ return OR_assignment_operator; }
 "&"				{ return amp_operator; }
 "!"				{ return exclamation_operator; }
 "~"				{ return tilde_operator; }
