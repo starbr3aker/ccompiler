@@ -18,6 +18,4 @@ int main()
         a+=5;
         printf("Goodbye");
     }while(b<10);
-
-    return 0;
 }

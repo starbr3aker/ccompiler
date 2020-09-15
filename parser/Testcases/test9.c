@@ -16,5 +16,4 @@ int main()
 
 	else
 		printf("i is not present");
-	return 0;
 }

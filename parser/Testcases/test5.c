@@ -22,6 +22,4 @@ int main()
         printf("hello do while loop\n");
         temp = temp - 1;
     } while (temp > 10);
-
-    return 0;
 }
