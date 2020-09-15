@@ -108,7 +108,7 @@ initialization_params
 
 initialization
 			: string_initialization
-			| array_initiaalization
+			| array_initialization
 			| ;
 
 storage_class_specifier
@@ -227,7 +227,7 @@ flow_stmt
 string_initialization
 			: assignment_operator string_constant { insV(); };
 
-array_initiaalization
+array_initialization
 			: assignment_operator '{' array_int_decl '}';
 
 array_int_decl

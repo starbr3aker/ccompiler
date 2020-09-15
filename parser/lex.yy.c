@@ -909,7 +909,7 @@ char *yytext;
 
 	void printST()
 	{
-		printf("%10s | %15s | %10s | %10s | %10s | %10s\n","SYMBOL", "CLASS", "TYPE","VALUE", "LINE NO", "NESTING");
+		printf("%10s | %15s | %10s | %15s | %10s | %10s\n","SYMBOL", "CLASS", "TYPE","VALUE", "LINE NO", "NESTING");
 		for(int i=0;i<81;i++) {
 			printf("-");
 		}
@@ -920,14 +920,14 @@ char *yytext;
 			{
 				continue;
 			}
-			printf("%10s | %15s | %10s | %10s | %10d | %10d\n",ST[i].name, ST[i].class, ST[i].type, ST[i].value, ST[i].lineno, ST[i].nesting);
+			printf("%10s | %15s | %10s | %15s | %10d | %10d\n",ST[i].name, ST[i].class, ST[i].type, ST[i].value, ST[i].lineno, ST[i].nesting);
 		}
     }
 
 
 	void printCT()
 	{
-		printf("%10s | %15s | %10s\n","NAME", "TYPE", "NESTING");
+		printf("%15s | %15s | %10s\n","NAME", "TYPE", "NESTING");
 		for(int i=0;i<81;i++) {
 			printf("-");
 		}
@@ -937,7 +937,7 @@ char *yytext;
 			if(CT[i].length == 0)
 				continue;
 
-			printf("%10s | %15s  | %10d\n",CT[i].name, CT[i].type, CT[i].nesting);
+			printf("%15s | %15s  | %10d\n",CT[i].name, CT[i].type, CT[i].nesting);
 		}
 	}
 	char curid[20];
