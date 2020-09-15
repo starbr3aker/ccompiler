@@ -25,4 +25,5 @@ int main()
 			b--;
 		}
 	}
+	return n;
 }

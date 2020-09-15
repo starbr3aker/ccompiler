@@ -17,4 +17,5 @@ void func1(int n)
 void main()
 {
 	func1(0);
+	return 0;
 }

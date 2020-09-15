@@ -291,9 +291,9 @@ sum_operators
 			: add_operator 
 			| subtract_operator ;
 
-term		: factor A';
+term		: factor Ax;
 
-A'			: MULOP factor A' 
+Ax			: MULOP factor Ax 
 			| ;
 
 MULOP 
@@ -306,9 +306,9 @@ factor
 			| mutable ;
 
 
-mutable		: identifier B';
+mutable		: identifier Bx;
 
-B'			: mutable_parts B'
+Bx			: mutable_parts Bx
 			| ;
 
 mutable_parts
