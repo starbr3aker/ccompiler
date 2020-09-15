@@ -1929,6 +1929,7 @@ yyreturn:
 
 extern FILE *yyin;
 extern int yylineno;
+extern int nesting;
 extern char *yytext;
 void insertSTtype(char *,char *);
 void insertSTvalue(char *, char *);

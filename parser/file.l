@@ -2,7 +2,8 @@
 	#include <stdio.h>
 	#include <string.h>
 	#include "y.tab.h"
-
+	
+	int nesting = 0;
 	#define TERM_RED	"\x1b[31m"
 	#define TERM_GRN	"\x1b[32m"
 	#define TERM_YLW	"\x1b[33m"
@@ -19,6 +20,7 @@
 		char type[20];
 		char value[20];
 		int lineno;
+		int nesting;
 		int length;
 	}ST[tablesize];
 
@@ -27,6 +29,7 @@
 		char name[20];
 		char type[20];
 		int length;
+		int nesting;
 	}CT[tablesize];
 
 	int hash(char *str)
@@ -100,6 +103,7 @@
 				strcpy(ST[value].name,str1);
 				strcpy(ST[value].class,str2);
 				ST[value].length = strlen(str1);
+				ST[value].nesting=nesting;
 				insertSTline(str1,yylineno);
 				return;
 			}
@@ -166,6 +170,7 @@
 				strcpy(CT[value].name,str1);
 				strcpy(CT[value].type,str2);
 				CT[value].length = strlen(str1);
+				CT[value].nesting = nesting;
 				return;
 			}
 
@@ -188,7 +193,7 @@
 
 	void printST()
 	{
-		printf("%10s | %15s | %10s | %10s | %10s\n","SYMBOL", "CLASS", "TYPE","VALUE", "LINE NO");
+		printf("%10s | %15s | %10s | %10s | %10s | %10s\n","SYMBOL", "CLASS", "TYPE","VALUE", "LINE NO", "NESTING");
 		for(int i=0;i<81;i++) {
 			printf("-");
 		}
@@ -199,14 +204,14 @@
 			{
 				continue;
 			}
-			printf("%10s | %15s | %10s | %10s | %10d\n",ST[i].name, ST[i].class, ST[i].type, ST[i].value, ST[i].lineno);
+			printf("%10s | %15s | %10s | %10s | %10d | %10d\n",ST[i].name, ST[i].class, ST[i].type, ST[i].value, ST[i].lineno, ST[i].nesting);
 		}
     }
 
 
 	void printCT()
 	{
-		printf("%10s | %15s\n","NAME", "TYPE");
+		printf("%10s | %15s | %10s\n","NAME", "TYPE", "NESTING");
 		for(int i=0;i<81;i++) {
 			printf("-");
 		}
@@ -216,7 +221,7 @@
 			if(CT[i].length == 0)
 				continue;
 
-			printf("%10s | %15s\n",CT[i].name, CT[i].type);
+			printf("%10s | %15s  | %10d\n",CT[i].name, CT[i].type, CT[i].nesting);
 		}
 	}
 	char curid[20];
@@ -237,8 +242,8 @@ IN "include"
 [ \n\t] ;
 ";"				{ return(';'); }
 ","				{ return(','); }
-("{")			{ return('{'); }
-("}")			{ return('}'); }
+("{")			{ nesting++; 	return('{'); }
+("}")			{ nesting--;	return('}'); }
 "("				{ return('('); }
 ")"				{ return(')'); }
 ("["|"<:")		{ return('['); }
