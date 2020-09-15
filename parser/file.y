@@ -11,6 +11,9 @@
 
 	#define TERM_RED	"\x1b[31m"
 	#define TERM_GRN	"\x1b[32m"
+	#define TERM_YLW	"\x1b[33m"
+	#define TERM_BLU	"\x1b[34m"
+	#define TERM_MGT	"\x1b[35m"
 	#define TERM_CYN	"\x1b[36m"
 	#define TERM_DEF	"\x1b[0m"
 
@@ -116,6 +119,10 @@ storage_class_specifier
 			| ;
 
 type_specifier 
+			: storage_class_specifier type_spec
+			| VOID ;
+
+type_spec 
 			: INT 
 			| CHAR 
 			| FLOAT 
@@ -124,7 +131,8 @@ type_specifier
 			| SHORT short_grammar
 			| UNSIGNED unsigned_grammar 
 			| SIGNED signed_grammar
-			| VOID ;
+			;
+
 
 unsigned_grammar 
 			: INT 

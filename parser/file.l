@@ -246,6 +246,11 @@ IN "include"
 ":"				{ return(':'); }
 "."				{ return('.'); }
 
+"auto"			{ strcpy(curtype,yytext); insertST(yytext, "keyword"); return AUTO; }
+"extern"		{ strcpy(curtype,yytext); insertST(yytext, "keyword"); return EXTERN; }
+"register"		{ strcpy(curtype,yytext); insertST(yytext, "keyword"); return REGISTER; }
+"static"		{ strcpy(curtype,yytext); insertST(yytext, "keyword"); return STATIC; }
+
 "int"			{ strcpy(curtype,yytext); insertST(yytext, "keyword"); return INT;}
 "char"			{ strcpy(curtype,yytext); insertST(yytext, "keyword"); return CHAR;}
 "float"			{ strcpy(curtype,yytext); insertST(yytext, "keyword"); return FLOAT;}
