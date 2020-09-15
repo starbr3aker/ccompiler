@@ -196,10 +196,10 @@ stmt
 			| var_decl;
 
 compound_stmt 
-			: '{' statment_list '}' ;
+			: '{' statement_list '}' ;
 
-statment_list 
-			: stmt statment_list 
+statement_list 
+			: stmt statement_list 
 			| ;
 
 expression_stmt 
