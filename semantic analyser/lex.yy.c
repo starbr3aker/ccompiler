@@ -695,7 +695,6 @@ char *yytext;
 	#define ANSI_COLOR_MAGENTA	"\x1b[35m"
 	#define ANSI_COLOR_CYAN		"\x1b[36m"
 	#define ANSI_COLOR_RESET	"\x1b[0m"
-
 	struct symboltable
 	{
 		char name[100];
@@ -1127,8 +1126,8 @@ char *yytext;
 	char curtype[20];
 	char curval[20];
 
+#line 1130 "lex.yy.c"
 #line 1131 "lex.yy.c"
-#line 1132 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -1345,9 +1344,9 @@ YY_DECL
 		}
 
 	{
-#line 450 "file.l"
+#line 449 "file.l"
 
-#line 1351 "lex.yy.c"
+#line 1350 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1407,7 +1406,7 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 451 "file.l"
+#line 450 "file.l"
 {yylineno++;}
 	YY_BREAK
 case 2:
@@ -1417,7 +1416,7 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 452 "file.l"
+#line 451 "file.l"
 { }
 	YY_BREAK
 case 3:
@@ -1427,329 +1426,329 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 453 "file.l"
+#line 452 "file.l"
 { } 
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 454 "file.l"
+#line 453 "file.l"
 { }
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 455 "file.l"
+#line 454 "file.l"
 { }
 	YY_BREAK
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 456 "file.l"
+#line 455 "file.l"
 ;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 457 "file.l"
+#line 456 "file.l"
 { return(';'); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 458 "file.l"
+#line 457 "file.l"
 { return(','); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 459 "file.l"
+#line 458 "file.l"
 { return('{'); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 460 "file.l"
+#line 459 "file.l"
 { return('}'); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 461 "file.l"
+#line 460 "file.l"
 { return('('); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 462 "file.l"
+#line 461 "file.l"
 { return(')'); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 463 "file.l"
+#line 462 "file.l"
 { return('['); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 464 "file.l"
+#line 463 "file.l"
 { return(']'); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 465 "file.l"
+#line 464 "file.l"
 { return(':'); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 466 "file.l"
+#line 465 "file.l"
 { return('.'); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 468 "file.l"
+#line 467 "file.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword");return CHAR;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 469 "file.l"
+#line 468 "file.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return DOUBLE;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 470 "file.l"
+#line 469 "file.l"
 { insertST(yytext, "Keyword"); return ELSE;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 471 "file.l"
+#line 470 "file.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return FLOAT;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 472 "file.l"
+#line 471 "file.l"
 { insertST(yytext, "Keyword"); return WHILE;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 473 "file.l"
+#line 472 "file.l"
 { insertST(yytext, "Keyword"); return DO;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 474 "file.l"
+#line 473 "file.l"
 { insertST(yytext, "Keyword"); return FOR;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 475 "file.l"
+#line 474 "file.l"
 { insertST(yytext, "Keyword"); return IF;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 476 "file.l"
+#line 475 "file.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return INT;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 477 "file.l"
+#line 476 "file.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return LONG;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 478 "file.l"
+#line 477 "file.l"
 { insertST(yytext, "Keyword"); return RETURN;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 479 "file.l"
+#line 478 "file.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return SHORT;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 480 "file.l"
+#line 479 "file.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return SIGNED;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 481 "file.l"
+#line 480 "file.l"
 { insertST(yytext, "Keyword"); return SIZEOF;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 482 "file.l"
+#line 481 "file.l"
 { strcpy(curtype,yytext);   insertST(yytext, "Keyword");  return STRUCT;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 483 "file.l"
+#line 482 "file.l"
 { insertST(yytext, "Keyword");   return UNSIGNED;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 484 "file.l"
+#line 483 "file.l"
 { strcpy(curtype,yytext);   insertST(yytext, "Keyword");  return VOID;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 485 "file.l"
+#line 484 "file.l"
 { insertST(yytext, "Keyword");  return BREAK;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 489 "file.l"
+#line 488 "file.l"
 { return increment_operator; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 490 "file.l"
+#line 489 "file.l"
 { return decrement_operator; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 491 "file.l"
+#line 490 "file.l"
 { return leftshift_operator; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 492 "file.l"
+#line 491 "file.l"
 { return rightshift_operator; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 493 "file.l"
+#line 492 "file.l"
 { return lessthan_assignment_operator; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 494 "file.l"
+#line 493 "file.l"
 { return lessthan_operator; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 495 "file.l"
+#line 494 "file.l"
 { return greaterthan_assignment_operator; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 496 "file.l"
+#line 495 "file.l"
 { return greaterthan_operator; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 497 "file.l"
+#line 496 "file.l"
 { return equality_operator; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 498 "file.l"
+#line 497 "file.l"
 { return inequality_operator; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 499 "file.l"
+#line 498 "file.l"
 { return AND_operator; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 500 "file.l"
+#line 499 "file.l"
 { return OR_operator; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 501 "file.l"
+#line 500 "file.l"
 { return caret_operator; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 502 "file.l"
+#line 501 "file.l"
 { return multiplication_assignment_operator; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 503 "file.l"
+#line 502 "file.l"
 { return division_assignment_operator; }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 504 "file.l"
+#line 503 "file.l"
 { return modulo_assignment_operator; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 505 "file.l"
+#line 504 "file.l"
 { return addition_assignment_operator; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 506 "file.l"
+#line 505 "file.l"
 { return subtraction_assignment_operator; }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 507 "file.l"
+#line 506 "file.l"
 { return leftshift_assignment_operator; }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 508 "file.l"
+#line 507 "file.l"
 { return rightshift_assignment_operator; }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 509 "file.l"
+#line 508 "file.l"
 { return AND_assignment_operator; }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 510 "file.l"
+#line 509 "file.l"
 { return XOR_assignment_operator; }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 511 "file.l"
+#line 510 "file.l"
 { return OR_assignment_operator; }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 512 "file.l"
+#line 511 "file.l"
 { return amp_operator; }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 513 "file.l"
+#line 512 "file.l"
 { return exclamation_operator; }
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 514 "file.l"
+#line 513 "file.l"
 { return tilde_operator; }
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 515 "file.l"
+#line 514 "file.l"
 { return subtract_operator; }
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 516 "file.l"
+#line 515 "file.l"
 { return add_operator; }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 517 "file.l"
+#line 516 "file.l"
 { return multiplication_operator; }
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 518 "file.l"
+#line 517 "file.l"
 { return division_operator; }
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 519 "file.l"
+#line 518 "file.l"
 { return modulo_operator; }
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 520 "file.l"
+#line 519 "file.l"
 { return pipe_operator; }
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 521 "file.l"
+#line 520 "file.l"
 { return assignment_operator;}
 	YY_BREAK
 case 68:
@@ -1757,8 +1756,8 @@ case 68:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 523 "file.l"
-{strcpy(curval,yytext); insertCT(yytext,"String Constant"); return string_constant;}
+#line 522 "file.l"
+{strcpy(curval,yytext); insertCT(yytext,"String Constant"); printf("String Constant %s on line %d, at nesting %d,\n", yytext, yylineno, currnest); return string_constant;}
 	YY_BREAK
 case 69:
 *yy_cp = (yy_hold_char); /* undo effects of setting up yytext */
@@ -1766,15 +1765,15 @@ case 69:
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
 #line 524 "file.l"
-{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); return character_constant;}
+{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); printf("Character Constant %s on line %d, at nesting %d,\n", yytext, yylineno, currnest); return character_constant;}
 	YY_BREAK
 case 70:
 *yy_cp = (yy_hold_char); /* undo effects of setting up yytext */
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 525 "file.l"
-{strcpy(curid,yytext); insertST(yytext, "Array Identifier");  return array_identifier;}
+#line 526 "file.l"
+{strcpy(curid,yytext); insertST(yytext, "Array Identifier");  printf("Array Identifier \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return array_identifier;}
 	YY_BREAK
 case 71:
 /* rule 71 can match eol */
@@ -1783,8 +1782,8 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 526 "file.l"
-{strcpy(curval,yytext); insertCT(yytext, "Number Constant"); yylval = atoi(yytext); return integer_constant;}
+#line 528 "file.l"
+{strcpy(curval,yytext); insertCT(yytext, "Number Constant"); yylval = atoi(yytext); printf("Number Constant \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return integer_constant;}
 	YY_BREAK
 case 72:
 /* rule 72 can match eol */
@@ -1793,17 +1792,17 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 527 "file.l"
-{strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); return float_constant;}
+#line 530 "file.l"
+{strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); printf("Floating Constant \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return float_constant;}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 528 "file.l"
-{strcpy(curid,yytext); insertST(curid,"Identifier"); return identifier;}
+#line 532 "file.l"
+{strcpy(curid,yytext); insertST(curid,"Identifier"); printf("Identifier \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return identifier;}
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 530 "file.l"
+#line 534 "file.l"
 {
 		if(yytext[0]=='#')
 		{
@@ -1827,10 +1826,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 551 "file.l"
+#line 555 "file.l"
 ECHO;
 	YY_BREAK
-#line 1834 "lex.yy.c"
+#line 1833 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2835,6 +2834,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 551 "file.l"
+#line 555 "file.l"
 
 

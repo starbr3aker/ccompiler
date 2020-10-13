@@ -3,6 +3,8 @@
 int main()
 {
 	int a = 5;
+	if(1){}
+	if(0){}
 	while(a>0)
 	{
 		printf("Hello world");
