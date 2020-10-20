@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+//Pass case to demonstrate initialisation after return.
 int main()
 {
 	int a, b;

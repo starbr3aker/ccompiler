@@ -1,4 +1,6 @@
 #include<stdio.h>
+//Pass case to demonstrate expression type matching
+//the rhs and lhs are int, so q can be assigned that value.
 
 int main()
 {
@@ -6,7 +8,7 @@ int main()
 	int r = 3;
 	int s = 4; 
 	printf("%d",q);
-	q=q+3;
+	q=r+3;
 	// int s = 12;
 
 	return 0;
