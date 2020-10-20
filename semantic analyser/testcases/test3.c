@@ -1,4 +1,5 @@
-#include<stdio.h>
+//Condition supplied must be a non-negative integer, no expressions permitted
+include<stdio.h>
 
 int main()
 {

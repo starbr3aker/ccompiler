@@ -1,3 +1,4 @@
+//Redeclaration of x
 #include<stdio.h>
 int divfunc(int x, int y)
 {
