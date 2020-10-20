@@ -353,7 +353,7 @@ call
 								if(getSTparamscount(currfunccall)!=call_params_count)
 								{
 									printf("\ncount : %d, expected : %d\n",call_params_count,getSTparamscount(currfunccall));
-									yyerror("Number of arguments in function call doesn't match number of parameters");
+									yyerror("ERROR: Number of arguments in function call doesn't match number of parameters");
 									//printf("Number of arguments in function call %s doesn't match number of parameters\n", currfunccall);
 									exit(8);
 								}

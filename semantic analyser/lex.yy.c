@@ -1838,23 +1838,23 @@ case 68:
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
 #line 603 "file.l"
-{strcpy(curval,yytext); insertCT(yytext,"String Constant"); return string_constant;}
+{strcpy(curval,yytext); insertCT(yytext,"String Constant"); printf("String Constant %s on line %d, at nesting %d,\n", yytext, yylineno, currnest); return string_constant;}
 	YY_BREAK
 case 69:
 *yy_cp = (yy_hold_char); /* undo effects of setting up yytext */
 (yy_c_buf_p) = yy_cp = yy_bp + 3;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 604 "file.l"
-{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); return character_constant;}
+#line 605 "file.l"
+{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); printf("Character Constant %s on line %d, at nesting %d,\n", yytext, yylineno, currnest); return character_constant;}
 	YY_BREAK
 case 70:
 *yy_cp = (yy_hold_char); /* undo effects of setting up yytext */
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 605 "file.l"
-{strcpy(curid,yytext); insertST(yytext, "Array Identifier");  return array_identifier;}
+#line 607 "file.l"
+{strcpy(curid,yytext); insertST(yytext, "Array Identifier");  printf("Array Identifier \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return array_identifier;}
 	YY_BREAK
 case 71:
 /* rule 71 can match eol */
@@ -1863,8 +1863,8 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 606 "file.l"
-{strcpy(curval,yytext); insertCT(yytext, "Number Constant"); yylval = atoi(yytext); return integer_constant;}
+#line 609 "file.l"
+{strcpy(curval,yytext); insertCT(yytext, "Number Constant"); yylval = atoi(yytext); printf("Number Constant \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return integer_constant;}
 	YY_BREAK
 case 72:
 /* rule 72 can match eol */
@@ -1873,17 +1873,17 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 607 "file.l"
-{strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); return float_constant;}
+#line 611 "file.l"
+{strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); printf("Floating Constant \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return float_constant;}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 608 "file.l"
-{strcpy(curid,yytext); insertST(curid,"Identifier"); return identifier;}
+#line 613 "file.l"
+{strcpy(curid,yytext); insertST(curid,"Identifier"); printf("Identifier \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return identifier;}
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 610 "file.l"
+#line 615 "file.l"
 {
 		if(yytext[0]=='#')
 		{
@@ -1907,7 +1907,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 631 "file.l"
+#line 636 "file.l"
 ECHO;
 	YY_BREAK
 #line 1914 "lex.yy.c"
@@ -2915,6 +2915,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 631 "file.l"
+#line 636 "file.l"
 
 

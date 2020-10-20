@@ -90,6 +90,7 @@
 	int check_id_is_func(char *);
 	void insertST(char*, char*);
 	void insertSTnest(char*, int);
+	void insertSTparamstype(char *, char *);
 	void insertSTparamscount(char*, int);
 	int getSTparamscount(char*);
 	int check_duplicate(char*);
@@ -102,11 +103,14 @@
 	char currfunccall[100];
 	void insertSTF(char*);
 	char gettype(char*,int);
+	char *gettypestr(char *);
 	char getfirst(char*);
+	int check_params_type(char *str, char types[100][100], int n);
 	extern int params_count;
 	int call_params_count;
+	char call_params_types[100][100];
 
-#line 110 "y.tab.c"
+#line 114 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -658,21 +662,21 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    82,    82,    85,    88,    89,    92,    93,    96,    99,
-      99,   102,   102,   103,   103,   107,   107,   110,   111,   114,
-     115,   118,   119,   120,   123,   123,   123,   123,   124,   125,
-     126,   127,   128,   131,   131,   131,   131,   134,   134,   134,
-     134,   137,   137,   140,   140,   143,   146,   149,   152,   152,
-     155,   155,   158,   161,   162,   165,   165,   168,   169,   172,
-     172,   173,   173,   174,   174,   175,   178,   178,   181,   182,
-     185,   186,   189,   189,   192,   193,   196,   196,   197,   197,
-     198,   198,   200,   201,   214,   217,   220,   223,   226,   227,
-     230,   238,   244,   250,   256,   262,   268,   269,   270,   274,
-     275,   278,   279,   283,   284,   287,   288,   291,   291,   291,
-     292,   292,   292,   295,   296,   299,   300,   303,   304,   307,
-     307,   307,   310,   311,   314,   326,   326,   334,   335,   336,
-     339,   339,   357,   357,   360,   360,   363,   363,   364,   367,
-     368,   369,   370
+       0,    86,    86,    89,    92,    93,    96,    97,   100,   103,
+     103,   106,   106,   107,   107,   111,   111,   114,   115,   118,
+     119,   122,   123,   124,   127,   127,   127,   127,   128,   129,
+     130,   131,   132,   135,   135,   135,   135,   138,   138,   138,
+     138,   141,   141,   144,   144,   147,   150,   153,   156,   156,
+     159,   159,   162,   165,   166,   169,   169,   172,   173,   176,
+     176,   177,   177,   178,   178,   179,   182,   182,   185,   186,
+     189,   190,   193,   193,   196,   197,   200,   200,   201,   201,
+     202,   202,   204,   205,   218,   221,   224,   227,   230,   231,
+     234,   242,   248,   254,   260,   266,   272,   273,   274,   278,
+     279,   282,   283,   287,   288,   291,   292,   295,   295,   295,
+     296,   296,   296,   299,   300,   303,   304,   307,   308,   311,
+     311,   311,   314,   315,   318,   330,   330,   338,   339,   340,
+     343,   343,   384,   385,   388,   388,   400,   400,   410,   413,
+     414,   415,   416
 };
 #endif
 
@@ -1647,93 +1651,93 @@ yyreduce:
   switch (yyn)
     {
   case 11:
-#line 102 "file.y"
-                                     {if(duplicate(curid)){printf(ANSI_COLOR_RED "ERROR : Duplicate instance of variable declaration.\n" ANSI_COLOR_RESET);exit(0);}insertSTnest(curid,currnest); ins();  }
-#line 1653 "y.tab.c"
+#line 106 "file.y"
+             {if(duplicate(curid)){printf(ANSI_COLOR_RED "ERROR : Duplicate instance of variable declaration.\n" ANSI_COLOR_RESET);exit(0);}insertSTnest(curid,currnest); ins();  }
+#line 1657 "y.tab.c"
     break;
 
   case 13:
-#line 103 "file.y"
-                                             {if(duplicate(curid)){printf(ANSI_COLOR_RED "ERROR : Duplicate instance of variable declaration.\n" ANSI_COLOR_RESET);exit(0);}insertSTnest(curid,currnest); ins();  }
-#line 1659 "y.tab.c"
+#line 107 "file.y"
+                           {if(duplicate(curid)){printf(ANSI_COLOR_RED "ERROR : Duplicate instance of variable declaration.\n" ANSI_COLOR_RESET);exit(0);}insertSTnest(curid,currnest); ins();  }
+#line 1663 "y.tab.c"
     break;
 
   case 19:
-#line 114 "file.y"
-                                                             {if(yyval < 1) {printf(ANSI_COLOR_RED "ERROR : Array size cannot be non positive value.\n" ANSI_COLOR_RESET ); exit(0);} }
-#line 1665 "y.tab.c"
+#line 118 "file.y"
+                                     {if(yyval < 1) {printf(ANSI_COLOR_RED "ERROR : Array size cannot be non positive value.\n" ANSI_COLOR_RESET ); exit(0);} }
+#line 1669 "y.tab.c"
     break;
 
   case 46:
-#line 146 "file.y"
+#line 150 "file.y"
                                                          { strcpy(currfunctype, curtype); strcpy(currfunc, curid); check_duplicate(curid); insertSTF(curid); ins(); }
-#line 1671 "y.tab.c"
+#line 1675 "y.tab.c"
     break;
 
   case 50:
-#line 155 "file.y"
+#line 159 "file.y"
                                          { check_params(curtype); }
-#line 1677 "y.tab.c"
+#line 1681 "y.tab.c"
     break;
 
   case 51:
-#line 155 "file.y"
+#line 159 "file.y"
                                                                                                { insertSTparamscount(currfunc, params_count); }
-#line 1683 "y.tab.c"
+#line 1687 "y.tab.c"
     break;
 
   case 55:
-#line 165 "file.y"
-                                     { ins();insertSTnest(curid,1); params_count++; }
-#line 1689 "y.tab.c"
+#line 169 "file.y"
+                                     { ins();insertSTnest(curid,1); params_count++;insertSTparamstype(currfunc, curtype); }
+#line 1693 "y.tab.c"
     break;
 
   case 66:
-#line 178 "file.y"
+#line 182 "file.y"
                           {currnest++;}
-#line 1695 "y.tab.c"
+#line 1699 "y.tab.c"
     break;
 
   case 67:
-#line 178 "file.y"
+#line 182 "file.y"
                                                                 {deletedata(currnest);currnest--;}
-#line 1701 "y.tab.c"
+#line 1705 "y.tab.c"
     break;
 
   case 72:
-#line 189 "file.y"
+#line 193 "file.y"
                                                        {if(yyvsp[-1]!=1){printf(ANSI_COLOR_RED "ERROR : Condition supplied must be a non-negative integer, expressions are not permitted.\n" ANSI_COLOR_RESET);exit(0);}}
-#line 1707 "y.tab.c"
+#line 1711 "y.tab.c"
     break;
 
   case 76:
-#line 196 "file.y"
-                                                          {if(yyvsp[-1]!=1){printf(ANSI_COLOR_RED "ERROR : Condition supplied must be a non-negative integer, expressions are not permitted.\n" ANSI_COLOR_RESET);exit(0);}}
-#line 1713 "y.tab.c"
+#line 200 "file.y"
+                                                                  {if(yyvsp[-1]!=1){printf(ANSI_COLOR_RED "ERROR : Condition supplied must be a non-negative integer, expressions are not permitted.\n" ANSI_COLOR_RESET);exit(0);}}
+#line 1717 "y.tab.c"
     break;
 
   case 78:
-#line 197 "file.y"
-                                                                       {if(yyvsp[-1]!=1){printf(ANSI_COLOR_RED "ERROR : Condition supplied must be a non-negative integer, expressions are not permitted.\n" ANSI_COLOR_RESET);exit(0);}}
-#line 1719 "y.tab.c"
+#line 201 "file.y"
+                                                                               {if(yyvsp[-1]!=1){printf(ANSI_COLOR_RED "ERROR : Condition supplied must be a non-negative integer, expressions are not permitted.\n" ANSI_COLOR_RESET);exit(0);}}
+#line 1723 "y.tab.c"
     break;
 
   case 80:
-#line 198 "file.y"
-                                                                      {if(yyvsp[-1]!=1){printf(ANSI_COLOR_RED "ERROR : Condition supplied must be a non-negative integer, expressions are not permitted.\n" ANSI_COLOR_RESET);exit(0);}}
-#line 1725 "y.tab.c"
+#line 202 "file.y"
+                                                                              {if(yyvsp[-1]!=1){printf(ANSI_COLOR_RED "ERROR : Condition supplied must be a non-negative integer, expressions are not permitted.\n" ANSI_COLOR_RESET);exit(0);}}
+#line 1729 "y.tab.c"
     break;
 
   case 82:
-#line 200 "file.y"
-                                     {if(strcmp(currfunctype,"void")) {printf(ANSI_COLOR_RED "ERROR : Non-void function returning void.\n" ANSI_COLOR_RESET); exit(0);}}
-#line 1731 "y.tab.c"
+#line 204 "file.y"
+                                                             {if(strcmp(currfunctype,"void")) {printf(ANSI_COLOR_RED "ERROR : Non-void function returning void.\n" ANSI_COLOR_RESET); exit(0);}}
+#line 1735 "y.tab.c"
     break;
 
   case 83:
-#line 201 "file.y"
+#line 205 "file.y"
                                                 { 	if(!strcmp(currfunctype, "void"))
-										{ 
+										{
 											yyerror(ANSI_COLOR_RED "ERROR : Void function returning value." ANSI_COLOR_RESET);
 										}
 
@@ -1741,194 +1745,194 @@ yyreduce:
 										{
 											printf(ANSI_COLOR_RED "ERROR : Function returns value that cannot be cast to defined return type.\n" ANSI_COLOR_RESET); exit(0);
 										}
-			              
+
 			                     	}
-#line 1747 "y.tab.c"
+#line 1751 "y.tab.c"
     break;
 
   case 85:
-#line 217 "file.y"
+#line 221 "file.y"
                                                               {insV();}
-#line 1753 "y.tab.c"
+#line 1757 "y.tab.c"
     break;
 
   case 90:
-#line 230 "file.y"
-                                                                 {
-														if(yyvsp[-2]==1 && yyvsp[0]==1) 
-														{
-														yyval=1;
-														} 
-														else 
-														{yyval=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);} 
-													}
-#line 1766 "y.tab.c"
+#line 234 "file.y"
+                                                                         {
+																		if(yyvsp[-2]==1 && yyvsp[0]==1)
+																		{
+																			yyval=1;
+																		}
+																		else
+																		{yyval=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
+																	}
+#line 1770 "y.tab.c"
     break;
 
   case 91:
-#line 238 "file.y"
-                                                                                {
-																	if(yyvsp[-2]==1 && yyvsp[0]==1) 
-																	yyval=1; 
-																	else 
-																	{yyval=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);} 
-																}
-#line 1777 "y.tab.c"
+#line 242 "file.y"
+                                                                                        {
+																		if(yyvsp[-2]==1 && yyvsp[0]==1)
+																			yyval=1;
+																		else
+																		{yyval=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
+																	}
+#line 1781 "y.tab.c"
     break;
 
   case 92:
-#line 244 "file.y"
+#line 248 "file.y"
                                                                               {
-																	  if(yyvsp[-2]==1 && yyvsp[0]==1) 
-			                                                          yyval=1; 
-			                                                          else 
-			                                                          {yyval=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);} 
+																	  if(yyvsp[-2]==1 && yyvsp[0]==1)
+			                                                          yyval=1;
+			                                                          else
+			                                                           {yyval=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
 			                                                       }
-#line 1788 "y.tab.c"
+#line 1792 "y.tab.c"
     break;
 
   case 93:
-#line 250 "file.y"
+#line 254 "file.y"
                                                                                 {
-																	  if(yyvsp[-2]==1 && yyvsp[0]==1) 
-			                                                          yyval=1; 
-			                                                          else 
-			                                                          {yyval=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);} 
+																	  if(yyvsp[-2]==1 && yyvsp[0]==1)
+			                                                          yyval=1;
+			                                                          else
+			                                                          {yyval=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
 			                                                       }
-#line 1799 "y.tab.c"
+#line 1803 "y.tab.c"
     break;
 
   case 94:
-#line 256 "file.y"
+#line 260 "file.y"
                                                                                         {
-																	  if(yyvsp[-2]==1 && yyvsp[0]==1) 
-			                                                          yyval=1; 
-			                                                          else 
-			                                                          {yyval=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);} 
+																	  if(yyvsp[-2]==1 && yyvsp[0]==1)
+			                                                          yyval=1;
+			                                                          else
+			                                                           {yyval=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
 			                                                       }
-#line 1810 "y.tab.c"
+#line 1814 "y.tab.c"
     break;
 
   case 95:
-#line 262 "file.y"
+#line 266 "file.y"
                                                                                         {
-																	  if(yyvsp[-2]==1 && yyvsp[0]==1) 
-			                                                          yyval=1; 
-			                                                          else 
-			                                                          {yyval=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);} 
+																	  if(yyvsp[-2]==1 && yyvsp[0]==1)
+			                                                          yyval=1;
+			                                                          else
+			                                                           {yyval=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
 			                                                       }
-#line 1821 "y.tab.c"
+#line 1825 "y.tab.c"
     break;
 
   case 96:
-#line 268 "file.y"
+#line 272 "file.y"
                                                                                                         {if(yyvsp[-1] == 1) yyval=1; else yyval=-1;}
-#line 1827 "y.tab.c"
+#line 1831 "y.tab.c"
     break;
 
   case 97:
-#line 269 "file.y"
+#line 273 "file.y"
                                                                                                         {if(yyvsp[-1] == 1) yyval=1; else yyval=-1;}
-#line 1833 "y.tab.c"
+#line 1837 "y.tab.c"
     break;
 
   case 98:
-#line 270 "file.y"
+#line 274 "file.y"
                                             {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 1839 "y.tab.c"
+#line 1843 "y.tab.c"
     break;
 
   case 99:
-#line 274 "file.y"
+#line 278 "file.y"
                                                                        {if(yyvsp[-2] == 1 && yyvsp[0]==1) yyval=1; else yyval=-1;}
-#line 1845 "y.tab.c"
+#line 1849 "y.tab.c"
     break;
 
   case 100:
-#line 275 "file.y"
+#line 279 "file.y"
                                          {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 1851 "y.tab.c"
+#line 1855 "y.tab.c"
     break;
 
   case 101:
-#line 278 "file.y"
+#line 282 "file.y"
                                                                                 {if(yyvsp[-2] == 1 && yyvsp[0]==1) yyval=1; else yyval=-1;}
-#line 1857 "y.tab.c"
+#line 1861 "y.tab.c"
     break;
 
   case 102:
-#line 279 "file.y"
+#line 283 "file.y"
                                                      {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 1863 "y.tab.c"
+#line 1867 "y.tab.c"
     break;
 
   case 103:
-#line 283 "file.y"
+#line 287 "file.y"
                                                                          {if(yyvsp[0]==1) yyval=1; else yyval=-1;}
-#line 1869 "y.tab.c"
+#line 1873 "y.tab.c"
     break;
 
   case 104:
-#line 284 "file.y"
+#line 288 "file.y"
                                              {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 1875 "y.tab.c"
+#line 1879 "y.tab.c"
     break;
 
   case 105:
-#line 287 "file.y"
+#line 291 "file.y"
                                                                                  {if(yyvsp[-2] == 1 && yyvsp[0]==1) yyval=1; else yyval=-1;}
-#line 1881 "y.tab.c"
+#line 1885 "y.tab.c"
     break;
 
   case 106:
-#line 288 "file.y"
+#line 292 "file.y"
                                            {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 1887 "y.tab.c"
+#line 1891 "y.tab.c"
     break;
 
   case 113:
-#line 295 "file.y"
+#line 299 "file.y"
                                                              {if(yyvsp[-2] == 1 && yyvsp[0]==1) yyval=1; else yyval=-1;}
-#line 1893 "y.tab.c"
+#line 1897 "y.tab.c"
     break;
 
   case 114:
-#line 296 "file.y"
+#line 300 "file.y"
                                {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 1899 "y.tab.c"
+#line 1903 "y.tab.c"
     break;
 
   case 117:
-#line 303 "file.y"
+#line 307 "file.y"
                                             {if(yyvsp[-2] == 1 && yyvsp[0]==1) yyval=1; else yyval=-1;}
-#line 1905 "y.tab.c"
+#line 1909 "y.tab.c"
     break;
 
   case 118:
-#line 304 "file.y"
+#line 308 "file.y"
                                  {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 1911 "y.tab.c"
+#line 1915 "y.tab.c"
     break;
 
   case 122:
-#line 310 "file.y"
+#line 314 "file.y"
                                     {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 1917 "y.tab.c"
+#line 1921 "y.tab.c"
     break;
 
   case 123:
-#line 311 "file.y"
+#line 315 "file.y"
                                   {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 1923 "y.tab.c"
+#line 1927 "y.tab.c"
     break;
 
   case 124:
-#line 314 "file.y"
+#line 318 "file.y"
                                      {
 						  if(check_id_is_func(curid))
 						  {printf(ANSI_COLOR_RED "ERROR : Function name used as an identifier.\n" ANSI_COLOR_RESET); exit(8);}
 			              if(!checkscope(curid))
-			              {printf("%s\n",curid);printf(ANSI_COLOR_RED "ERROR : Identifier not found in scope.\n" ANSI_COLOR_RESET);exit(0);} 
+			              {printf("%s\n",curid);printf(ANSI_COLOR_RED "ERROR : Identifier not found in scope.\n" ANSI_COLOR_RESET);exit(0);}
 			              if(!checkarray(curid))
 			              {printf("%s\n",curid);printf(ANSI_COLOR_RED"ERROR : Array ID has no subscript\n"ANSI_COLOR_RESET);exit(0);}
 			              if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
@@ -1936,101 +1940,148 @@ yyreduce:
 			              else
 			              yyval = -1;
 			              }
-#line 1940 "y.tab.c"
+#line 1944 "y.tab.c"
     break;
 
   case 125:
-#line 326 "file.y"
+#line 330 "file.y"
                                            {if(!checkscope(curid)){printf("%s\n",curid);printf(ANSI_COLOR_RED "ERROR : Identifier not found in scope.\n" ANSI_COLOR_RESET);exit(0);}}
-#line 1946 "y.tab.c"
+#line 1950 "y.tab.c"
     break;
 
   case 126:
-#line 327 "file.y"
+#line 331 "file.y"
                                            {if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
 			              		yyval = 1;
 			              		else
 			              		yyval = -1;
 			              		}
-#line 1956 "y.tab.c"
+#line 1960 "y.tab.c"
     break;
 
   case 127:
-#line 334 "file.y"
+#line 338 "file.y"
                                              {if(yyvsp[-1]==1) yyval=1; else yyval=-1;}
-#line 1962 "y.tab.c"
+#line 1966 "y.tab.c"
     break;
 
   case 129:
-#line 336 "file.y"
+#line 340 "file.y"
                                    {if(yyvsp[0]==1) yyval=1; else yyval=-1;}
-#line 1968 "y.tab.c"
+#line 1972 "y.tab.c"
     break;
 
   case 130:
-#line 339 "file.y"
+#line 343 "file.y"
                                         {
 			             if(!check_declaration(curid, "Function"))
-			             { printf(ANSI_COLOR_RED "ERROR : Function declaration not found in scope.\n" ANSI_COLOR_RESET); exit(0);} 
-			             insertSTF(curid); 
+			             { printf(ANSI_COLOR_RED "ERROR : Function declaration not found in scope.\n" ANSI_COLOR_RESET); exit(0);}
+			             insertSTF(curid);
 						 strcpy(currfunccall,curid);
+						 call_params_count=0;
+						 for(int i=0;i<100;i++) call_params_types[i][0]='\0';
 			             }
-#line 1979 "y.tab.c"
+#line 1985 "y.tab.c"
     break;
 
   case 131:
-#line 345 "file.y"
+#line 351 "file.y"
                                                  { if(strcmp(currfunccall,"printf"))
-							{ 
+							{
 								if(getSTparamscount(currfunccall)!=call_params_count)
-								{	
-									yyerror("Number of arguments in function call doesn't match number of parameters");
+								{
+									printf("\ncount : %d, expected : %d\n",call_params_count,getSTparamscount(currfunccall));
+									yyerror("ERROR: Number of arguments in function call doesn't match number of parameters");
 									//printf("Number of arguments in function call %s doesn't match number of parameters\n", currfunccall);
 									exit(8);
 								}
-							} 
+								/*
+								if(call_params_count>=1)
+								{
+									if(check_params_type(currfunccall, call_params_types, call_params_count)==0)
+									{
+										//for(int i=0;i<call_params_count;i++)
+											//printf("\n%d %s \n",i,call_params_types[i]);
+										yyerror("Type mismatch in function parameters");
+										exit(8);
+									}
+									*/
+									/*
+									else
+									{
+										printf("\nfunction call");
+										for(int i=0;i<call_params_count;i++)
+											printf("\n%d %s \n",i,call_params_types[i]);
+									}
+									*/
+								//}
+							}
 						 }
-#line 1994 "y.tab.c"
+#line 2021 "y.tab.c"
+    break;
+
+  case 133:
+#line 385 "file.y"
+                          { call_params_count = -1;}
+#line 2027 "y.tab.c"
     break;
 
   case 134:
-#line 360 "file.y"
-                                     { call_params_count++; }
-#line 2000 "y.tab.c"
+#line 388 "file.y"
+                                     { call_params_count++;
+											 for(int i=0;i<100;i++)
+											 {
+												 if(call_params_types[i][0]=='\0')
+												 {
+													 strcpy(call_params_types[i],gettypestr(curid));
+													 break;
+												 }
+											 }
+											}
+#line 2042 "y.tab.c"
     break;
 
   case 136:
-#line 363 "file.y"
-                                         { call_params_count++; }
-#line 2006 "y.tab.c"
+#line 400 "file.y"
+                                         { call_params_count++;
+														for(int i=0;i<100;i++)
+														{
+															if(call_params_types[i][0]=='\0')
+															{
+																strcpy(call_params_types[i],gettypestr(curid));
+																break;
+															}
+														}
+												 }
+#line 2057 "y.tab.c"
     break;
 
   case 139:
-#line 367 "file.y"
+#line 413 "file.y"
                                                 {  insV(); yyval=1; }
-#line 2012 "y.tab.c"
+#line 2063 "y.tab.c"
     break;
 
   case 140:
-#line 368 "file.y"
+#line 414 "file.y"
                                                 {  insV(); yyval=-1;}
-#line 2018 "y.tab.c"
+#line 2069 "y.tab.c"
     break;
 
   case 141:
-#line 369 "file.y"
+#line 415 "file.y"
                                                 {  insV(); }
-#line 2024 "y.tab.c"
+#line 2075 "y.tab.c"
     break;
 
   case 142:
-#line 370 "file.y"
+#line 416 "file.y"
                                             {  insV();yyval=1; }
-#line 2030 "y.tab.c"
+#line 2081 "y.tab.c"
     break;
 
 
-#line 2034 "y.tab.c"
+#line 2085 "y.tab.c"
 
       default: break;
     }
@@ -2262,7 +2313,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 372 "file.y"
+#line 418 "file.y"
 
 
 extern FILE *yyin;
