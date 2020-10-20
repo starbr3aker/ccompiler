@@ -1,7 +1,7 @@
 #include<stdio.h>
 //No semantic errors
 
-int fun(int a)
+int fun(int b)
 {
     int x;
     return x;
@@ -24,6 +24,5 @@ void main()
 
     }
    x=3;
-    
-}
 
+}
