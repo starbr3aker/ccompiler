@@ -103,8 +103,8 @@ variable_declaration_list
 			: variable_declaration_list ',' variable_declaration_identifier | variable_declaration_identifier;
 
 variable_declaration_identifier
-			: identifier {if(duplicate(curid)){printf("Duplicate\n");exit(0);}insertSTnest(curid,currnest); ins();  } vdi
-			  | array_identifier {if(duplicate(curid)){printf("Duplicate\n");exit(0);}insertSTnest(curid,currnest); ins();  } vdi;
+: identifier {if(duplicate(curid)){printf(ANSI_COLOR_RED "ERROR : Duplicate instance of variable declaration.\n" ANSI_COLOR_RESET);exit(0);}insertSTnest(curid,currnest); ins();  } vdi
+	| array_identifier {if(duplicate(curid)){printf(ANSI_COLOR_RED "ERROR : Duplicate instance of variable declaration.\n" ANSI_COLOR_RESET);exit(0);}insertSTnest(curid,currnest); ins();  } vdi;
 
 
 
@@ -115,7 +115,7 @@ identifier_array_type
 			| ;
 
 initilization_params
-			: integer_constant ']' initilization {if($$ < 1) {printf("Wrong array size\n"); exit(0);} }
+: integer_constant ']' initilization {if($$ < 1) {printf(ANSI_COLOR_RED "ERROR : Array size cannot be non positive value.\n" ANSI_COLOR_RESET ); exit(0);} }
 			| ']' string_initilization;
 
 initilization
@@ -190,26 +190,26 @@ expression_statment
 			| ';' ;
 
 conditional_statements
-			: IF '(' simple_expression ')' {if($3!=1){printf("Condition checking is not of type int\n");exit(0);}} statement conditional_statements_breakup;
+			: IF '(' simple_expression ')' {if($3!=1){printf(ANSI_COLOR_RED "ERROR : Condition supplied must be a non-negative integer, expressions are not permitted.\n" ANSI_COLOR_RESET);exit(0);}} statement conditional_statements_breakup;
 
 conditional_statements_breakup
 			: ELSE statement
 			| ;
 
 iterative_statements
-			: WHILE '(' simple_expression ')' {if($3!=1){printf("Condition checking is not of type int\n");exit(0);}} statement
-			| FOR '(' expression ';' simple_expression ';' {if($5!=1){printf("Condition checking is not of type int\n");exit(0);}} expression ')'
-			| DO statement WHILE '(' simple_expression ')'{if($5!=1){printf("Condition checking is not of type int\n");exit(0);}} ';';
+				: WHILE '(' simple_expression ')' {if($3!=1){printf(ANSI_COLOR_RED "ERROR : Condition supplied must be a non-negative integer, expressions are not permitted.\n" ANSI_COLOR_RESET);exit(0);}} statement
+				| FOR '(' expression ';' simple_expression ';' {if($5!=1){printf(ANSI_COLOR_RED "ERROR : Condition supplied must be a non-negative integer, expressions are not permitted.\n" ANSI_COLOR_RESET);exit(0);}} expression ')'
+				| DO statement WHILE '(' simple_expression ')'{if($5!=1){printf(ANSI_COLOR_RED "ERROR : Condition supplied must be a non-negative integer, expressions are not permitted.\n" ANSI_COLOR_RESET);exit(0);}} ';';
 return_statement
-			: RETURN ';' {if(strcmp(currfunctype,"void")) {printf("Returning void of a non-void function\n"); exit(0);}}
+						: RETURN ';' {if(strcmp(currfunctype,"void")) {printf(ANSI_COLOR_RED "ERROR : Non-void function returning void.\n" ANSI_COLOR_RESET); exit(0);}}
 			| RETURN expression ';' { 	if(!strcmp(currfunctype, "void"))
 										{
-											yyerror("Function is void");
+											yyerror(ANSI_COLOR_RED "ERROR : Void function returning value." ANSI_COLOR_RESET);
 										}
 
 										if((currfunctype[0]=='i' || currfunctype[0]=='c') && $2!=1)
 										{
-											printf("Expression doesn't match return type of function\n"); exit(0);
+											printf(ANSI_COLOR_RED "ERROR : Function returns value that cannot be cast to defined return type.\n" ANSI_COLOR_RESET); exit(0);
 										}
 
 			                     	};
@@ -231,43 +231,43 @@ array_int_declarations_breakup
 			| ;
 
 expression
-			: mutable assignment_operator expression              {
-																	  if($1==1 && $3==1)
-																	  {
-			                                                          $$=1;
-			                                                          }
-			                                                          else
-			                                                          {$$=-1; printf("Type mismatch\n"); exit(0);}
-			                                                       }
-			| mutable addition_assignment_operator expression     {
-																	  if($1==1 && $3==1)
-			                                                          $$=1;
-			                                                          else
-			                                                          {$$=-1; printf("Type mismatch\n"); exit(0);}
-			                                                       }
+				: mutable assignment_operator expression {
+																		if($1==1 && $3==1)
+																		{
+																			$$=1;
+																		}
+																		else
+																		{$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
+																	}
+				| mutable addition_assignment_operator expression  	{
+																		if($1==1 && $3==1)
+																			$$=1;
+																		else
+																		{$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
+																	}
 			| mutable subtraction_assignment_operator expression  {
 																	  if($1==1 && $3==1)
 			                                                          $$=1;
 			                                                          else
-			                                                          {$$=-1; printf("Type mismatch\n"); exit(0);}
+			                                                           {$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
 			                                                       }
 			| mutable multiplication_assignment_operator expression {
 																	  if($1==1 && $3==1)
 			                                                          $$=1;
 			                                                          else
-			                                                          {$$=-1; printf("Type mismatch\n"); exit(0);}
+			                                                          {$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
 			                                                       }
 			| mutable division_assignment_operator expression 		{
 																	  if($1==1 && $3==1)
 			                                                          $$=1;
 			                                                          else
-			                                                          {$$=-1; printf("Type mismatch\n"); exit(0);}
+			                                                           {$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
 			                                                       }
 			| mutable modulo_assignment_operator expression 		{
 																	  if($1==1 && $3==1)
 			                                                          $$=1;
 			                                                          else
-			                                                          {$$=-1; printf("Type mismatch\n"); exit(0);}
+			                                                           {$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
 			                                                       }
 			| mutable increment_operator 							{if($1 == 1) $$=1; else $$=-1;}
 			| mutable decrement_operator 							{if($1 == 1) $$=1; else $$=-1;}
@@ -317,17 +317,17 @@ factor
 mutable
 			: identifier {
 						  if(check_id_is_func(curid))
-						  {printf("Function name used as Identifier\n"); exit(8);}
+						  {printf(ANSI_COLOR_RED "ERROR : Function name used as an identifier.\n" ANSI_COLOR_RESET); exit(8);}
 			              if(!checkscope(curid))
-			              {printf("%s\n",curid);printf("Undeclared\n");exit(0);}
+			              {printf("%s\n",curid);printf(ANSI_COLOR_RED "ERROR : Identifier not found in scope.\n" ANSI_COLOR_RESET);exit(0);}
 			              if(!checkarray(curid))
-			              {printf("%s\n",curid);printf("Array ID has no subscript\n");exit(0);}
+			              {printf("%s\n",curid);printf(ANSI_COLOR_RED"ERROR : Array ID has no subscript\n"ANSI_COLOR_RESET);exit(0);}
 			              if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
 			              $$ = 1;
 			              else
 			              $$ = -1;
 			              }
-			| array_identifier {if(!checkscope(curid)){printf("%s\n",curid);printf("Undeclared\n");exit(0);}} '[' expression ']'
+			| array_identifier {if(!checkscope(curid)){printf("%s\n",curid);printf(ANSI_COLOR_RED "ERROR : Identifier not found in scope.\n" ANSI_COLOR_RESET);exit(0);}} '[' expression ']'
 			                   {if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
 			              		$$ = 1;
 			              		else
@@ -342,7 +342,7 @@ immutable
 call
 			: identifier '('{
 			             if(!check_declaration(curid, "Function"))
-			             { printf("Function not declared"); exit(0);}
+			             { printf(ANSI_COLOR_RED "ERROR : Function declaration not found in scope.\n" ANSI_COLOR_RESET); exit(0);}
 			             insertSTF(curid);
 						 strcpy(currfunccall,curid);
 						 call_params_count=0;

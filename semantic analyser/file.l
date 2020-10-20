@@ -600,12 +600,17 @@ IN "include"
 "|"				{ return pipe_operator; }
 \=				{ return assignment_operator;}
 
-\"[^\n]*\"/[;|,|\)] 			{strcpy(curval,yytext); insertCT(yytext,"String Constant"); return string_constant;}
-\'[A-Z|a-z]\'/[;|,|\)|:] 		{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); return character_constant;}
-[a-z|A-Z]([a-z|A-Z]|[0-9])*/\[ 	{strcpy(curid,yytext); insertST(yytext, "Array Identifier");  return array_identifier;}
-[1-9][0-9]*|0/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\]|\}|:|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Number Constant"); yylval = atoi(yytext); return integer_constant;}
-([0-9]*)\.([0-9]+)/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); return float_constant;}
-[A-Za-z_][A-Za-z_0-9]* {strcpy(curid,yytext); insertST(curid,"Identifier"); return identifier;}
+\"[^\n]*\"/[;|,|\)] 			{strcpy(curval,yytext); insertCT(yytext,"String Constant"); printf("String Constant %s on line %d, at nesting %d,\n", yytext, yylineno, currnest); return string_constant;}
+
+\'[A-Z|a-z]\'/[;|,|\)|:] 		{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); printf("Character Constant %s on line %d, at nesting %d,\n", yytext, yylineno, currnest); return character_constant;}
+
+[a-z|A-Z]([a-z|A-Z]|[0-9])*/\[ 	{strcpy(curid,yytext); insertST(yytext, "Array Identifier");  printf("Array Identifier \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return array_identifier;}
+
+[1-9][0-9]*|0/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\]|\}|:|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Number Constant"); yylval = atoi(yytext); printf("Number Constant \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return integer_constant;}
+
+([0-9]*)\.([0-9]+)/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); printf("Floating Constant \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return float_constant;}
+
+[A-Za-z_][A-Za-z_0-9]* {strcpy(curid,yytext); insertST(curid,"Identifier"); printf("Identifier \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return identifier;}
 
 (.?) {
 		if(yytext[0]=='#')
