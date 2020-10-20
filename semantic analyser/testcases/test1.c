@@ -1,4 +1,5 @@
 #include<stdio.h>
+//No semantic errors
 
 int fun(int a)
 {

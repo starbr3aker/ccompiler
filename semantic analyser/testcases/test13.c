@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-//sunction missing
+//function missing
 void main()
 {
     int i,n;

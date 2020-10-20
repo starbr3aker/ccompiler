@@ -1,6 +1,6 @@
 #include<stdio.h>
 #define NUM 5
- 
+ //Type mismatch for printf
 int main()
 {
 char St1[] = "#define FIVE 15";
