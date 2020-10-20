@@ -1,5 +1,6 @@
-
+// testing different kinds of variable declaration
 #include <stdio.h>
+int x;
 int main()
 {
   int _var;
