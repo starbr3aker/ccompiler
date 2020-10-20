@@ -2,26 +2,12 @@
 
 int main()
 {
-	int a = 5;
-	if(1){}
-	if(0){}
-	while(a>0)
-	{
-		printf("Hello world");
-		a--;
-	}
+	int q = 2;
+	int r = 3;
+	int s = 4; 
+	printf("%d",q);
+	q=q+3;
+	// int s = 12;
 
-	a=4;
-	while(a>0)
-	{
-		printf("%d",a);
-		a--;
-		int b;
-		b= 4;
-		while(b>0)
-		{
-			printf("%d", a*b);
-			b--;
-		}
-	}
+	return 0;
 }
