@@ -1,5 +1,6 @@
 #include<stdio.h>
 //No semantic errors
+//pass
 
 int fun(int b)
 {
