@@ -12,5 +12,5 @@ void main(){
   d=a-b;
   h += a;
   e=(d+c)*a;
-  f=++(g/h)+b;
+  f=(g/h)+b;
 }

@@ -9,6 +9,6 @@ void main()
 {
     int i,n;
 
-    int a = function(i,n);
+    int x = function(i,n);
 
 }
