@@ -232,43 +232,43 @@ array_int_declarations_breakup
 
 expression
 				: mutable assignment_operator expression {
-																		if($1==1 && $3==1)
-																		{
-																			$$=1;
-																		}
-																		else
-																		{$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
-																	}
+							if($1==1 && $3==1)
+							{
+								$$=1;
+							}
+							else
+							{$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
+						}
 				| mutable addition_assignment_operator expression  	{
-																		if($1==1 && $3==1)
-																			$$=1;
-																		else
-																		{$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
-																	}
+							if($1==1 && $3==1)
+								$$=1;
+							else
+							{$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
+						}
 			| mutable subtraction_assignment_operator expression  {
-																	  if($1==1 && $3==1)
-			                                                          $$=1;
-			                                                          else
-			                                                           {$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
-			                                                       }
+							if($1==1 && $3==1)
+							$$=1;
+							else
+							{$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
+						}
 			| mutable multiplication_assignment_operator expression {
-																	  if($1==1 && $3==1)
-			                                                          $$=1;
-			                                                          else
-			                                                          {$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
-			                                                       }
+							if($1==1 && $3==1)
+							$$=1;
+							else
+							{$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
+						}
 			| mutable division_assignment_operator expression 		{
-																	  if($1==1 && $3==1)
-			                                                          $$=1;
-			                                                          else
-			                                                           {$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
-			                                                       }
+							if($1==1 && $3==1)
+							$$=1;
+							else
+							{$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
+						}
 			| mutable modulo_assignment_operator expression 		{
-																	  if($1==1 && $3==1)
-			                                                          $$=1;
-			                                                          else
-			                                                           {$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
-			                                                       }
+							if($1==1 && $3==1)
+							$$=1;
+							else
+							{$$=-1; printf(ANSI_COLOR_RED "ERROR : Type mismatch\n" ANSI_COLOR_RESET); exit(0);}
+						}
 			| mutable increment_operator 							{if($1 == 1) $$=1; else $$=-1;}
 			| mutable decrement_operator 							{if($1 == 1) $$=1; else $$=-1;}
 			| simple_expression {if($1 == 1) $$=1; else $$=-1;} ;
@@ -317,16 +317,16 @@ factor
 mutable
 			: identifier {
 						  if(check_id_is_func(curid))
-						  {printf(ANSI_COLOR_RED "ERROR : Function name used as an identifier.\n" ANSI_COLOR_RESET); exit(8);}
-			              if(!checkscope(curid))
-			              {printf("%s\n",curid);printf(ANSI_COLOR_RED "ERROR : Identifier not found in scope.\n" ANSI_COLOR_RESET);exit(0);}
-			              if(!checkarray(curid))
-			              {printf("%s\n",curid);printf(ANSI_COLOR_RED"ERROR : Array ID has no subscript\n"ANSI_COLOR_RESET);exit(0);}
-			              if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
-			              $$ = 1;
-			              else
-			              $$ = -1;
-			              }
+				{printf(ANSI_COLOR_RED "ERROR : Function name used as an identifier.\n" ANSI_COLOR_RESET); exit(8);}
+				if(!checkscope(curid))
+				{printf("%s\n",curid);printf(ANSI_COLOR_RED "ERROR : Identifier not found in scope.\n" ANSI_COLOR_RESET);exit(0);}
+				if(!checkarray(curid))
+				{printf("%s\n",curid);printf(ANSI_COLOR_RED"ERROR : Array ID has no subscript\n"ANSI_COLOR_RESET);exit(0);}
+				if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
+				$$ = 1;
+				else
+				$$ = -1;
+				}
 			| array_identifier {if(!checkscope(curid)){printf("%s\n",curid);printf(ANSI_COLOR_RED "ERROR : Identifier not found in scope.\n" ANSI_COLOR_RESET);exit(0);}} '[' expression ']'
 			                   {if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
 			              		$$ = 1;
@@ -350,35 +350,35 @@ call
 			             } arguments ')'
 						 { if(strcmp(currfunccall,"printf"))
 							{
-								if(getSTparamscount(currfunccall)!=call_params_count)
+							if(getSTparamscount(currfunccall)!=call_params_count)
+							{
+								printf("\ncount : %d, expected : %d\n",call_params_count,getSTparamscount(currfunccall));
+								yyerror("ERROR: Number of arguments in function call doesn't match number of parameters");
+								//printf("Number of arguments in function call %s doesn't match number of parameters\n", currfunccall);
+								exit(8);
+							}
+							/*
+							if(call_params_count>=1)
+							{
+								if(check_params_type(currfunccall, call_params_types, call_params_count)==0)
 								{
-									printf("\ncount : %d, expected : %d\n",call_params_count,getSTparamscount(currfunccall));
-									yyerror("ERROR: Number of arguments in function call doesn't match number of parameters");
-									//printf("Number of arguments in function call %s doesn't match number of parameters\n", currfunccall);
+									//for(int i=0;i<call_params_count;i++)
+										//printf("\n%d %s \n",i,call_params_types[i]);
+									yyerror("Type mismatch in function parameters");
 									exit(8);
 								}
+								*/
 								/*
-								if(call_params_count>=1)
+								else
 								{
-									if(check_params_type(currfunccall, call_params_types, call_params_count)==0)
-									{
-										//for(int i=0;i<call_params_count;i++)
-											//printf("\n%d %s \n",i,call_params_types[i]);
-										yyerror("Type mismatch in function parameters");
-										exit(8);
-									}
-									*/
-									/*
-									else
-									{
-										printf("\nfunction call");
-										for(int i=0;i<call_params_count;i++)
-											printf("\n%d %s \n",i,call_params_types[i]);
-									}
-									*/
-								//}
-							}
-						 };
+									printf("\nfunction call");
+									for(int i=0;i<call_params_count;i++)
+										printf("\n%d %s \n",i,call_params_types[i]);
+								}
+								*/
+							//}
+						}
+						};
 
 arguments
 			: arguments_list
@@ -386,27 +386,27 @@ arguments
 
 arguments_list
 			: expression { call_params_count++;
-											 for(int i=0;i<100;i++)
-											 {
-												 if(call_params_types[i][0]=='\0')
-												 {
-													 strcpy(call_params_types[i],gettypestr(curid));
-													 break;
-												 }
-											 }
-											} A
+							for(int i=0;i<100;i++)
+							{
+								if(call_params_types[i][0]=='\0')
+								{
+									strcpy(call_params_types[i],gettypestr(curid));
+									break;
+								}
+							}
+						} A
 
 A
 			: ',' expression { call_params_count++;
-														for(int i=0;i<100;i++)
-														{
-															if(call_params_types[i][0]=='\0')
-															{
-																strcpy(call_params_types[i],gettypestr(curid));
-																break;
-															}
-														}
-												 } A
+								for(int i=0;i<100;i++)
+								{
+									if(call_params_types[i][0]=='\0')
+									{
+										strcpy(call_params_types[i],gettypestr(curid));
+										break;
+									}
+								}
+							} A
 			| ;
 
 constant
