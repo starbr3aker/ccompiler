@@ -17,6 +17,7 @@
 		char class[100];
 		char type[100];
 		char value[100];
+		int initnestval;
 		int nestval;
 		int lineno;
 		int length;
@@ -177,6 +178,7 @@
 				strcpy(ST[value].name,str1);
 				strcpy(ST[value].class,str2);
 				ST[value].length = strlen(str1);
+				ST[value].initnestval = 9999;
 				ST[value].nestval = 9999;
 				ST[value].params_count = -1;
 				insertSTline(str1,yylineno);
@@ -199,6 +201,7 @@
 			strcpy(ST[pos].name,str1);
 			strcpy(ST[pos].class,str2);
 			ST[pos].length = strlen(str1);
+			ST[pos].initnestval = 9999;
 			ST[pos].nestval = 9999;
 			ST[pos].params_count = -1;
 			for(int j=0;j<100;j++)
@@ -247,6 +250,7 @@
 			strcpy(ST[pos].name,s);
 			strcpy(ST[pos].class,"Identifier");
 			ST[pos].length = strlen(s);
+			ST[pos].initnestval = nest;
 			ST[pos].nestval = nest;
 			ST[pos].params_count = -1;
 			ST[pos].lineno = yylineno;
@@ -257,6 +261,7 @@
 			{
 				if(strcmp(ST[i].name,s)==0 )
 				{
+					ST[i].initnestval = nest;
 					ST[i].nestval = nest;
 				}
 			}
@@ -487,7 +492,7 @@
 			{
 				continue;
 			}
-			printf("%10s | %15s | %10s | %10s | %10d | %15d | %10d |\n",ST[i].name, ST[i].class, ST[i].type, ST[i].value, ST[i].lineno, ST[i].nestval, ST[i].params_count);
+			printf("%10s | %15s | %10s | %10s | %10d | %15d | %10d |\n",ST[i].name, ST[i].class, ST[i].type, ST[i].value, ST[i].lineno, ST[i].initnestval, ST[i].params_count);
 		}
 		for(int i=0;i<1001;i++)
 		{
