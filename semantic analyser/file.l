@@ -105,57 +105,103 @@
 		}
 	}
 
+
 	void insertSTline(char *str1, int line)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(str1);
+		if(strcmp(ST[value].name,str1)==0)
+			ST[value].lineno = line;
+		else
 		{
-			if(strcmp(ST[i].name,str1)==0)
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				ST[i].lineno = line;
+				if(strcmp(ST[i].name,str1)==0)
+				{
+					ST[i].lineno = line;
+				}
 			}
 		}
 	}
 
 	void insertSTparamstype(char *str1, char *str2)
 	{
-		for(int i=0;i<1001;i++)
-		{
-			if(strcmp(ST[i].name,str1)==0)
+		int value = hash(str1);
+	    if(strcmp(ST[value].name,str1)==0)
 			{
 				for(int j=0;j<100;j++)
 				{
-					if(ST[i].params_types[j][0]=='\0')
+					if(ST[value].params_types[j][0]=='\0')
 					{
-						strcpy(ST[i].params_types[j],str2);
+						strcpy(ST[value].params_types[j],str2);
 						break;
 					}
 				}
 			}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,str1)==0)
+				{
+					for(int j=0;j<100;j++)
+					{
+						if(ST[i].params_types[j][0]=='\0')
+						{
+							strcpy(ST[i].params_types[j],str2);
+							break;
+						}
+					}
+				}
+			}
 		}
+		
 	}
 
 	int check_params_type(char *str, char types[100][100], int n)
 	{
-		for(int i=0;i<1001;i++)
-		{
-			if(strcmp(ST[i].name,str)==0)
+		int value = hash(str);
+	    if(strcmp(ST[value].name,str)==0)
 			{
 				for(int j=0;j<n;j++)
 				{
-					if(strcmp(ST[i].params_types[j],types[j]))
+					if(strcmp(ST[value].params_types[j],types[j]))
 					{
 						/*
 						for(int k=0;k<n;k++)
 						{
-							printf("\n%s\n",ST[i].params_types[j]);
+							printf("\n%s\n",ST[value].params_types[j]);
 						}
-						printf("\n%s....%s....%s....%d\n",ST[i].name,ST[i].params_types[j],types[j],j);
+						printf("\n%s....%s....%s....%d\n",ST[value].name,ST[value].params_types[j],types[j],j);
 						*/
 						return 0;
 					}
 				}
 			}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,str)==0)
+				{
+					for(int j=0;j<n;j++)
+					{
+						if(strcmp(ST[i].params_types[j],types[j]))
+						{
+							/*
+							for(int k=0;k<n;k++)
+							{
+								printf("\n%s\n",ST[i].params_types[j]);
+							}
+							printf("\n%s....%s....%s....%d\n",ST[i].name,ST[i].params_types[j],types[j],j);
+							*/
+							return 0;
+						}
+					}
+				}
+			}
 		}
+		
+
 		return 1;
 	}
 
@@ -211,24 +257,39 @@
 
 	void insertSTtype(char *str1, char *str2)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(str1);
+		if(strcmp(ST[value].name,str1)==0)
+			strcpy(ST[value].type,str2);
+		else
 		{
-			if(strcmp(ST[i].name,str1)==0)
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				strcpy(ST[i].type,str2);
+				if(strcmp(ST[i].name,str1)==0)
+				{
+					strcpy(ST[i].type,str2);
+				}
 			}
 		}
+		
+	
     }
 
 	void insertSTvalue(char *str1, char *str2)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(str1);
+		if(strcmp(ST[value].name,str1)==0 && ST[value].nestval == currnest)
+			strcpy(ST[value].value,str2);
+		else
 		{
-			if(strcmp(ST[i].name,str1)==0 && ST[i].nestval == currnest)
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				strcpy(ST[i].value,str2);
+				if(strcmp(ST[i].name,str1)==0 && ST[i].nestval == currnest)
+				{
+					strcpy(ST[i].value,str2);
+				}
 			}
 		}
+
 	}
 
 
@@ -270,37 +331,58 @@
 
 	void insertSTparamscount(char *s, int count)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
+			ST[value].params_count = count;
+		else
 		{
-			if(strcmp(ST[i].name,s)==0 )
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				ST[i].params_count = count;
+				if(strcmp(ST[i].name,s)==0)
+				{
+					ST[i].params_count = count;
+				}
 			}
 		}
+
 	}
 
 	int getSTparamscount(char *s)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
+			return ST[value].params_count;
+		else
 		{
-			if(strcmp(ST[i].name,s)==0 )
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				return ST[i].params_count;
+				if(strcmp(ST[i].name,s)==0)
+				{
+					return ST[i].params_count;
+				}
 			}
 		}
+		
 		return -2;
 	}
 
 	void insertSTF(char *s)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
+			strcpy(ST[value].class,"Function");
+		else
 		{
-			if(strcmp(ST[i].name,s)==0 )
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				strcpy(ST[i].class,"Function");
-				return;
+				if(strcmp(ST[i].name,s)==0)
+				{
+					strcpy(ST[i].class,"Function");
+				}
 			}
 		}
+		
+		
 
 	}
 
@@ -349,6 +431,7 @@
 
 	}
 
+
 	int checkscope(char *s)
 	{
 		int flag = 0;
@@ -379,12 +462,21 @@
 
 	int check_id_is_func(char *s)
 	{
-		for(int i = 0 ; i < 1000 ; i++)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
 		{
-			if(strcmp(ST[i].name,s)==0)
-			{
-				if(strcmp(ST[i].class,"Function")==0)
+			if(strcmp(ST[value].class,"Function")==0)
 					return 1;
+		}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,s)==0)
+				{
+					if(strcmp(ST[i].class,"Function")==0);
+					return 1;
+				}
 			}
 		}
 		return 0;
@@ -392,28 +484,51 @@
 
 	int checkarray(char *s)
 	{
-		for(int i = 0 ; i < 1000 ; i++)
-		{
-			if(strcmp(ST[i].name,s)==0)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
 			{
-				if(strcmp(ST[i].class,"Array Identifier")==0)
+				if(strcmp(ST[value].class,"Array Identifier")==0)
 				{
 					return 0;
 				}
 			}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,s)==0)
+				{
+					if(strcmp(ST[i].class,"Array Identifier")==0)
+					{
+						return 0;
+					}
+				}
+			}
 		}
+		
 		return 1;
 	}
 
 	int duplicate(char *s)
 	{
-		for(int i = 0 ; i < 1000 ; i++)
-		{
-			if(strcmp(ST[i].name,s)==0)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
 			{
-				if(ST[i].nestval == currnest)
+				if(ST[value].nestval == currnest)
 				{
 			        return 1;
+				}
+			}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,s)==0)
+				{
+					if(ST[i].nestval == currnest)
+					{
+						return 1;
+					}
 				}
 			}
 		}
@@ -423,25 +538,42 @@
 
 	int check_duplicate(char* str)
 	{
-		for(int i=0; i<1001; i++)
-		{
-			if(strcmp(ST[i].name, str) == 0 && strcmp(ST[i].class, "Function") == 0)
+		int value = hash(str);
+		if(strcmp(ST[value].name, str) == 0 && strcmp(ST[value].class, "Function") == 0)
 			{
 				printf("Function redeclaration not allowed\n");
 				exit(0);
 			}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name, str) == 0 && strcmp(ST[i].class, "Function") == 0)
+				{
+					printf("Function redeclaration not allowed\n");
+					exit(0);
+				}
+			}
 		}
+		
 	}
 
 	int check_declaration(char* str, char *check_type)
 	{
-		for(int i=0; i<1001; i++)
-		{
-			if(strcmp(ST[i].name, str) == 0 && strcmp(ST[i].class, "Function") == 0 || strcmp(ST[i].name,"printf")==0 )
-			{
+		int value = hash(str);
+		if(strcmp(ST[value].name, str) == 0 && strcmp(ST[value].class, "Function") == 0 || strcmp(ST[value].name,"printf")==0 )
 				return 1;
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name, str) == 0 && strcmp(ST[i].class, "Function") == 0 || strcmp(ST[i].name,"printf")==0)
+				{
+                    return 1;    
+    			}
 			}
 		}
+
 		return 0;
 	}
 
@@ -457,25 +589,36 @@
 
 	char gettype(char *s, int flag)
 	{
-			for(int i = 0 ; i < 1001 ; i++ )
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
+			return ST[value].type[0];
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,s)==0)
 				{
 					return ST[i].type[0];
 				}
 			}
+		}
 
 	}
 
 	char *gettypestr(char *s)
-	{
-			for(int i = 0 ; i < 1001 ; i++ )
+	{	int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
+			return ST[value].type;
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,s)==0)
 				{
 					return ST[i].type;
 				}
 			}
+		}
 
 	}
 
