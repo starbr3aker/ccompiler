@@ -1,5 +1,5 @@
-//Condition supplied must be a non-negative integer, no expressions permitted
-include<stdio.h>
+// VALID CASE
+#include<stdio.h>
 
 int main()
 {
@@ -7,7 +7,7 @@ int main()
 	while(x>0)
 	{
 		printf("--Example code--");
-		--x;
+		x--;
 	}
 
 	x=2;
@@ -18,10 +18,10 @@ int main()
 		while(m>0)
 		{
 			printf("%d", x-m);
-			--m;
+			m--;
 		}
         printf("%d",x);
-        --x;
+        x--;
 
 	}
 }
