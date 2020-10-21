@@ -790,57 +790,103 @@ char *yytext;
 		}
 	}
 
+
 	void insertSTline(char *str1, int line)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(str1);
+		if(strcmp(ST[value].name,str1)==0)
+			ST[value].lineno = line;
+		else
 		{
-			if(strcmp(ST[i].name,str1)==0)
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				ST[i].lineno = line;
+				if(strcmp(ST[i].name,str1)==0)
+				{
+					ST[i].lineno = line;
+				}
 			}
 		}
 	}
 
 	void insertSTparamstype(char *str1, char *str2)
 	{
-		for(int i=0;i<1001;i++)
-		{
-			if(strcmp(ST[i].name,str1)==0)
+		int value = hash(str1);
+	    if(strcmp(ST[value].name,str1)==0)
 			{
 				for(int j=0;j<100;j++)
 				{
-					if(ST[i].params_types[j][0]=='\0')
+					if(ST[value].params_types[j][0]=='\0')
 					{
-						strcpy(ST[i].params_types[j],str2);
+						strcpy(ST[value].params_types[j],str2);
 						break;
 					}
 				}
 			}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,str1)==0)
+				{
+					for(int j=0;j<100;j++)
+					{
+						if(ST[i].params_types[j][0]=='\0')
+						{
+							strcpy(ST[i].params_types[j],str2);
+							break;
+						}
+					}
+				}
+			}
 		}
+		
 	}
 
 	int check_params_type(char *str, char types[100][100], int n)
 	{
-		for(int i=0;i<1001;i++)
-		{
-			if(strcmp(ST[i].name,str)==0)
+		int value = hash(str);
+	    if(strcmp(ST[value].name,str)==0)
 			{
 				for(int j=0;j<n;j++)
 				{
-					if(strcmp(ST[i].params_types[j],types[j]))
+					if(strcmp(ST[value].params_types[j],types[j]))
 					{
 						/*
 						for(int k=0;k<n;k++)
 						{
-							printf("\n%s\n",ST[i].params_types[j]);
+							printf("\n%s\n",ST[value].params_types[j]);
 						}
-						printf("\n%s....%s....%s....%d\n",ST[i].name,ST[i].params_types[j],types[j],j);
+						printf("\n%s....%s....%s....%d\n",ST[value].name,ST[value].params_types[j],types[j],j);
 						*/
 						return 0;
 					}
 				}
 			}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,str)==0)
+				{
+					for(int j=0;j<n;j++)
+					{
+						if(strcmp(ST[i].params_types[j],types[j]))
+						{
+							/*
+							for(int k=0;k<n;k++)
+							{
+								printf("\n%s\n",ST[i].params_types[j]);
+							}
+							printf("\n%s....%s....%s....%d\n",ST[i].name,ST[i].params_types[j],types[j],j);
+							*/
+							return 0;
+						}
+					}
+				}
+			}
 		}
+		
+
 		return 1;
 	}
 
@@ -896,24 +942,39 @@ char *yytext;
 
 	void insertSTtype(char *str1, char *str2)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(str1);
+		if(strcmp(ST[value].name,str1)==0)
+			strcpy(ST[value].type,str2);
+		else
 		{
-			if(strcmp(ST[i].name,str1)==0)
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				strcpy(ST[i].type,str2);
+				if(strcmp(ST[i].name,str1)==0)
+				{
+					strcpy(ST[i].type,str2);
+				}
 			}
 		}
+		
+	
     }
 
 	void insertSTvalue(char *str1, char *str2)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(str1);
+		if(strcmp(ST[value].name,str1)==0 && ST[value].nestval == currnest)
+			strcpy(ST[value].value,str2);
+		else
 		{
-			if(strcmp(ST[i].name,str1)==0 && ST[i].nestval == currnest)
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				strcpy(ST[i].value,str2);
+				if(strcmp(ST[i].name,str1)==0 && ST[i].nestval == currnest)
+				{
+					strcpy(ST[i].value,str2);
+				}
 			}
 		}
+
 	}
 
 
@@ -955,37 +1016,58 @@ char *yytext;
 
 	void insertSTparamscount(char *s, int count)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
+			ST[value].params_count = count;
+		else
 		{
-			if(strcmp(ST[i].name,s)==0 )
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				ST[i].params_count = count;
+				if(strcmp(ST[i].name,s)==0)
+				{
+					ST[i].params_count = count;
+				}
 			}
 		}
+
 	}
 
 	int getSTparamscount(char *s)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
+			return ST[value].params_count;
+		else
 		{
-			if(strcmp(ST[i].name,s)==0 )
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				return ST[i].params_count;
+				if(strcmp(ST[i].name,s)==0)
+				{
+					return ST[i].params_count;
+				}
 			}
 		}
+		
 		return -2;
 	}
 
 	void insertSTF(char *s)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
+			strcpy(ST[value].class,"Function");
+		else
 		{
-			if(strcmp(ST[i].name,s)==0 )
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				strcpy(ST[i].class,"Function");
-				return;
+				if(strcmp(ST[i].name,s)==0)
+				{
+					strcpy(ST[i].class,"Function");
+				}
 			}
 		}
+		
+		
 
 	}
 
@@ -1034,6 +1116,7 @@ char *yytext;
 
 	}
 
+
 	int checkscope(char *s)
 	{
 		int flag = 0;
@@ -1064,12 +1147,21 @@ char *yytext;
 
 	int check_id_is_func(char *s)
 	{
-		for(int i = 0 ; i < 1000 ; i++)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
 		{
-			if(strcmp(ST[i].name,s)==0)
-			{
-				if(strcmp(ST[i].class,"Function")==0)
+			if(strcmp(ST[value].class,"Function")==0)
 					return 1;
+		}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,s)==0)
+				{
+					if(strcmp(ST[i].class,"Function")==0);
+					return 1;
+				}
 			}
 		}
 		return 0;
@@ -1077,28 +1169,51 @@ char *yytext;
 
 	int checkarray(char *s)
 	{
-		for(int i = 0 ; i < 1000 ; i++)
-		{
-			if(strcmp(ST[i].name,s)==0)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
 			{
-				if(strcmp(ST[i].class,"Array Identifier")==0)
+				if(strcmp(ST[value].class,"Array Identifier")==0)
 				{
 					return 0;
 				}
 			}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,s)==0)
+				{
+					if(strcmp(ST[i].class,"Array Identifier")==0)
+					{
+						return 0;
+					}
+				}
+			}
 		}
+		
 		return 1;
 	}
 
 	int duplicate(char *s)
 	{
-		for(int i = 0 ; i < 1000 ; i++)
-		{
-			if(strcmp(ST[i].name,s)==0)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
 			{
-				if(ST[i].nestval == currnest)
+				if(ST[value].nestval == currnest)
 				{
 			        return 1;
+				}
+			}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,s)==0)
+				{
+					if(ST[i].nestval == currnest)
+					{
+						return 1;
+					}
 				}
 			}
 		}
@@ -1108,25 +1223,42 @@ char *yytext;
 
 	int check_duplicate(char* str)
 	{
-		for(int i=0; i<1001; i++)
-		{
-			if(strcmp(ST[i].name, str) == 0 && strcmp(ST[i].class, "Function") == 0)
+		int value = hash(str);
+		if(strcmp(ST[value].name, str) == 0 && strcmp(ST[value].class, "Function") == 0)
 			{
 				printf("Function redeclaration not allowed\n");
 				exit(0);
 			}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name, str) == 0 && strcmp(ST[i].class, "Function") == 0)
+				{
+					printf("Function redeclaration not allowed\n");
+					exit(0);
+				}
+			}
 		}
+		
 	}
 
 	int check_declaration(char* str, char *check_type)
 	{
-		for(int i=0; i<1001; i++)
-		{
-			if(strcmp(ST[i].name, str) == 0 && strcmp(ST[i].class, "Function") == 0 || strcmp(ST[i].name,"printf")==0 )
-			{
+		int value = hash(str);
+		if(strcmp(ST[value].name, str) == 0 && strcmp(ST[value].class, "Function") == 0 || strcmp(ST[value].name,"printf")==0 )
 				return 1;
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name, str) == 0 && strcmp(ST[i].class, "Function") == 0 || strcmp(ST[i].name,"printf")==0)
+				{
+                    return 1;    
+    			}
 			}
 		}
+
 		return 0;
 	}
 
@@ -1142,25 +1274,36 @@ char *yytext;
 
 	char gettype(char *s, int flag)
 	{
-			for(int i = 0 ; i < 1001 ; i++ )
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
+			return ST[value].type[0];
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,s)==0)
 				{
 					return ST[i].type[0];
 				}
 			}
+		}
 
 	}
 
 	char *gettypestr(char *s)
-	{
-			for(int i = 0 ; i < 1001 ; i++ )
+	{	int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
+			return ST[value].type;
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,s)==0)
 				{
 					return ST[i].type;
 				}
 			}
+		}
 
 	}
 
@@ -1212,8 +1355,8 @@ char *yytext;
 	char curtype[20];
 	char curval[20];
 
-#line 1216 "lex.yy.c"
-#line 1217 "lex.yy.c"
+#line 1359 "lex.yy.c"
+#line 1360 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -1430,9 +1573,9 @@ YY_DECL
 		}
 
 	{
-#line 535 "file.l"
+#line 678 "file.l"
 
-#line 1436 "lex.yy.c"
+#line 1579 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1492,7 +1635,7 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 536 "file.l"
+#line 679 "file.l"
 {yylineno++;}
 	YY_BREAK
 case 2:
@@ -1502,7 +1645,7 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 537 "file.l"
+#line 680 "file.l"
 { }
 	YY_BREAK
 case 3:
@@ -1512,329 +1655,329 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 538 "file.l"
+#line 681 "file.l"
 { }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 539 "file.l"
+#line 682 "file.l"
 { }
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 540 "file.l"
+#line 683 "file.l"
 { }
 	YY_BREAK
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 541 "file.l"
+#line 684 "file.l"
 ;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 542 "file.l"
+#line 685 "file.l"
 { return(';'); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 543 "file.l"
+#line 686 "file.l"
 { return(','); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 544 "file.l"
+#line 687 "file.l"
 { return('{'); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 545 "file.l"
+#line 688 "file.l"
 { return('}'); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 546 "file.l"
+#line 689 "file.l"
 { return('('); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 547 "file.l"
+#line 690 "file.l"
 { return(')'); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 548 "file.l"
+#line 691 "file.l"
 { return('['); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 549 "file.l"
+#line 692 "file.l"
 { return(']'); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 550 "file.l"
+#line 693 "file.l"
 { return(':'); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 551 "file.l"
+#line 694 "file.l"
 { return('.'); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 553 "file.l"
+#line 696 "file.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword");return CHAR;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 554 "file.l"
+#line 697 "file.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return DOUBLE;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 555 "file.l"
+#line 698 "file.l"
 { insertST(yytext, "Keyword"); return ELSE;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 556 "file.l"
+#line 699 "file.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return FLOAT;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 557 "file.l"
+#line 700 "file.l"
 { insertST(yytext, "Keyword"); return WHILE;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 558 "file.l"
+#line 701 "file.l"
 { insertST(yytext, "Keyword"); return DO;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 559 "file.l"
+#line 702 "file.l"
 { insertST(yytext, "Keyword"); return FOR;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 560 "file.l"
+#line 703 "file.l"
 { insertST(yytext, "Keyword"); return IF;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 561 "file.l"
+#line 704 "file.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return INT;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 562 "file.l"
+#line 705 "file.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return LONG;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 563 "file.l"
+#line 706 "file.l"
 { insertST(yytext, "Keyword"); return RETURN;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 564 "file.l"
+#line 707 "file.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return SHORT;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 565 "file.l"
+#line 708 "file.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return SIGNED;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 566 "file.l"
+#line 709 "file.l"
 { insertST(yytext, "Keyword"); return SIZEOF;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 567 "file.l"
+#line 710 "file.l"
 { strcpy(curtype,yytext);   insertST(yytext, "Keyword");  return STRUCT;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 568 "file.l"
+#line 711 "file.l"
 { insertST(yytext, "Keyword");   return UNSIGNED;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 569 "file.l"
+#line 712 "file.l"
 { strcpy(curtype,yytext);   insertST(yytext, "Keyword");  return VOID;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 570 "file.l"
+#line 713 "file.l"
 { insertST(yytext, "Keyword");  return BREAK;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 574 "file.l"
+#line 717 "file.l"
 { return increment_operator; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 575 "file.l"
+#line 718 "file.l"
 { return decrement_operator; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 576 "file.l"
+#line 719 "file.l"
 { return leftshift_operator; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 577 "file.l"
+#line 720 "file.l"
 { return rightshift_operator; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 578 "file.l"
+#line 721 "file.l"
 { return lessthan_assignment_operator; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 579 "file.l"
+#line 722 "file.l"
 { return lessthan_operator; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 580 "file.l"
+#line 723 "file.l"
 { return greaterthan_assignment_operator; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 581 "file.l"
+#line 724 "file.l"
 { return greaterthan_operator; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 582 "file.l"
+#line 725 "file.l"
 { return equality_operator; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 583 "file.l"
+#line 726 "file.l"
 { return inequality_operator; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 584 "file.l"
+#line 727 "file.l"
 { return AND_operator; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 585 "file.l"
+#line 728 "file.l"
 { return OR_operator; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 586 "file.l"
+#line 729 "file.l"
 { return caret_operator; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 587 "file.l"
+#line 730 "file.l"
 { return multiplication_assignment_operator; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 588 "file.l"
+#line 731 "file.l"
 { return division_assignment_operator; }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 589 "file.l"
+#line 732 "file.l"
 { return modulo_assignment_operator; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 590 "file.l"
+#line 733 "file.l"
 { return addition_assignment_operator; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 591 "file.l"
+#line 734 "file.l"
 { return subtraction_assignment_operator; }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 592 "file.l"
+#line 735 "file.l"
 { return leftshift_assignment_operator; }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 593 "file.l"
+#line 736 "file.l"
 { return rightshift_assignment_operator; }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 594 "file.l"
+#line 737 "file.l"
 { return AND_assignment_operator; }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 595 "file.l"
+#line 738 "file.l"
 { return XOR_assignment_operator; }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 596 "file.l"
+#line 739 "file.l"
 { return OR_assignment_operator; }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 597 "file.l"
+#line 740 "file.l"
 { return amp_operator; }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 598 "file.l"
+#line 741 "file.l"
 { return exclamation_operator; }
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 599 "file.l"
+#line 742 "file.l"
 { return tilde_operator; }
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 600 "file.l"
+#line 743 "file.l"
 { return subtract_operator; }
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 601 "file.l"
+#line 744 "file.l"
 { return add_operator; }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 602 "file.l"
+#line 745 "file.l"
 { return multiplication_operator; }
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 603 "file.l"
+#line 746 "file.l"
 { return division_operator; }
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 604 "file.l"
+#line 747 "file.l"
 { return modulo_operator; }
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 605 "file.l"
+#line 748 "file.l"
 { return pipe_operator; }
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 606 "file.l"
+#line 749 "file.l"
 { return assignment_operator;}
 	YY_BREAK
 case 68:
@@ -1842,7 +1985,7 @@ case 68:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 608 "file.l"
+#line 751 "file.l"
 {strcpy(curval,yytext); insertCT(yytext,"String Constant"); printf("String Constant %s on line %d, at nesting %d,\n", yytext, yylineno, currnest); return string_constant;}
 	YY_BREAK
 case 69:
@@ -1850,7 +1993,7 @@ case 69:
 (yy_c_buf_p) = yy_cp = yy_bp + 3;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 610 "file.l"
+#line 753 "file.l"
 {strcpy(curval,yytext); insertCT(yytext,"Character Constant"); printf("Character Constant %s on line %d, at nesting %d,\n", yytext, yylineno, currnest); return character_constant;}
 	YY_BREAK
 case 70:
@@ -1858,7 +2001,7 @@ case 70:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 612 "file.l"
+#line 755 "file.l"
 {strcpy(curid,yytext); insertST(yytext, "Array Identifier");  printf("Array Identifier \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return array_identifier;}
 	YY_BREAK
 case 71:
@@ -1868,7 +2011,7 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 614 "file.l"
+#line 757 "file.l"
 {strcpy(curval,yytext); insertCT(yytext, "Number Constant"); yylval = atoi(yytext); printf("Number Constant \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return integer_constant;}
 	YY_BREAK
 case 72:
@@ -1878,17 +2021,17 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 616 "file.l"
+#line 759 "file.l"
 {strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); printf("Floating Constant \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return float_constant;}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 618 "file.l"
+#line 761 "file.l"
 {strcpy(curid,yytext); insertST(curid,"Identifier"); printf("Identifier \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return identifier;}
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 620 "file.l"
+#line 763 "file.l"
 {
 		if(yytext[0]=='#')
 		{
@@ -1912,10 +2055,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 641 "file.l"
+#line 784 "file.l"
 ECHO;
 	YY_BREAK
-#line 1919 "lex.yy.c"
+#line 2062 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2920,6 +3063,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 641 "file.l"
+#line 784 "file.l"
 
 
