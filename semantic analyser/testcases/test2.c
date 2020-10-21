@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-//test case for simple expressions
+//pass test case for simple expressions
 
 void main(){
 	int a,b,c,d,e,f,g,h;

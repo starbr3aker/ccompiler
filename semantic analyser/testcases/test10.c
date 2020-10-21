@@ -1,4 +1,4 @@
-// testing different kinds of variable declaration
+//fail testing different kinds of variable declaration
 #include <stdio.h>
 int a;
 int main()

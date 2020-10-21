@@ -1,5 +1,5 @@
 #include<stdio.h>
-// to test incorrect number of parameters
+//fail test to check incorrect number of parameters
 int function(int a)
 {
     return a;
