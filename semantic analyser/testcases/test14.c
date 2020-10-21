@@ -3,7 +3,7 @@
 //fail test for return type of function
 void function(int a, float b)
 {
-    return a;
+    return;
 }
 
 void main()
