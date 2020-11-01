@@ -22,6 +22,7 @@
 		int lineno;
 		int length;
 		int params_count;
+		int brackets;
 	}ST[1001];
 
 	struct constanttable
@@ -32,6 +33,8 @@
 	}CT[1001];
 
 	int currnest = 0;
+	int arrbrackets = 0;
+	int totbrackets = 0;
 	extern int yylval;
 
 	int hash(char *str)
@@ -90,6 +93,36 @@
 				}
 			}
 			return 0;
+		}
+	}
+
+	int getbrackets(char *str1){
+		int value = hash(str1);
+		if(ST[value].length == 0)
+			return 12;
+		if(strcmp(ST[value].name,str1)==0)
+			return ST[value].brackets;
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,str1)==0)
+				{
+					return ST[i].brackets;
+				}
+			}
+			return 13;
+		}
+	}
+
+	void setbrackets(char *str1, int brackets){
+		for(int i = 0 ; i < 1001 ; i++)
+		{
+			if(strcmp(ST[i].name,str1)==0 )
+			{
+				ST[i].brackets = brackets;
+				return;
+			}
 		}
 	}
 
@@ -523,6 +556,7 @@ IN "include"
 
 \"[^\n]*\"/[;|,|\)] 			{strcpy(curval,yytext); insertCT(yytext,"String Constant"); return string_constant;}
 \'[A-Z|a-z]\'/[;|,|\)|:] 		{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); return character_constant;}
+\'\\[0-9|A-Z|a-z]\'/[;|,|\)|:] 		{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); return character_constant;}
 [a-z|A-Z]([a-z|A-Z]|[0-9])*/\[ 	{strcpy(curid,yytext); insertST(yytext, "Array Identifier");  return array_identifier;}
 [1-9][0-9]*|0/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\]|\}|:|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Number Constant"); yylval = atoi(yytext); return integer_constant;}
 ([0-9]*)\.([0-9]+)/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); return float_constant;}

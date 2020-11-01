@@ -16,6 +16,10 @@
 	extern char curtype[20];
 	extern char curval[20];
 	extern int currnest;
+	extern int arrbrackets;
+	extern int totbrackets;
+	int getbrackets(char* );
+	void setbrackets(char*, int);
 	void deletedata (int );
 	int checkscope(char*);
 	int check_id_is_func(char *);
@@ -120,8 +124,8 @@ variable_declaration_list
 			: variable_declaration_list ',' variable_declaration_identifier | variable_declaration_identifier;
 
 variable_declaration_identifier 
-			: identifier {if(duplicate(curid)){printf("Duplicate\n");exit(0);}insertSTnest(curid,currnest); ins();  } vdi   
-			  | array_identifier {if(duplicate(curid)){printf("Duplicate\n");exit(0);}insertSTnest(curid,currnest); ins();  } vdi;
+			: identifier {if(duplicate(curid)){printf("ERROR : Duplicate initialisation\n");exit(0);}insertSTnest(curid,currnest); ins();  } vdi   
+			| array_identifier {if(duplicate(curid)){printf("ERROR : Duplicate initialisation\n");exit(0);}insertSTnest(curid,currnest); ins();  } vdi;
 			
 			
 
@@ -132,7 +136,8 @@ identifier_array_type
 			| ;
 
 initilization_params
-			: integer_constant ']' initilization {if($$ < 1) {printf("Wrong array size\n"); exit(0);} }
+			: integer_constant ']' initilization {if($$ < 1) {printf("ERROR : Array size is invalid at index %d\n", arrbrackets); exit(0);} arrbrackets++; setbrackets(curid, arrbrackets); arrbrackets=0;}
+			| integer_constant ']' '[' initilization_params {if($$ < 1){printf("ERROR : Array size is invalid at index %d\n", arrbrackets); arrbrackets++;}}
 			| ']' string_initilization;
 
 initilization
@@ -207,26 +212,26 @@ expression_statment
 			| ';' ;
 
 conditional_statements 
-			: IF '(' simple_expression ')' {label1();if($3!=1){printf("Condition checking is not of type int\n");exit(0);}} statement {label2();}  conditional_statements_breakup;
+			: IF '(' simple_expression ')' {label1();if($3!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}} statement {label2();}  conditional_statements_breakup;
 
 conditional_statements_breakup
 			: ELSE statement {label3();}
 			| {label3();};
 
 iterative_statements 
-			: WHILE '(' {label4();} simple_expression ')' {label1();if($4!=1){printf("Condition checking is not of type int\n");exit(0);}} statement {label5();} 
-			| FOR '(' expression ';' {label4();} simple_expression ';' {label1();if($6!=1){printf("Condition checking is not of type int\n");exit(0);}} expression ')'statement {label5();} 
-			| {label4();}DO statement WHILE '(' simple_expression ')'{label1();label5();if($6!=1){printf("Condition checking is not of type int\n");exit(0);}} ';';
+			: WHILE '(' {label4();} simple_expression ')' {label1();if($4!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}} statement {label5();} 
+			| FOR '(' expression ';' {label4();} simple_expression ';' {label1();if($6!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}} expression ')'statement {label5();} 
+			| {label4();}DO statement WHILE '(' simple_expression ')'{label1();label5();if($6!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}} ';';
 return_statement 
-			: RETURN ';' {if(strcmp(currfunctype,"void")) {printf("Returning void of a non-void function\n"); exit(0);}}
+			: RETURN ';' {if(strcmp(currfunctype,"void")) {printf("ERROR : No return value found for non-void function.\n"); exit(0);}}
 			| RETURN expression ';' { 	if(!strcmp(currfunctype, "void"))
 										{ 
-											yyerror("Function is void");
+											yyerror("ERROR : Void function calls return statement.\n");
 										}
 
 										if((currfunctype[0]=='i' || currfunctype[0]=='c') && $2!=1)
 										{
-											printf("Expression doesn't match return type of function\n"); exit(0);
+											printf("ERROR : Expression doesn't resolve to return specified datatype.\n"); exit(0);
 										}
 
 									};
@@ -249,48 +254,48 @@ array_int_declarations_breakup
 
 expression 
 			: mutable assignment_operator {push("=");} expression   {   
-																	  if($1==1 && $4==1) 
-																	  {
-			                                                          $$=1;
-			                                                          } 
-			                                                          else 
-			                                                          {$$=-1; printf("Type mismatch\n"); exit(0);} 
-			                                                          codeassign();
-			                                                       }
+					if($1==1 && $4==1) 
+					{
+					$$=1;
+					} 
+					else 
+					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);} 
+					codeassign();
+				}
 			| mutable addition_assignment_operator {push("+=");}expression {  
-																	  if($1==1 && $4==1) 
-			                                                          $$=1; 
-			                                                          else 
-			                                                          {$$=-1; printf("Type mismatch\n"); exit(0);} 
-			                                                          codeassign();
-			                                                       }
-			| mutable subtraction_assignment_operator {push("-=");} expression  {	  
-																	  if($1==1 && $4==1) 
-			                                                          $$=1; 
-			                                                          else 
-			                                                          {$$=-1; printf("Type mismatch\n"); exit(0);} 
-			                                                          codeassign();
-			                                                       }
+					if($1==1 && $4==1) 
+					$$=1; 
+					else 
+					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);} 
+					codeassign();
+				}
+			| mutable subtraction_assignment_operator {push("-=");} expression{	  
+					if($1==1 && $4==1) 
+					$$=1; 
+					else 
+					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);} 
+					codeassign();
+				}
 			| mutable multiplication_assignment_operator {push("*=");} expression {
-																	  if($1==1 && $4==1) 
-			                                                          $$=1; 
-			                                                          else 
-			                                                          {$$=-1; printf("Type mismatch\n"); exit(0);}
-			                                                          codeassign(); 
-			                                                       }
+					if($1==1 && $4==1) 
+					$$=1; 
+					else 
+					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);}
+					codeassign(); 
+				}
 			| mutable division_assignment_operator {push("/=");}expression 		{ 
-																	  if($1==1 && $4==1) 
-			                                                          $$=1; 
-			                                                          else 
-			                                                          {$$=-1; printf("Type mismatch\n"); exit(0);} 
-			                                                       }
+					if($1==1 && $4==1) 
+					$$=1; 
+					else 
+					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);} 
+				}
 			| mutable modulo_assignment_operator {push("%=");}expression 		{ 
-																	  if($1==1 && $3==1) 
-			                                                          $$=1; 
-			                                                          else 
-			                                                          {$$=-1; printf("Type mismatch\n"); exit(0);} 
-			                                                          codeassign();
-																	}
+					if($1==1 && $3==1) 
+					$$=1; 
+					else 
+					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);} 
+					codeassign();
+				}
 			| mutable increment_operator 							{ push("++");if($1 == 1) $$=1; else $$=-1; genunary();}
 			| mutable decrement_operator  							{push("--");if($1 == 1) $$=1; else $$=-1;}
 			| simple_expression {if($1 == 1) $$=1; else $$=-1;} ;
@@ -339,22 +344,32 @@ mutable
 			: identifier {
 						  push(curid);
 						  if(check_id_is_func(curid))
-						  {printf("Function name used as Identifier\n"); exit(8);}
+						  {printf("ERROR : Identifier used has been declared as function.\n"); exit(8);}
 			              if(!checkscope(curid))
-			              {printf("%s\n",curid);printf("Undeclared\n");exit(0);} 
+			              {printf("%s\n",curid);printf("ERROR : Identifier used is undeclared.\n");exit(0);} 
 			              if(!checkarray(curid))
-			              {printf("%s\n",curid);printf("Array ID has no subscript\n");exit(0);}
+			              {printf("%s\n",curid);printf("ERROR : Call to array without subscript.\n");exit(0);}
 			              if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
 			              $$ = 1;
 			              else
 			              $$ = -1;
 			              }
-			| array_identifier {if(!checkscope(curid)){printf("%s\n",curid);printf("Undeclared\n");exit(0);}} '[' expression ']' 
-			                   {if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
-			              		$$ = 1;
-			              		else
-			              		$$ = -1;
-			              		};
+			| array_identifier {if(!checkscope(curid)){printf("%s\n",curid);printf("ERROR : Identifier used in undeclared\n");exit(0);}} bracketlist 
+						{	if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
+							$$ = 1;
+							else
+							$$ = -1;
+							totbrackets = getbrackets(curid);
+							printf("Totbrackets recd %d\n", totbrackets);
+						};
+
+bracketlist	: '[' expression ']' bracketlist {totbrackets--;}
+			| '[' expression ']' 	{
+										totbrackets--;
+										if(totbrackets!=0){
+										printf("ERROR : Dimension of array resolution doesn't match declaration. %d\n", totbrackets);
+										exit(0);
+									}};
 
 immutable 
 			: '(' expression ')' {if($2==1) $$=1; else $$=-1;}
@@ -365,7 +380,7 @@ call
 			: identifier '('{
 
 			             if(!check_declaration(curid, "Function"))
-			             { printf("Function not declared"); exit(0);} 
+			             { printf("ERROR : Function declaration not found.\n"); exit(0);} 
 			             insertSTF(curid); 
 						 strcpy(currfunccall,curid);
 						 if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
@@ -381,7 +396,7 @@ call
 							{ 
 								if(getSTparamscount(currfunccall)!=call_params_count)
 								{	
-									yyerror("Number of arguments in function call doesn't match number of parameters");
+									yyerror("ERROR : Number of arguments in function call doesn't match number of parameters.");
 									exit(8);
 								}
 							}
