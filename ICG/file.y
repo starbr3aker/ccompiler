@@ -136,8 +136,8 @@ identifier_array_type
 			| ;
 
 initilization_params
-			: integer_constant ']' initilization {if($$ < 1) {printf("ERROR : Array size is invalid at index %d\n", arrbrackets); exit(0);} arrbrackets++; setbrackets(curid, arrbrackets); arrbrackets=0;}
-			| integer_constant ']' '[' initilization_params {if($$ < 1){printf("ERROR : Array size is invalid at index %d\n", arrbrackets); arrbrackets++;}}
+			: integer_constant ']' {arrbrackets++;} initilization {if($$ < 1) {printf("ERROR : Array size is invalid at index %d\n", arrbrackets); exit(0);}  setbrackets(curid, arrbrackets); arrbrackets=0;}
+			| integer_constant ']' {arrbrackets++;} '[' initilization_params {if($$ < 1){printf("ERROR : Array size is invalid at index %d\n", arrbrackets);}}
 			| ']' string_initilization;
 
 initilization
@@ -354,16 +354,15 @@ mutable
 			              else
 			              $$ = -1;
 			              }
-			| array_identifier {if(!checkscope(curid)){printf("%s\n",curid);printf("ERROR : Identifier used in undeclared\n");exit(0);}} bracketlist 
+			| array_identifier {if(!checkscope(curid)){printf("%s\n",curid);printf("ERROR : Identifier used in undeclared\n");exit(0);}}  
 						{	if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
-							$$ = 1;
+								$$ = 1;
 							else
-							$$ = -1;
+								$$ = -1;
 							totbrackets = getbrackets(curid);
-							printf("Totbrackets recd %d\n", totbrackets);
-						};
+						} bracketlist;
 
-bracketlist	: '[' expression ']' bracketlist {totbrackets--;}
+bracketlist	: '[' expression ']' {totbrackets--;} bracketlist 
 			| '[' expression ']' 	{
 										totbrackets--;
 										if(totbrackets!=0){
