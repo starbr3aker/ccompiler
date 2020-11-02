@@ -1,7 +1,6 @@
 %{
 	#include <stdio.h>
 	#include <string.h>
-	#include <stdlib.h>
 	#include "y.tab.h"
 
 	#define ANSI_COLOR_RED		"\x1b[31m"
@@ -18,11 +17,12 @@
 		char class[100];
 		char type[100];
 		char value[100];
+		int initnestval;
 		int nestval;
 		int lineno;
 		int length;
 		int params_count;
-		int brackets;
+		char params_types[100][100];
 	}ST[1001];
 
 	struct constanttable
@@ -31,10 +31,19 @@
 		char type[100];
 		int length;
 	}CT[1001];
-
+/*
+	struct proc_decl
+	{
+		char name[100];
+		char lineno;
+		int params_count;
+		char params_types[100][100];
+		char ret_type[100];
+	}PT[1001];
+	*/
 	int currnest = 0;
-	int arrbrackets = 0;
-	int totbrackets = 0;
+	int params_count = 0;
+	int call_params_count = 0;
 	extern int yylval;
 
 	int hash(char *str)
@@ -59,7 +68,7 @@
 		}
 		else if(strcmp(ST[value].name,str)==0)
 		{
-			
+
 			return value;
 		}
 		else
@@ -68,7 +77,7 @@
 			{
 				if(strcmp(ST[i].name,str)==0)
 				{
-					
+
 					return i;
 				}
 			}
@@ -96,47 +105,105 @@
 		}
 	}
 
-	int getbrackets(char *str1){
+
+	void insertSTline(char *str1, int line)
+	{
 		int value = hash(str1);
-		if(ST[value].length == 0)
-			return 12;
 		if(strcmp(ST[value].name,str1)==0)
-			return ST[value].brackets;
+			ST[value].lineno = line;
 		else
 		{
 			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,str1)==0)
 				{
-					return ST[i].brackets;
+					ST[i].lineno = line;
 				}
 			}
-			return 13;
 		}
 	}
 
-	void setbrackets(char *str1, int brackets){
-		for(int i = 0 ; i < 1001 ; i++)
-		{
-			if(strcmp(ST[i].name,str1)==0 )
-			{
-				ST[i].brackets = brackets;
-				return;
-			}
-		}
-	}
-
-	void insertSTline(char *str1, int line)
+	void insertSTparamstype(char *str1, char *str2)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
-		{
-			if(strcmp(ST[i].name,str1)==0)
+		int value = hash(str1);
+	    if(strcmp(ST[value].name,str1)==0)
 			{
-				ST[i].lineno = line;
+				for(int j=0;j<100;j++)
+				{
+					if(ST[value].params_types[j][0]=='\0')
+					{
+						strcpy(ST[value].params_types[j],str2);
+						break;
+					}
+				}
+			}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,str1)==0)
+				{
+					for(int j=0;j<100;j++)
+					{
+						if(ST[i].params_types[j][0]=='\0')
+						{
+							strcpy(ST[i].params_types[j],str2);
+							break;
+						}
+					}
+				}
 			}
 		}
+		
 	}
 
+	int check_params_type(char *str, char types[100][100], int n)
+	{
+		int value = hash(str);
+	    if(strcmp(ST[value].name,str)==0)
+			{
+				for(int j=0;j<n;j++)
+				{
+					if(strcmp(ST[value].params_types[j],types[j]))
+					{
+						/*
+						for(int k=0;k<n;k++)
+						{
+							printf("\n%s\n",ST[value].params_types[j]);
+						}
+						printf("\n%s....%s....%s....%d\n",ST[value].name,ST[value].params_types[j],types[j],j);
+						*/
+						return 0;
+					}
+				}
+			}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,str)==0)
+				{
+					for(int j=0;j<n;j++)
+					{
+						if(strcmp(ST[i].params_types[j],types[j]))
+						{
+							/*
+							for(int k=0;k<n;k++)
+							{
+								printf("\n%s\n",ST[i].params_types[j]);
+							}
+							printf("\n%s....%s....%s....%d\n",ST[i].name,ST[i].params_types[j],types[j],j);
+							*/
+							return 0;
+						}
+					}
+				}
+			}
+		}
+		
+
+		return 1;
+	}
 
 	void insertST(char *str1, char *str2)
 	{
@@ -146,7 +213,7 @@
 			{
 				printf("Error use of array\n");
 				exit(0);
-			}	
+			}
 			return;
 		}
 		else
@@ -157,9 +224,12 @@
 				strcpy(ST[value].name,str1);
 				strcpy(ST[value].class,str2);
 				ST[value].length = strlen(str1);
+				ST[value].initnestval = 9999;
 				ST[value].nestval = 9999;
 				ST[value].params_count = -1;
 				insertSTline(str1,yylineno);
+				for(int j=0;j<100;j++)
+					ST[value].params_types[j][0] = '\0';
 				return;
 			}
 
@@ -177,31 +247,49 @@
 			strcpy(ST[pos].name,str1);
 			strcpy(ST[pos].class,str2);
 			ST[pos].length = strlen(str1);
+			ST[pos].initnestval = 9999;
 			ST[pos].nestval = 9999;
 			ST[pos].params_count = -1;
+			for(int j=0;j<100;j++)
+				ST[value].params_types[j][0] = '\0';
 		}
 	}
 
 	void insertSTtype(char *str1, char *str2)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(str1);
+		if(strcmp(ST[value].name,str1)==0)
+			strcpy(ST[value].type,str2);
+		else
 		{
-			if(strcmp(ST[i].name,str1)==0)
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				strcpy(ST[i].type,str2);
+				if(strcmp(ST[i].name,str1)==0)
+				{
+					strcpy(ST[i].type,str2);
+				}
 			}
 		}
+		
+	
     }
 
 	void insertSTvalue(char *str1, char *str2)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(str1);
+		if(strcmp(ST[value].name,str1)==0 && ST[value].nestval == currnest)
+			strcpy(ST[value].value,str2);
+		else
 		{
-			if(strcmp(ST[i].name,str1)==0 && ST[i].nestval == currnest)
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				strcpy(ST[i].value,str2);
+				if(strcmp(ST[i].name,str1)==0 && ST[i].nestval == currnest)
+				{
+					strcpy(ST[i].value,str2);
+				}
 			}
 		}
+
 	}
 
 
@@ -223,6 +311,7 @@
 			strcpy(ST[pos].name,s);
 			strcpy(ST[pos].class,"Identifier");
 			ST[pos].length = strlen(s);
+			ST[pos].initnestval = nest;
 			ST[pos].nestval = nest;
 			ST[pos].params_count = -1;
 			ST[pos].lineno = yylineno;
@@ -233,46 +322,67 @@
 			{
 				if(strcmp(ST[i].name,s)==0 )
 				{
+					ST[i].initnestval = nest;
 					ST[i].nestval = nest;
 				}
 			}
 		}
 	}
 
-	void insertSTparamscount(char *s, int count1)
+	void insertSTparamscount(char *s, int count)
 	{
-
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
+			ST[value].params_count = count;
+		else
 		{
-			if(strcmp(ST[i].name,s)==0 )
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				ST[i].params_count = count1;
+				if(strcmp(ST[i].name,s)==0)
+				{
+					ST[i].params_count = count;
+				}
 			}
 		}
+
 	}
 
 	int getSTparamscount(char *s)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
+			return ST[value].params_count;
+		else
 		{
-			if(strcmp(ST[i].name,s)==0 )
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				return ST[i].params_count;
+				if(strcmp(ST[i].name,s)==0)
+				{
+					return ST[i].params_count;
+				}
 			}
 		}
-		return -1;
+		
+		return -2;
 	}
 
 	void insertSTF(char *s)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
+			strcpy(ST[value].class,"Function");
+		else
 		{
-			if(strcmp(ST[i].name,s)==0 )
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
-				strcpy(ST[i].class,"Function");
-				return;
+				if(strcmp(ST[i].name,s)==0)
+				{
+					strcpy(ST[i].class,"Function");
+				}
 			}
 		}
+		
+		
 
 	}
 
@@ -321,6 +431,7 @@
 
 	}
 
+
 	int checkscope(char *s)
 	{
 		int flag = 0;
@@ -351,12 +462,21 @@
 
 	int check_id_is_func(char *s)
 	{
-		for(int i = 0 ; i < 1000 ; i++)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
 		{
-			if(strcmp(ST[i].name,s)==0)
-			{
-				if(strcmp(ST[i].class,"Function")==0)
+			if(strcmp(ST[value].class,"Function")==0)
 					return 1;
+		}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,s)==0)
+				{
+					if(strcmp(ST[i].class,"Function")==0);
+					return 1;
+				}
 			}
 		}
 		return 0;
@@ -364,56 +484,96 @@
 
 	int checkarray(char *s)
 	{
-		for(int i = 0 ; i < 1000 ; i++)
-		{
-			if(strcmp(ST[i].name,s)==0)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
 			{
-				if(strcmp(ST[i].class,"Array Identifier")==0)
+				if(strcmp(ST[value].class,"Array Identifier")==0)
 				{
 					return 0;
 				}
 			}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,s)==0)
+				{
+					if(strcmp(ST[i].class,"Array Identifier")==0)
+					{
+						return 0;
+					}
+				}
+			}
 		}
+		
 		return 1;
 	}
 
 	int duplicate(char *s)
 	{
-		for(int i = 0 ; i < 1000 ; i++)
-		{
-			if(strcmp(ST[i].name,s)==0)
-			{				
-				if(ST[i].nestval == currnest)
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
+			{
+				if(ST[value].nestval == currnest)
 				{
 			        return 1;
 				}
 			}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,s)==0)
+				{
+					if(ST[i].nestval == currnest)
+					{
+						return 1;
+					}
+				}
+			}
 		}
-		
+
 		return 0;
 	}
 
 	int check_duplicate(char* str)
 	{
-		for(int i=0; i<1001; i++)
-		{
-			if(strcmp(ST[i].name, str) == 0 && strcmp(ST[i].class, "Function") == 0)
+		int value = hash(str);
+		if(strcmp(ST[value].name, str) == 0 && strcmp(ST[value].class, "Function") == 0)
 			{
 				printf("Function redeclaration not allowed\n");
 				exit(0);
 			}
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name, str) == 0 && strcmp(ST[i].class, "Function") == 0)
+				{
+					printf("Function redeclaration not allowed\n");
+					exit(0);
+				}
+			}
 		}
+		
 	}
 
 	int check_declaration(char* str, char *check_type)
 	{
-		for(int i=0; i<1001; i++)
-		{
-			if(strcmp(ST[i].name, str) == 0 && strcmp(ST[i].class, "Function") == 0 || strcmp(ST[i].name,"printf")==0 )
-			{
+		int value = hash(str);
+		if(strcmp(ST[value].name, str) == 0 && strcmp(ST[value].class, "Function") == 0 || strcmp(ST[value].name,"printf")==0 )
 				return 1;
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name, str) == 0 && strcmp(ST[i].class, "Function") == 0 || strcmp(ST[i].name,"printf")==0)
+				{
+                    return 1;    
+    			}
 			}
 		}
+
 		return 0;
 	}
 
@@ -429,14 +589,37 @@
 
 	char gettype(char *s, int flag)
 	{
-			for(int i = 0 ; i < 1001 ; i++ )
+		int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
+			return ST[value].type[0];
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,s)==0)
 				{
 					return ST[i].type[0];
 				}
 			}
-		
+		}
+
+	}
+
+	char *gettypestr(char *s)
+	{	int value = hash(s);
+		if(strcmp(ST[value].name,s)==0)
+			return ST[value].type;
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,s)==0)
+				{
+					return ST[i].type;
+				}
+			}
+		}
+
 	}
 
 	void printST()
@@ -452,7 +635,18 @@
 			{
 				continue;
 			}
-			printf("%10s | %15s | %10s | %10s | %10d | %15d | %10d |\n",ST[i].name, ST[i].class, ST[i].type, ST[i].value, ST[i].lineno, ST[i].nestval, ST[i].params_count);
+			printf("%10s | %15s | %10s | %10s | %10d | %15d | %10d |\n",ST[i].name, ST[i].class, ST[i].type, ST[i].value, ST[i].lineno, ST[i].initnestval, ST[i].params_count);
+		}
+		for(int i=0;i<1001;i++)
+		{
+			if(!strcmp(ST[i].class,"Function"))
+			{
+				printf("\n%s : ",ST[i].name);
+				for(int j=0;j<ST[i].params_count;j++)
+				{
+					printf(" %s ",ST[i].params_types[j]);
+				}
+			}
 		}
     }
 
@@ -484,7 +678,7 @@ IN "include"
 %%
 \n 	{yylineno++;}
 ([#][" "]*({IN})[ ]*([<]?)([A-Za-z]+)[.]?([A-Za-z]*)([>]?))/["\n"|\/|" "|"\t"]	{ }
-([#][" "]*({DE})[" "]*([A-Za-z]+)(" ")*[0-9]+)/["\n"|\/|" "|"\t"]				{ } 
+([#][" "]*({DE})[" "]*([A-Za-z]+)(" ")*[0-9]+)/["\n"|\/|" "|"\t"]				{ }
 \/\/(.*)																		{ }
 \/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+\/										{ }
 [ \n\t] ;
@@ -554,13 +748,17 @@ IN "include"
 "|"				{ return pipe_operator; }
 \=				{ return assignment_operator;}
 
-\"[^\n]*\"/[;|,|\)] 			{strcpy(curval,yytext); insertCT(yytext,"String Constant"); return string_constant;}
-\'[A-Z|a-z]\'/[;|,|\)|:] 		{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); return character_constant;}
-\'\\[0-9|A-Z|a-z]\'/[;|,|\)|:] 		{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); return character_constant;}
-[a-z|A-Z]([a-z|A-Z]|[0-9])*/\[ 	{strcpy(curid,yytext); insertST(yytext, "Array Identifier");  return array_identifier;}
-[1-9][0-9]*|0/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\]|\}|:|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Number Constant"); yylval = atoi(yytext); return integer_constant;}
-([0-9]*)\.([0-9]+)/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); return float_constant;}
-[A-Za-z_][A-Za-z_0-9]* {strcpy(curid,yytext); insertST(curid,"Identifier"); return identifier;}
+\"[^\n]*\"/[;|,|\)] 			{strcpy(curval,yytext); insertCT(yytext,"String Constant"); printf("String Constant %s on line %d, at nesting %d,\n", yytext, yylineno, currnest); return string_constant;}
+
+\'[A-Z|a-z]\'/[;|,|\)|:] 		{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); printf("Character Constant %s on line %d, at nesting %d,\n", yytext, yylineno, currnest); return character_constant;}
+
+[a-z|A-Z]([a-z|A-Z]|[0-9])*/\[ 	{strcpy(curid,yytext); insertST(yytext, "Array Identifier");  printf("Array Identifier \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return array_identifier;}
+
+[1-9][0-9]*|0/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\]|\}|:|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Number Constant"); yylval = atoi(yytext); printf("Number Constant \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return integer_constant;}
+
+([0-9]*)\.([0-9]+)/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); printf("Floating Constant \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return float_constant;}
+
+[A-Za-z_][A-Za-z_0-9]* {strcpy(curid,yytext); insertST(curid,"Identifier"); printf("Identifier \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return identifier;}
 
 (.?) {
 		if(yytext[0]=='#')
