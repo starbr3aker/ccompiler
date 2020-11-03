@@ -370,7 +370,7 @@ bracketlist	: '[' expression ']' {totbrackets--;} bracketlist
 			| '[' expression ']' 	{
 										totbrackets--;
 										if(totbrackets!=0){
-										printf("ERROR : Dimension of array resolution doesn't match declaration. %d\n", totbrackets);
+										printf("ERROR : Dimension of array resolution doesn't match declaration, difference of %d\n", totbrackets);
 										exit(0);
 									}};
 
@@ -411,7 +411,7 @@ call
 									{
 										//for(int i=0;i<call_params_count;i++)
 											//printf("\nCALL PARAMS : %d %s \n",i,call_params_types[i]);
-										yyerror("Type mismatch in function parameters");
+										yyerror("ERROR : Type mismatch in function parameters");
 										exit(8);
 									}
 
@@ -650,7 +650,7 @@ void label1()
 	char buffer[100];
 	itoa(lno,buffer,10);
 	strcat(temp,buffer);
-	printf("IF not %s GoTo %s\n",s[top].value,temp);
+	printf("IF NOT %s GOTO %s\n",s[top].value,temp);
 	label[++ltop].labelvalue = lno++;
 }
 
@@ -660,7 +660,7 @@ void label2()
 	char buffer[100];
 	itoa(lno,buffer,10);
 	strcat(temp,buffer);
-	printf("GoTo %s\n",temp);
+	printf("GOTO %s\n",temp);
 	strcpy(temp,"L");
 	itoa(label[ltop].labelvalue,buffer,10);
 	strcat(temp,buffer);
@@ -697,7 +697,7 @@ void label5()
 	char buffer[100];
 	itoa(label[ltop-1].labelvalue,buffer,10);
 	strcat(temp,buffer);
-	printf("GoTo %s:\n",temp);
+	printf("GOTO %s:\n",temp);
 	strcpy(temp,"L");
 	itoa(label[ltop].labelvalue,buffer,10);
 	strcat(temp,buffer);

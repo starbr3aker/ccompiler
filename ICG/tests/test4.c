@@ -1,14 +1,13 @@
+//PASS CASE: Simple variable naming and initialisations.
 #include<stdio.h>
 
 int main()
 {
-	int a = 2;
-	printf("%d",a);
-	a++;
-	int b = 4;
-	int c = 3; 
-	
-	//int b = 8;
-	//int c = 3;
-	a--;
+	int var1;
+	int v2 = 12;
+	int c3 = 1;
+	var1 = v2 + c3;
+	printf("%d",var1);
+
+	v2--;
 }
