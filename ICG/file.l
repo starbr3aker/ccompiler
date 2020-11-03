@@ -658,7 +658,7 @@
 
 	void printST()
 	{
-		printf("%10s | %15s | %10s | %10s | %10s | %15s | %10s |\n","SYMBOL", "CLASS", "TYPE","VALUE", "LINE NO", "NESTING", "PARAMS COUNT");
+		printf("%10s | %15s | %10s | %10s | %10s | %15s | %15s | %10s |\n","SYMBOL", "CLASS", "TYPE","VALUE", "LINE NO", "NESTING", "PARAMS COUNT", "ARRAY DIM.");
 		for(int i=0;i<100;i++) {
 			printf("-");
 		}
@@ -669,7 +669,7 @@
 			{
 				continue;
 			}
-			printf("%10s | %15s | %10s | %10s | %10d | %15d | %10d |\n",ST[i].name, ST[i].class, ST[i].type, ST[i].value, ST[i].lineno, ST[i].initnestval, ST[i].params_count);
+			printf("%10s | %15s | %10s | %10s | %10d | %15d | %15d | %10d |\n",ST[i].name, ST[i].class, ST[i].type, ST[i].value, ST[i].lineno, ST[i].initnestval, ST[i].params_count, ST[i].brackets);
 		}
 		for(int i=0;i<1001;i++)
 		{
