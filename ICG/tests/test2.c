@@ -1,8 +1,10 @@
+//PASS CASE: function call 
+
 #include <stdio.h>
 
 int myfunc(int a,int b)
 {
-	return a+b;
+	return a;
 }
 
 void main()
@@ -15,10 +17,10 @@ void main()
 		for(i=0;i<b;i++)
 		{
 			b++;
-			myfunc(a,b);
+			b=myfunc(a,b);
 
 		}
 		a++;
 	}
-	
+
 }
