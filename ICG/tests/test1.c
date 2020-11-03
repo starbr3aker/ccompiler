@@ -1,12 +1,12 @@
+//workinng do while with ncrement function
 #include <stdio.h>
 
 void main()
 {
-	int i,n;
-
-	
-		do
-		{
-			printf("hi");
-		}while(i<n);
+	int i = 0,y = 20;
+	do
+	{
+		printf("Working");
+		i++;
+	}while(i<y);
 }

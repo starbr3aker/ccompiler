@@ -1,9 +1,11 @@
+//missing function
+//Fail
 #include<stdio.h>
 
 void main()
 {
-    int i,n;
+    int i  = 20,n;
 
-    myfunc(i);
+    func(i);
     
 }
