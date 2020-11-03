@@ -1,17 +1,17 @@
+//Redeclaration of x
 #include<stdio.h>
-int square(int a, int b)
+int divfunc(int x, int y)
 {
-	int b = 2;
-	return b;
+	int x = 2,z;
+    z=x/y;
+	return x;
 }
 
 int main()
 {
-	int num = 2;
-	int num2;
-	square(num,num);
-	
-	//printf("Square of %d is %d", num, square2(5));
+	int m = 8,n;
+	divfunc(m,n);
+	printf("HelloWorld!");
 
 	return 0;
 }

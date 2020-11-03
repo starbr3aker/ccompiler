@@ -1,24 +1,17 @@
-//for loop
-//continue
-//while loop
-//do while loop
+//VALID CASE
 
 #include<stdio.h>
 
 int main()
 {
-    int a=0;
-    for (a = 0; a < 10; a++)
+    int p=8;
+    while(p>5)
         {
-        	printf("H1");
+        	printf("Saluton Mondo!");
+            p--;
         }
     
-    while(a>0) {
-        a--;
-    }
-
-    while(a<10)
-    {
-        a++;
-    }
+   do {
+        p = p*2;
+    }while(p<10);
 }

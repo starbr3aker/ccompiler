@@ -1,25 +1,27 @@
+// VALID CASE
 #include<stdio.h>
 
-int main()
+void main()
 {
-	int a = 5;
-	while(a>0)
+	int x = 10;
+	while(x>0)
 	{
-		printf("Hello world");
-		a--;
+		printf("--Example code--");
+		x--;
 	}
 
-	a=4;
-	while(a>0)
+	x=8;
+	do
 	{
-		printf("%d",a);
-		a--;
-		int b;
-		b= 4;
-		while(b>0)
+		int m;
+		m =  4;
+		while(m>0)
 		{
-			printf("%d", b);
-			b--;
+			int res = x-m;
+			printf("%d", res);
+			m--;
 		}
-	}
+        printf("%d",x);
+        x--;
+	}while(x>4);
 }
