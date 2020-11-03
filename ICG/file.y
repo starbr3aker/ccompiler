@@ -2,7 +2,7 @@
 	#include <stdio.h>
 	#include <string.h>
 	#include <stdlib.h>
-	
+
 	void yyerror(char* s);
 	int yylex();
 	void ins();
@@ -30,6 +30,9 @@
 	int check_duplicate(char*);
 	int check_declaration(char*, char *);
 	int check_params(char*);
+	int check_params_type(char *str, char types[100][100], int n);
+	void insertSTparamstype(char *, char *);
+	char *gettypestr(char *);
 	int duplicate(char *s);
 	int checkarray(char*);
 	char currfunctype[100];
@@ -42,7 +45,7 @@
 	void codegen();
 	void codeassign();
 	char* itoa(int num, char* str, int base);
-	void reverse(char str[], int length); 
+	void reverse(char str[], int length);
 	void swap(char*,char*);
 	void label1();
 	void label2();
@@ -59,6 +62,7 @@
 
 	int params_count=0;
 	int call_params_count=0;
+	char call_params_types[100][100];
 	int top = 0,count=0,ltop=0,lno=0;
 	char temp[3] = "t";
 %}
@@ -67,7 +71,7 @@
 %token INT CHAR FLOAT DOUBLE LONG SHORT SIGNED UNSIGNED STRUCT
 %token RETURN MAIN
 %token VOID
-%token WHILE FOR DO 
+%token WHILE FOR DO
 %token BREAK
 %token ENDIF
 %expect 1
@@ -91,13 +95,13 @@
 %left amp_operator
 %left equality_operator inequality_operator
 %left lessthan_assignment_operator lessthan_operator greaterthan_assignment_operator greaterthan_operator
-%left leftshift_operator rightshift_operator 
+%left leftshift_operator rightshift_operator
 %left add_operator subtract_operator
 %left multiplication_operator division_operator modulo_operator
 
 %right SIZEOF
 %right tilde_operator exclamation_operator
-%left increment_operator decrement_operator 
+%left increment_operator decrement_operator
 
 
 %start program
@@ -107,29 +111,29 @@ program
 			: declaration_list;
 
 declaration_list
-			: declaration D 
+			: declaration D
 
 D
 			: declaration_list
 			| ;
 
 declaration
-			: variable_declaration 
+			: variable_declaration
 			| function_declaration
 
 variable_declaration
-			: type_specifier variable_declaration_list ';' 
+			: type_specifier variable_declaration_list ';'
 
 variable_declaration_list
 			: variable_declaration_list ',' variable_declaration_identifier | variable_declaration_identifier;
 
-variable_declaration_identifier 
-			: identifier {if(duplicate(curid)){printf("ERROR : Duplicate initialisation\n");exit(0);}insertSTnest(curid,currnest); ins();  } vdi   
+variable_declaration_identifier
+			: identifier {if(duplicate(curid)){printf("ERROR : Duplicate initialisation\n");exit(0);}insertSTnest(curid,currnest); ins();  } vdi
 			| array_identifier {if(duplicate(curid)){printf("ERROR : Duplicate initialisation\n");exit(0);}insertSTnest(curid,currnest); ins();  } vdi;
-			
-			
 
-vdi : identifier_array_type | assignment_operator simple_expression  ; 
+
+
+vdi : identifier_array_type | assignment_operator simple_expression  ;
 
 identifier_array_type
 			: '[' initilization_params
@@ -145,24 +149,24 @@ initilization
 			| array_initialization
 			| ;
 
-type_specifier 
-			: INT | CHAR | FLOAT  | DOUBLE  
-			| LONG long_grammar 
+type_specifier
+			: INT | CHAR | FLOAT  | DOUBLE
+			| LONG long_grammar
 			| SHORT short_grammar
-			| UNSIGNED unsigned_grammar 
+			| UNSIGNED unsigned_grammar
 			| SIGNED signed_grammar
 			| VOID  ;
 
-unsigned_grammar 
+unsigned_grammar
 			: INT | LONG long_grammar | SHORT short_grammar | ;
 
-signed_grammar 
+signed_grammar
 			: INT | LONG long_grammar | SHORT short_grammar | ;
 
-long_grammar 
+long_grammar
 			: INT  | ;
 
-short_grammar 
+short_grammar
 			: INT | ;
 
 function_declaration
@@ -174,58 +178,58 @@ function_declaration_type
 function_declaration_param_statement
 			: {params_count=0;}params ')' {funcgen();} statement {funcgenend();};
 
-params 
+params
 			: parameters_list { insertSTparamscount(currfunc, params_count); }| { insertSTparamscount(currfunc, params_count); };
 
-parameters_list 
+parameters_list
 			: type_specifier { check_params(curtype);} parameters_identifier_list ;
 
-parameters_identifier_list 
+parameters_identifier_list
 			: param_identifier parameters_identifier_list_breakup;
 
 parameters_identifier_list_breakup
-			: ',' parameters_list 
+			: ',' parameters_list
 			| ;
 
-param_identifier 
-			: identifier { ins();insertSTnest(curid,1); params_count++; } param_identifier_breakup;
+param_identifier
+			: identifier { ins();insertSTnest(curid,1); params_count++; insertSTparamstype(currfunc, curtype); } param_identifier_breakup;
 
 param_identifier_breakup
 			: '[' ']'
 			| ;
 
-statement 
-			: expression_statment | compound_statement 
-			| conditional_statements | iterative_statements 
-			| return_statement | break_statement 
+statement
+			: expression_statment | compound_statement
+			| conditional_statements | iterative_statements
+			| return_statement | break_statement
 			| variable_declaration;
 
-compound_statement 
+compound_statement
 			: {currnest++;} '{'  statment_list  '}' {deletedata(currnest);currnest--;}  ;
 
-statment_list 
-			: statement statment_list 
+statment_list
+			: statement statment_list
 			| ;
 
-expression_statment 
-			: expression ';' 
+expression_statment
+			: expression ';'
 			| ';' ;
 
-conditional_statements 
+conditional_statements
 			: IF '(' simple_expression ')' {label1();if($3!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}} statement {label2();}  conditional_statements_breakup;
 
 conditional_statements_breakup
 			: ELSE statement {label3();}
 			| {label3();};
 
-iterative_statements 
-			: WHILE '(' {label4();} simple_expression ')' {label1();if($4!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}} statement {label5();} 
-			| FOR '(' expression ';' {label4();} simple_expression ';' {label1();if($6!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}} expression ')'statement {label5();} 
+iterative_statements
+			: WHILE '(' {label4();} simple_expression ')' {label1();if($4!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}} statement {label5();}
+			| FOR '(' expression ';' {label4();} simple_expression ';' {label1();if($6!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}} expression ')'statement {label5();}
 			| {label4();}DO statement WHILE '(' simple_expression ')'{label1();label5();if($6!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}} ';';
-return_statement 
+return_statement
 			: RETURN ';' {if(strcmp(currfunctype,"void")) {printf("ERROR : No return value found for non-void function.\n"); exit(0);}}
 			| RETURN expression ';' { 	if(!strcmp(currfunctype, "void"))
-										{ 
+										{
 											yyerror("ERROR : Void function calls return statement.\n");
 										}
 
@@ -236,7 +240,7 @@ return_statement
 
 									};
 
-break_statement 
+break_statement
 			: BREAK ';' ;
 
 string_initilization
@@ -249,51 +253,51 @@ array_int_declarations
 			: integer_constant array_int_declarations_breakup;
 
 array_int_declarations_breakup
-			: ',' array_int_declarations 
+			: ',' array_int_declarations
 			| ;
 
-expression 
-			: mutable assignment_operator {push("=");} expression   {   
-					if($1==1 && $4==1) 
+expression
+			: mutable assignment_operator {push("=");} expression   {
+					if($1==1 && $4==1)
 					{
 					$$=1;
-					} 
-					else 
-					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);} 
+					}
+					else
+					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);}
 					codeassign();
 				}
-			| mutable addition_assignment_operator {push("+=");}expression {  
-					if($1==1 && $4==1) 
-					$$=1; 
-					else 
-					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);} 
+			| mutable addition_assignment_operator {push("+=");}expression {
+					if($1==1 && $4==1)
+					$$=1;
+					else
+					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);}
 					codeassign();
 				}
-			| mutable subtraction_assignment_operator {push("-=");} expression{	  
-					if($1==1 && $4==1) 
-					$$=1; 
-					else 
-					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);} 
+			| mutable subtraction_assignment_operator {push("-=");} expression{
+					if($1==1 && $4==1)
+					$$=1;
+					else
+					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);}
 					codeassign();
 				}
 			| mutable multiplication_assignment_operator {push("*=");} expression {
-					if($1==1 && $4==1) 
-					$$=1; 
-					else 
+					if($1==1 && $4==1)
+					$$=1;
+					else
 					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);}
-					codeassign(); 
+					codeassign();
 				}
-			| mutable division_assignment_operator {push("/=");}expression 		{ 
-					if($1==1 && $4==1) 
-					$$=1; 
-					else 
-					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);} 
+			| mutable division_assignment_operator {push("/=");}expression 		{
+					if($1==1 && $4==1)
+					$$=1;
+					else
+					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);}
 				}
-			| mutable modulo_assignment_operator {push("%=");}expression 		{ 
-					if($1==1 && $3==1) 
-					$$=1; 
-					else 
-					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);} 
+			| mutable modulo_assignment_operator {push("%=");}expression 		{
+					if($1==1 && $3==1)
+					$$=1;
+					else
+					{$$=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);}
 					codeassign();
 				}
 			| mutable increment_operator 							{ push("++");if($1 == 1) $$=1; else $$=-1; genunary();}
@@ -301,31 +305,31 @@ expression
 			| simple_expression {if($1 == 1) $$=1; else $$=-1;} ;
 
 
-simple_expression 
+simple_expression
 			: simple_expression OR_operator and_expression {push("||");} {if($1 == 1 && $3==1) $$=1; else $$=-1; codegen();}
 			| and_expression {if($1 == 1) $$=1; else $$=-1;};
 
-and_expression 
+and_expression
 			: and_expression AND_operator {push("&&");} unary_relation_expression  {if($1 == 1 && $3==1) $$=1; else $$=-1; codegen();}
 			  |unary_relation_expression {if($1 == 1) $$=1; else $$=-1;} ;
 
 
-unary_relation_expression 
-			: exclamation_operator {push("!");} unary_relation_expression {if($2==1) $$=1; else $$=-1; codegen();} 
+unary_relation_expression
+			: exclamation_operator {push("!");} unary_relation_expression {if($2==1) $$=1; else $$=-1; codegen();}
 			| regular_expression {if($1 == 1) $$=1; else $$=-1;} ;
 
-regular_expression 
+regular_expression
 			: regular_expression relational_operators sum_expression {if($1 == 1 && $3==1) $$=1; else $$=-1; codegen();}
 			  | sum_expression {if($1 == 1) $$=1; else $$=-1;} ;
-			
-relational_operators 
+
+relational_operators
 			: greaterthan_assignment_operator {push(">=");} | lessthan_assignment_operator {push("<=");} | greaterthan_operator {push(">");}| lessthan_operator {push("<");}| equality_operator {push("==");}| inequality_operator {push("!=");} ;
 
-sum_expression 
+sum_expression
 			: sum_expression sum_operators term  {if($1 == 1 && $3==1) $$=1; else $$=-1; codegen();}
 			| term {if($1 == 1) $$=1; else $$=-1;};
 
-sum_operators 
+sum_operators
 			: add_operator {push("+");}
 			| subtract_operator {push("-");} ;
 
@@ -333,20 +337,20 @@ term
 			: term MULOP factor {if($1 == 1 && $3==1) $$=1; else $$=-1; codegen();}
 			| factor {if($1 == 1) $$=1; else $$=-1;} ;
 
-MULOP 
+MULOP
 			: multiplication_operator {push("*");}| division_operator {push("/");} | modulo_operator {push("%");} ;
 
-factor 
-			: immutable {if($1 == 1) $$=1; else $$=-1;} 
+factor
+			: immutable {if($1 == 1) $$=1; else $$=-1;}
 			| mutable {if($1 == 1) $$=1; else $$=-1;} ;
 
-mutable 
+mutable
 			: identifier {
 						  push(curid);
 						  if(check_id_is_func(curid))
 						  {printf("ERROR : Identifier used has been declared as function.\n"); exit(8);}
 			              if(!checkscope(curid))
-			              {printf("%s\n",curid);printf("ERROR : Identifier used is undeclared.\n");exit(0);} 
+			              {printf("%s\n",curid);printf("ERROR : Identifier used is undeclared.\n");exit(0);}
 			              if(!checkarray(curid))
 			              {printf("%s\n",curid);printf("ERROR : Call to array without subscript.\n");exit(0);}
 			              if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
@@ -354,7 +358,7 @@ mutable
 			              else
 			              $$ = -1;
 			              }
-			| array_identifier {if(!checkscope(curid)){printf("%s\n",curid);printf("ERROR : Identifier used in undeclared\n");exit(0);}}  
+			| array_identifier {if(!checkscope(curid)){printf("%s\n",curid);printf("ERROR : Identifier used in undeclared\n");exit(0);}}
 						{	if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
 								$$ = 1;
 							else
@@ -362,7 +366,7 @@ mutable
 							totbrackets = getbrackets(curid);
 						} bracketlist;
 
-bracketlist	: '[' expression ']' {totbrackets--;} bracketlist 
+bracketlist	: '[' expression ']' {totbrackets--;} bracketlist
 			| '[' expression ']' 	{
 										totbrackets--;
 										if(totbrackets!=0){
@@ -370,7 +374,7 @@ bracketlist	: '[' expression ']' {totbrackets--;} bracketlist
 										exit(0);
 									}};
 
-immutable 
+immutable
 			: '(' expression ')' {if($2==1) $$=1; else $$=-1;}
 			| call {if($1==-1) $$=-1; else $$=1;}
 			| constant {if($1==1) $$=1; else $$=-1;};
@@ -379,8 +383,8 @@ call
 			: identifier '('{
 
 			             if(!check_declaration(curid, "Function"))
-			             { printf("ERROR : Function declaration not found.\n"); exit(0);} 
-			             insertSTF(curid); 
+			             { printf("ERROR : Function declaration not found.\n"); exit(0);}
+			             insertSTF(curid);
 						 strcpy(currfunccall,curid);
 						 if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
 						 {
@@ -389,32 +393,103 @@ call
 			             else
 			             $$ = -1;
                          call_params_count=0;
-			             } 
-			             arguments ')' 
+												 for(int i=0;i<100;i++) call_params_types[i][0]='\0';
+
+			             }
+			             arguments ')'
 						 { if(strcmp(currfunccall,"printf"))
-							{ 
+							{
 								if(getSTparamscount(currfunccall)!=call_params_count)
-								{	
+								{
 									yyerror("ERROR : Number of arguments in function call doesn't match number of parameters.");
 									exit(8);
+								}
+
+								if(call_params_count>=1)
+								{
+									if(check_params_type(currfunccall, call_params_types, call_params_count)==0)
+									{
+										//for(int i=0;i<call_params_count;i++)
+											//printf("\nCALL PARAMS : %d %s \n",i,call_params_types[i]);
+										yyerror("Type mismatch in function parameters");
+										exit(8);
+									}
+
+/*
+									else
+									{
+										printf("\nfunction call");
+										for(int i=0;i<call_params_count;i++)
+											printf("\n%d %s \n",i,call_params_types[i]);
+									}
+*/
 								}
 							}
 							callgen();
 						 };
 
-arguments 
+arguments
 			: arguments_list | ;
 
-arguments_list 
-			: arguments_list ',' exp { call_params_count++; }  
+arguments_list
+			: arguments_list ',' exp {  call_params_count++; }
 			| exp { call_params_count++; };
 
-exp : identifier {arggen(1);} | integer_constant {arggen(2);} | string_constant {arggen(3);} | float_constant {arggen(4);} | character_constant {arggen(5);} ;
+exp : identifier {  arggen(1);
+										for(int i=0;i<100;i++)
+										{
+											if(call_params_types[i][0]=='\0')
+											{
+												strcpy(call_params_types[i],gettypestr(curid));
+												break;
+											}
+										}
+									}
+			| integer_constant {  arggen(2);
+														for(int i=0;i<100;i++)
+														{
+															if(call_params_types[i][0]=='\0')
+															{
+																strcpy(call_params_types[i],"int");
+																break;
+															}
+														}
+													}
+			| string_constant { arggen(3);
+													for(int i=0;i<100;i++)
+													{
+														if(call_params_types[i][0]=='\0')
+														{
+															strcpy(call_params_types[i],"char");
+															break;
+														}
+													}
+												}
+			| float_constant {  arggen(4);
+													for(int i=0;i<100;i++)
+													{
+														if(call_params_types[i][0]=='\0')
+														{
+															strcpy(call_params_types[i],"float");
+															break;
+														}
+													}
+												}
+			| character_constant {  arggen(5);
+															for(int i=0;i<100;i++)
+															{
+																if(call_params_types[i][0]=='\0')
+																{
+																	strcpy(call_params_types[i],"char");
+																	break;
+																}
+															}
+														} ;
 
-constant 
-			: integer_constant 	{  insV(); codegencon(); $$=1; } 
-			| string_constant	{  insV(); codegencon();$$=-1;} 
-			| float_constant	{  insV(); codegencon();} 
+constant
+			: integer_constant 	{  insV(); codegencon(); $$=1; }
+			| string_constant	{  insV(); codegencon();$$=-1;}
+			| float_constant	{  insV(); codegencon();}
 			| character_constant{  insV(); codegencon();$$=1; };
 
 %%
@@ -447,55 +522,55 @@ void swap(char *x, char *y)
 	*y = temp;
 }
 
-void reverse(char str[], int length) 
-{ 
-    int start = 0; 
-    int end = length -1; 
-    while (start < end) 
-    { 
-        swap((str+start), (str+end)); 
-        start++; 
-        end--; 
-    } 
-} 
-  
-char* itoa(int num, char* str, int base) 
-{ 
-    int i = 0; 
-    int isNegative = 0; 
-  
-   
-    if (num == 0) 
-    { 
-        str[i++] = '0'; 
-        str[i] = '\0'; 
-        return str; 
-    } 
-  
-    if (num < 0 && base == 10) 
-    { 
-        isNegative = 1; 
-        num = -num; 
-    } 
-  
-   
-    while (num != 0) 
-    { 
-        int rem = num % base; 
-        str[i++] = (rem > 9)? (rem-10) + 'a' : rem + '0'; 
-        num = num/base; 
-    } 
-  
-    if (isNegative) 
-        str[i++] = '-'; 
-  
-    str[i] = '\0'; 
-  
-   
-    reverse(str, i); 
-  
-    return str; 
-} 
+void reverse(char str[], int length)
+{
+    int start = 0;
+    int end = length -1;
+    while (start < end)
+    {
+        swap((str+start), (str+end));
+        start++;
+        end--;
+    }
+}
+
+char* itoa(int num, char* str, int base)
+{
+    int i = 0;
+    int isNegative = 0;
+
+
+    if (num == 0)
+    {
+        str[i++] = '0';
+        str[i] = '\0';
+        return str;
+    }
+
+    if (num < 0 && base == 10)
+    {
+        isNegative = 1;
+        num = -num;
+    }
+
+
+    while (num != 0)
+    {
+        int rem = num % base;
+        str[i++] = (rem > 9)? (rem-10) + 'a' : rem + '0';
+        num = num/base;
+    }
+
+    if (isNegative)
+        str[i++] = '-';
+
+    str[i] = '\0';
+
+
+    reverse(str, i);
+
+    return str;
+}
 
 void codegen()
 {
@@ -506,7 +581,7 @@ void codegen()
 	printf("%s = %s %s %s\n",temp,s[top-2].value,s[top-1].value,s[top].value);
 	top = top - 2;
 	strcpy(s[top].value,temp);
-	count++; 
+	count++;
 }
 
 void codegencon()
@@ -518,7 +593,7 @@ void codegencon()
 	printf("%s = %s\n",temp,curval);
 	push(temp);
 	count++;
-	
+
 }
 
 int isunary(char *s)
@@ -602,7 +677,7 @@ void label3()
 	strcat(temp,buffer);
 	printf("%s:\n",temp);
 	ltop--;
-	
+
 }
 
 void label4()
@@ -628,8 +703,8 @@ void label5()
 	strcat(temp,buffer);
 	printf("%s:\n",temp);
 	ltop = ltop - 2;
-    
-   
+
+
 }
 
 void funcgen()
@@ -683,9 +758,9 @@ int main(int argc , char **argv)
 
 void yyerror(char *s)
 {
-	printf(ANSI_COLOR_RED "%d %s %s\n", yylineno, s, yytext);
+	printf("%d %s %s\n", yylineno, s, yytext);
 	flag=1;
-	printf(ANSI_COLOR_RED "Status: Parsing Failed - Invalid\n" ANSI_COLOR_RESET);
+	printf( "Status: Parsing Failed - Invalid\n");
 	exit(7);
 }
 

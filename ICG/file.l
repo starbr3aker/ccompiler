@@ -22,6 +22,7 @@
 		int lineno;
 		int length;
 		int params_count;
+		int brackets;
 		char params_types[100][100];
 	}ST[1001];
 
@@ -42,9 +43,11 @@
 	}PT[1001];
 	*/
 	int currnest = 0;
-	int params_count = 0;
-	int call_params_count = 0;
+	//int params_count = 0;
+	//int call_params_count = 0;
 	extern int yylval;
+	int arrbrackets = 0;
+	int totbrackets = 0;
 
 	int hash(char *str)
 	{
@@ -58,6 +61,37 @@
 		}
 		return value;
 	}
+
+	int getbrackets(char *str1){
+		int value = hash(str1);
+		if(ST[value].length == 0)
+			return 12;
+		if(strcmp(ST[value].name,str1)==0)
+			return ST[value].brackets;
+		else
+		{
+			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			{
+				if(strcmp(ST[i].name,str1)==0)
+				{
+					return ST[i].brackets;
+				}
+			}
+			return 13;
+		}
+	}
+
+	void setbrackets(char *str1, int brackets){
+		for(int i = 0 ; i < 1001 ; i++)
+		{
+			if(strcmp(ST[i].name,str1)==0 )
+			{
+				ST[i].brackets = brackets;
+				return;
+			}
+		}
+	}
+
 
 	int lookupST(char *str)
 	{
@@ -154,7 +188,7 @@
 				}
 			}
 		}
-		
+
 	}
 
 	int check_params_type(char *str, char types[100][100], int n)
@@ -200,7 +234,7 @@
 				}
 			}
 		}
-		
+
 
 		return 1;
 	}
@@ -270,8 +304,8 @@
 				}
 			}
 		}
-		
-	
+
+
     }
 
 	void insertSTvalue(char *str1, char *str2)
@@ -362,7 +396,7 @@
 				}
 			}
 		}
-		
+
 		return -2;
 	}
 
@@ -381,8 +415,8 @@
 				}
 			}
 		}
-		
-		
+
+
 
 	}
 
@@ -505,7 +539,7 @@
 				}
 			}
 		}
-		
+
 		return 1;
 	}
 
@@ -555,7 +589,7 @@
 				}
 			}
 		}
-		
+
 	}
 
 	int check_declaration(char* str, char *check_type)
@@ -569,7 +603,7 @@
 			{
 				if(strcmp(ST[i].name, str) == 0 && strcmp(ST[i].class, "Function") == 0 || strcmp(ST[i].name,"printf")==0)
 				{
-                    return 1;    
+                    return 1;
     			}
 			}
 		}
@@ -748,18 +782,13 @@ IN "include"
 "|"				{ return pipe_operator; }
 \=				{ return assignment_operator;}
 
-\"[^\n]*\"/[;|,|\)] 			{strcpy(curval,yytext); insertCT(yytext,"String Constant"); printf("String Constant %s on line %d, at nesting %d,\n", yytext, yylineno, currnest); return string_constant;}
-
-\'[A-Z|a-z]\'/[;|,|\)|:] 		{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); printf("Character Constant %s on line %d, at nesting %d,\n", yytext, yylineno, currnest); return character_constant;}
-
-[a-z|A-Z]([a-z|A-Z]|[0-9])*/\[ 	{strcpy(curid,yytext); insertST(yytext, "Array Identifier");  printf("Array Identifier \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return array_identifier;}
-
-[1-9][0-9]*|0/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\]|\}|:|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Number Constant"); yylval = atoi(yytext); printf("Number Constant \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return integer_constant;}
-
-([0-9]*)\.([0-9]+)/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); printf("Floating Constant \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return float_constant;}
-
-[A-Za-z_][A-Za-z_0-9]* {strcpy(curid,yytext); insertST(curid,"Identifier"); printf("Identifier \"%s\" on line %d, at nesting %d,\n", yytext, yylineno, currnest); return identifier;}
-
+\"[^\n]*\"/[;|,|\)] 			{strcpy(curval,yytext); insertCT(yytext,"String Constant"); return string_constant;}
+\'[A-Z|a-z]\'/[;|,|\)|:] 		{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); return character_constant;}
+\'\\[0-9|A-Z|a-z]\'/[;|,|\)|:] 		{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); return character_constant;}
+[a-z|A-Z]([a-z|A-Z]|[0-9])*/\[ 	{strcpy(curid,yytext); insertST(yytext, "Array Identifier");  return array_identifier;}
+[1-9][0-9]*|0/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\]|\}|:|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Number Constant"); yylval = atoi(yytext); return integer_constant;}
+([0-9]*)\.([0-9]+)/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); return float_constant;}
+[A-Za-z_][A-Za-z_0-9]* {strcpy(curid,yytext); insertST(curid,"Identifier"); return identifier;}
 (.?) {
 		if(yytext[0]=='#')
 		{
