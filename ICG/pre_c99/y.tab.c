@@ -68,7 +68,7 @@
 /* Copy the first part of user declarations.  */
 
 /* Line 189 of yacc.c  */
-#line 1 ".\\file.y"
+#line 1 ".\\filewind.y"
 
 	#include <stdio.h>
 	#include <string.h>
@@ -665,8 +665,8 @@ static const yytype_uint16 yyrline[] =
      318,   318,   319,   322,   323,   326,   326,   326,   326,   326,
      326,   329,   330,   333,   334,   337,   338,   341,   341,   341,
      344,   345,   348,   361,   362,   361,   369,   369,   370,   378,
-     379,   380,   383,   383,   432,   432,   435,   436,   438,   448,
-     458,   468,   478,   490,   491,   492,   493
+     379,   380,   383,   383,   434,   434,   437,   438,   440,   451,
+     462,   473,   484,   497,   498,   499,   500
 };
 #endif
 
@@ -1776,210 +1776,210 @@ yyreduce:
         case 11:
 
 /* Line 1455 of yacc.c  */
-#line 131 ".\\file.y"
+#line 131 ".\\filewind.y"
     {if(duplicate(curid)){printf("ERROR : Duplicate initialisation\n");exit(0);}insertSTnest(curid,currnest); ins();  }
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 132 ".\\file.y"
+#line 132 ".\\filewind.y"
     {if(duplicate(curid)){printf("ERROR : Duplicate initialisation\n");exit(0);}insertSTnest(curid,currnest); ins();  }
     break;
 
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 143 ".\\file.y"
+#line 143 ".\\filewind.y"
     {arrbrackets++;}
     break;
 
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 143 ".\\file.y"
+#line 143 ".\\filewind.y"
     {if((yyval) < 1) {printf("ERROR : Array size is invalid at index %d\n", arrbrackets); exit(0);}  setbrackets(curid, arrbrackets); arrbrackets=0;}
     break;
 
   case 21:
 
 /* Line 1455 of yacc.c  */
-#line 144 ".\\file.y"
+#line 144 ".\\filewind.y"
     {arrbrackets++;}
     break;
 
   case 22:
 
 /* Line 1455 of yacc.c  */
-#line 144 ".\\file.y"
+#line 144 ".\\filewind.y"
     {if((yyval) < 1){printf("ERROR : Array size is invalid at index %d\n", arrbrackets);}}
     break;
 
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 176 ".\\file.y"
+#line 176 ".\\filewind.y"
     { strcpy(currfunctype, curtype); strcpy(currfunc, curid); check_duplicate(curid); insertSTF(curid); ins(); }
     break;
 
   case 50:
 
 /* Line 1455 of yacc.c  */
-#line 179 ".\\file.y"
+#line 179 ".\\filewind.y"
     {params_count=0;}
     break;
 
   case 51:
 
 /* Line 1455 of yacc.c  */
-#line 179 ".\\file.y"
+#line 179 ".\\filewind.y"
     {funcgen();}
     break;
 
   case 52:
 
 /* Line 1455 of yacc.c  */
-#line 179 ".\\file.y"
+#line 179 ".\\filewind.y"
     {funcgenend();}
     break;
 
   case 53:
 
 /* Line 1455 of yacc.c  */
-#line 182 ".\\file.y"
+#line 182 ".\\filewind.y"
     { insertSTparamscount(currfunc, params_count); }
     break;
 
   case 54:
 
 /* Line 1455 of yacc.c  */
-#line 182 ".\\file.y"
+#line 182 ".\\filewind.y"
     { insertSTparamscount(currfunc, params_count); }
     break;
 
   case 55:
 
 /* Line 1455 of yacc.c  */
-#line 185 ".\\file.y"
+#line 185 ".\\filewind.y"
     { check_params(curtype);}
     break;
 
   case 60:
 
 /* Line 1455 of yacc.c  */
-#line 195 ".\\file.y"
+#line 195 ".\\filewind.y"
     { ins();insertSTnest(curid,1); params_count++; insertSTparamstype(currfunc, curtype); }
     break;
 
   case 71:
 
 /* Line 1455 of yacc.c  */
-#line 208 ".\\file.y"
+#line 208 ".\\filewind.y"
     {currnest++;}
     break;
 
   case 72:
 
 /* Line 1455 of yacc.c  */
-#line 208 ".\\file.y"
+#line 208 ".\\filewind.y"
     {deletedata(currnest);currnest--;}
     break;
 
   case 77:
 
 /* Line 1455 of yacc.c  */
-#line 219 ".\\file.y"
+#line 219 ".\\filewind.y"
     {label1();if((yyvsp[(3) - (4)])!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}}
     break;
 
   case 78:
 
 /* Line 1455 of yacc.c  */
-#line 219 ".\\file.y"
+#line 219 ".\\filewind.y"
     {label2();}
     break;
 
   case 80:
 
 /* Line 1455 of yacc.c  */
-#line 222 ".\\file.y"
+#line 222 ".\\filewind.y"
     {label3();}
     break;
 
   case 81:
 
 /* Line 1455 of yacc.c  */
-#line 223 ".\\file.y"
+#line 223 ".\\filewind.y"
     {label3();}
     break;
 
   case 82:
 
 /* Line 1455 of yacc.c  */
-#line 226 ".\\file.y"
+#line 226 ".\\filewind.y"
     {label4();}
     break;
 
   case 83:
 
 /* Line 1455 of yacc.c  */
-#line 226 ".\\file.y"
+#line 226 ".\\filewind.y"
     {label1();if((yyvsp[(4) - (5)])!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}}
     break;
 
   case 84:
 
 /* Line 1455 of yacc.c  */
-#line 226 ".\\file.y"
+#line 226 ".\\filewind.y"
     {label5();}
     break;
 
   case 85:
 
 /* Line 1455 of yacc.c  */
-#line 227 ".\\file.y"
+#line 227 ".\\filewind.y"
     {label4();}
     break;
 
   case 86:
 
 /* Line 1455 of yacc.c  */
-#line 227 ".\\file.y"
+#line 227 ".\\filewind.y"
     {label1();if((yyvsp[(6) - (7)])!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}}
     break;
 
   case 87:
 
 /* Line 1455 of yacc.c  */
-#line 227 ".\\file.y"
+#line 227 ".\\filewind.y"
     {label5();}
     break;
 
   case 88:
 
 /* Line 1455 of yacc.c  */
-#line 228 ".\\file.y"
+#line 228 ".\\filewind.y"
     {label4();}
     break;
 
   case 89:
 
 /* Line 1455 of yacc.c  */
-#line 228 ".\\file.y"
+#line 228 ".\\filewind.y"
     {label1();label5();if((yyvsp[(6) - (7)])!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}}
     break;
 
   case 91:
 
 /* Line 1455 of yacc.c  */
-#line 230 ".\\file.y"
+#line 230 ".\\filewind.y"
     {if(strcmp(currfunctype,"void")) {printf("ERROR : No return value found for non-void function.\n"); exit(0);}}
     break;
 
   case 92:
 
 /* Line 1455 of yacc.c  */
-#line 231 ".\\file.y"
+#line 231 ".\\filewind.y"
     { 	if(!strcmp(currfunctype, "void"))
 										{
 											yyerror("ERROR : Void function calls return statement.\n");
@@ -1996,21 +1996,21 @@ yyreduce:
   case 94:
 
 /* Line 1455 of yacc.c  */
-#line 247 ".\\file.y"
+#line 247 ".\\filewind.y"
     {insV();}
     break;
 
   case 99:
 
 /* Line 1455 of yacc.c  */
-#line 260 ".\\file.y"
+#line 260 ".\\filewind.y"
     {push("=");}
     break;
 
   case 100:
 
 /* Line 1455 of yacc.c  */
-#line 260 ".\\file.y"
+#line 260 ".\\filewind.y"
     {
 					if((yyvsp[(1) - (4)])==1 && (yyvsp[(4) - (4)])==1)
 					{
@@ -2025,14 +2025,14 @@ yyreduce:
   case 101:
 
 /* Line 1455 of yacc.c  */
-#line 269 ".\\file.y"
+#line 269 ".\\filewind.y"
     {push("+=");}
     break;
 
   case 102:
 
 /* Line 1455 of yacc.c  */
-#line 269 ".\\file.y"
+#line 269 ".\\filewind.y"
     {
 					if((yyvsp[(1) - (4)])==1 && (yyvsp[(4) - (4)])==1)
 					(yyval)=1;
@@ -2045,14 +2045,14 @@ yyreduce:
   case 103:
 
 /* Line 1455 of yacc.c  */
-#line 276 ".\\file.y"
+#line 276 ".\\filewind.y"
     {push("-=");}
     break;
 
   case 104:
 
 /* Line 1455 of yacc.c  */
-#line 276 ".\\file.y"
+#line 276 ".\\filewind.y"
     {
 					if((yyvsp[(1) - (4)])==1 && (yyvsp[(4) - (4)])==1)
 					(yyval)=1;
@@ -2065,14 +2065,14 @@ yyreduce:
   case 105:
 
 /* Line 1455 of yacc.c  */
-#line 283 ".\\file.y"
+#line 283 ".\\filewind.y"
     {push("*=");}
     break;
 
   case 106:
 
 /* Line 1455 of yacc.c  */
-#line 283 ".\\file.y"
+#line 283 ".\\filewind.y"
     {
 					if((yyvsp[(1) - (4)])==1 && (yyvsp[(4) - (4)])==1)
 					(yyval)=1;
@@ -2085,14 +2085,14 @@ yyreduce:
   case 107:
 
 /* Line 1455 of yacc.c  */
-#line 290 ".\\file.y"
+#line 290 ".\\filewind.y"
     {push("/=");}
     break;
 
   case 108:
 
 /* Line 1455 of yacc.c  */
-#line 290 ".\\file.y"
+#line 290 ".\\filewind.y"
     {
 					if((yyvsp[(1) - (4)])==1 && (yyvsp[(4) - (4)])==1)
 					(yyval)=1;
@@ -2104,14 +2104,14 @@ yyreduce:
   case 109:
 
 /* Line 1455 of yacc.c  */
-#line 296 ".\\file.y"
+#line 296 ".\\filewind.y"
     {push("%=");}
     break;
 
   case 110:
 
 /* Line 1455 of yacc.c  */
-#line 296 ".\\file.y"
+#line 296 ".\\filewind.y"
     {
 					if((yyvsp[(1) - (4)])==1 && (yyvsp[(3) - (4)])==1)
 					(yyval)=1;
@@ -2124,224 +2124,224 @@ yyreduce:
   case 111:
 
 /* Line 1455 of yacc.c  */
-#line 303 ".\\file.y"
+#line 303 ".\\filewind.y"
     { push("++");if((yyvsp[(1) - (2)]) == 1) (yyval)=1; else (yyval)=-1; genunary();}
     break;
 
   case 112:
 
 /* Line 1455 of yacc.c  */
-#line 304 ".\\file.y"
+#line 304 ".\\filewind.y"
     {push("--");if((yyvsp[(1) - (2)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 113:
 
 /* Line 1455 of yacc.c  */
-#line 305 ".\\file.y"
+#line 305 ".\\filewind.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 114:
 
 /* Line 1455 of yacc.c  */
-#line 309 ".\\file.y"
+#line 309 ".\\filewind.y"
     {push("||");}
     break;
 
   case 115:
 
 /* Line 1455 of yacc.c  */
-#line 309 ".\\file.y"
+#line 309 ".\\filewind.y"
     {if((yyvsp[(1) - (4)]) == 1 && (yyvsp[(3) - (4)])==1) (yyval)=1; else (yyval)=-1; codegen();}
     break;
 
   case 116:
 
 /* Line 1455 of yacc.c  */
-#line 310 ".\\file.y"
+#line 310 ".\\filewind.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 117:
 
 /* Line 1455 of yacc.c  */
-#line 313 ".\\file.y"
+#line 313 ".\\filewind.y"
     {push("&&");}
     break;
 
   case 118:
 
 /* Line 1455 of yacc.c  */
-#line 313 ".\\file.y"
+#line 313 ".\\filewind.y"
     {if((yyvsp[(1) - (4)]) == 1 && (yyvsp[(3) - (4)])==1) (yyval)=1; else (yyval)=-1; codegen();}
     break;
 
   case 119:
 
 /* Line 1455 of yacc.c  */
-#line 314 ".\\file.y"
+#line 314 ".\\filewind.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 120:
 
 /* Line 1455 of yacc.c  */
-#line 318 ".\\file.y"
+#line 318 ".\\filewind.y"
     {push("!");}
     break;
 
   case 121:
 
 /* Line 1455 of yacc.c  */
-#line 318 ".\\file.y"
+#line 318 ".\\filewind.y"
     {if((yyvsp[(2) - (3)])==1) (yyval)=1; else (yyval)=-1; codegen();}
     break;
 
   case 122:
 
 /* Line 1455 of yacc.c  */
-#line 319 ".\\file.y"
+#line 319 ".\\filewind.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 123:
 
 /* Line 1455 of yacc.c  */
-#line 322 ".\\file.y"
+#line 322 ".\\filewind.y"
     {if((yyvsp[(1) - (3)]) == 1 && (yyvsp[(3) - (3)])==1) (yyval)=1; else (yyval)=-1; codegen();}
     break;
 
   case 124:
 
 /* Line 1455 of yacc.c  */
-#line 323 ".\\file.y"
+#line 323 ".\\filewind.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 125:
 
 /* Line 1455 of yacc.c  */
-#line 326 ".\\file.y"
+#line 326 ".\\filewind.y"
     {push(">=");}
     break;
 
   case 126:
 
 /* Line 1455 of yacc.c  */
-#line 326 ".\\file.y"
+#line 326 ".\\filewind.y"
     {push("<=");}
     break;
 
   case 127:
 
 /* Line 1455 of yacc.c  */
-#line 326 ".\\file.y"
+#line 326 ".\\filewind.y"
     {push(">");}
     break;
 
   case 128:
 
 /* Line 1455 of yacc.c  */
-#line 326 ".\\file.y"
+#line 326 ".\\filewind.y"
     {push("<");}
     break;
 
   case 129:
 
 /* Line 1455 of yacc.c  */
-#line 326 ".\\file.y"
+#line 326 ".\\filewind.y"
     {push("==");}
     break;
 
   case 130:
 
 /* Line 1455 of yacc.c  */
-#line 326 ".\\file.y"
+#line 326 ".\\filewind.y"
     {push("!=");}
     break;
 
   case 131:
 
 /* Line 1455 of yacc.c  */
-#line 329 ".\\file.y"
+#line 329 ".\\filewind.y"
     {if((yyvsp[(1) - (3)]) == 1 && (yyvsp[(3) - (3)])==1) (yyval)=1; else (yyval)=-1; codegen();}
     break;
 
   case 132:
 
 /* Line 1455 of yacc.c  */
-#line 330 ".\\file.y"
+#line 330 ".\\filewind.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 133:
 
 /* Line 1455 of yacc.c  */
-#line 333 ".\\file.y"
+#line 333 ".\\filewind.y"
     {push("+");}
     break;
 
   case 134:
 
 /* Line 1455 of yacc.c  */
-#line 334 ".\\file.y"
+#line 334 ".\\filewind.y"
     {push("-");}
     break;
 
   case 135:
 
 /* Line 1455 of yacc.c  */
-#line 337 ".\\file.y"
+#line 337 ".\\filewind.y"
     {if((yyvsp[(1) - (3)]) == 1 && (yyvsp[(3) - (3)])==1) (yyval)=1; else (yyval)=-1; codegen();}
     break;
 
   case 136:
 
 /* Line 1455 of yacc.c  */
-#line 338 ".\\file.y"
+#line 338 ".\\filewind.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 137:
 
 /* Line 1455 of yacc.c  */
-#line 341 ".\\file.y"
+#line 341 ".\\filewind.y"
     {push("*");}
     break;
 
   case 138:
 
 /* Line 1455 of yacc.c  */
-#line 341 ".\\file.y"
+#line 341 ".\\filewind.y"
     {push("/");}
     break;
 
   case 139:
 
 /* Line 1455 of yacc.c  */
-#line 341 ".\\file.y"
+#line 341 ".\\filewind.y"
     {push("%");}
     break;
 
   case 140:
 
 /* Line 1455 of yacc.c  */
-#line 344 ".\\file.y"
+#line 344 ".\\filewind.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 141:
 
 /* Line 1455 of yacc.c  */
-#line 345 ".\\file.y"
+#line 345 ".\\filewind.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 142:
 
 /* Line 1455 of yacc.c  */
-#line 348 ".\\file.y"
+#line 348 ".\\filewind.y"
     {
 						  push(curid);
 						  if(check_id_is_func(curid))
@@ -2360,14 +2360,14 @@ yyreduce:
   case 143:
 
 /* Line 1455 of yacc.c  */
-#line 361 ".\\file.y"
+#line 361 ".\\filewind.y"
     {if(!checkscope(curid)){printf("%s\n",curid);printf("ERROR : Identifier used in undeclared\n");exit(0);}}
     break;
 
   case 144:
 
 /* Line 1455 of yacc.c  */
-#line 362 ".\\file.y"
+#line 362 ".\\filewind.y"
     {	if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
 								(yyval) = 1;
 							else
@@ -2379,14 +2379,14 @@ yyreduce:
   case 146:
 
 /* Line 1455 of yacc.c  */
-#line 369 ".\\file.y"
+#line 369 ".\\filewind.y"
     {totbrackets--;}
     break;
 
   case 148:
 
 /* Line 1455 of yacc.c  */
-#line 370 ".\\file.y"
+#line 370 ".\\filewind.y"
     {
 										totbrackets--;
 										if(totbrackets!=0){
@@ -2398,29 +2398,29 @@ yyreduce:
   case 149:
 
 /* Line 1455 of yacc.c  */
-#line 378 ".\\file.y"
+#line 378 ".\\filewind.y"
     {if((yyvsp[(2) - (3)])==1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 150:
 
 /* Line 1455 of yacc.c  */
-#line 379 ".\\file.y"
+#line 379 ".\\filewind.y"
     {if((yyvsp[(1) - (1)])==-1) (yyval)=-1; else (yyval)=1;}
     break;
 
   case 151:
 
 /* Line 1455 of yacc.c  */
-#line 380 ".\\file.y"
+#line 380 ".\\filewind.y"
     {if((yyvsp[(1) - (1)])==1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 152:
 
 /* Line 1455 of yacc.c  */
-#line 383 ".\\file.y"
-    {
+#line 383 ".\\filewind.y"
+    { int si;
 
 			             if(!check_declaration(curid, "Function"))
 			             { printf("ERROR : Function declaration not found.\n"); exit(0);}
@@ -2433,7 +2433,8 @@ yyreduce:
 			             else
 			             (yyval) = -1;
                          call_params_count=0;
-												 for(int i=0;i<100;i++) call_params_types[i][0]='\0';
+                         int i;
+												 for(i=0;i<100;i++) call_params_types[i][0]='\0';
 
 			             }
     break;
@@ -2441,7 +2442,7 @@ yyreduce:
   case 153:
 
 /* Line 1455 of yacc.c  */
-#line 400 ".\\file.y"
+#line 401 ".\\filewind.y"
     { if(strcmp(currfunccall,"printf"))
 							{
 								if(getSTparamscount(currfunccall)!=call_params_count)
@@ -2463,8 +2464,9 @@ yyreduce:
 /*
 									else
 									{
+										int i;
 										printf("\nfunction call");
-										for(int i=0;i<call_params_count;i++)
+										for(i=0;i<call_params_count;i++)
 											printf("\n%d %s \n",i,call_params_types[i]);
 									}
 */
@@ -2477,23 +2479,24 @@ yyreduce:
   case 156:
 
 /* Line 1455 of yacc.c  */
-#line 435 ".\\file.y"
+#line 437 ".\\filewind.y"
     {  call_params_count++; }
     break;
 
   case 157:
 
 /* Line 1455 of yacc.c  */
-#line 436 ".\\file.y"
+#line 438 ".\\filewind.y"
     { call_params_count++; }
     break;
 
   case 158:
 
 /* Line 1455 of yacc.c  */
-#line 438 ".\\file.y"
+#line 440 ".\\filewind.y"
     {  arggen(1);
-										for(int i=0;i<100;i++)
+										int i;
+										for(i=0;i<100;i++)
 										{
 											if(call_params_types[i][0]=='\0')
 											{
@@ -2507,9 +2510,10 @@ yyreduce:
   case 159:
 
 /* Line 1455 of yacc.c  */
-#line 448 ".\\file.y"
+#line 451 ".\\filewind.y"
     {  arggen(2);
-														for(int i=0;i<100;i++)
+														int i;
+														for(i=0;i<100;i++)
 														{
 															if(call_params_types[i][0]=='\0')
 															{
@@ -2523,9 +2527,10 @@ yyreduce:
   case 160:
 
 /* Line 1455 of yacc.c  */
-#line 458 ".\\file.y"
+#line 462 ".\\filewind.y"
     { arggen(3);
-													for(int i=0;i<100;i++)
+													int i;
+													for(i=0;i<100;i++)
 													{
 														if(call_params_types[i][0]=='\0')
 														{
@@ -2539,9 +2544,10 @@ yyreduce:
   case 161:
 
 /* Line 1455 of yacc.c  */
-#line 468 ".\\file.y"
+#line 473 ".\\filewind.y"
     {  arggen(4);
-													for(int i=0;i<100;i++)
+													int i;
+													for(i=0;i<100;i++)
 													{
 														if(call_params_types[i][0]=='\0')
 														{
@@ -2555,9 +2561,10 @@ yyreduce:
   case 162:
 
 /* Line 1455 of yacc.c  */
-#line 478 ".\\file.y"
+#line 484 ".\\filewind.y"
     {  arggen(5);
-															for(int i=0;i<100;i++)
+															int i;
+															for(i=0;i<100;i++)
 															{
 																if(call_params_types[i][0]=='\0')
 																{
@@ -2571,35 +2578,35 @@ yyreduce:
   case 163:
 
 /* Line 1455 of yacc.c  */
-#line 490 ".\\file.y"
+#line 497 ".\\filewind.y"
     {  insV(); codegencon(); (yyval)=1; }
     break;
 
   case 164:
 
 /* Line 1455 of yacc.c  */
-#line 491 ".\\file.y"
+#line 498 ".\\filewind.y"
     {  insV(); codegencon();(yyval)=-1;}
     break;
 
   case 165:
 
 /* Line 1455 of yacc.c  */
-#line 492 ".\\file.y"
+#line 499 ".\\filewind.y"
     {  insV(); codegencon();}
     break;
 
   case 166:
 
 /* Line 1455 of yacc.c  */
-#line 493 ".\\file.y"
+#line 500 ".\\filewind.y"
     {  insV(); codegencon();(yyval)=1; }
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 2603 "y.tab.c"
+#line 2610 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2811,7 +2818,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 495 ".\\file.y"
+#line 502 ".\\filewind.y"
 
 
 extern FILE *yyin;

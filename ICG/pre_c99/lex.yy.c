@@ -261,9 +261,13 @@ static void yy_flex_free YY_PROTO(( void * ));
 
 #define YY_AT_BOL() (yy_current_buffer->yy_at_bol)
 
+
+#define YY_USES_REJECT
 typedef unsigned char YY_CHAR;
 FILE *yyin = (FILE *) 0, *yyout = (FILE *) 0;
 typedef int yy_state_type;
+extern int yylineno;
+int yylineno = 1;
 extern char *yytext;
 #define yytext_ptr yytext
 
@@ -284,29 +288,60 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 
 #define YY_NUM_RULES 76
 #define YY_END_OF_BUFFER 77
-static yyconst short int yy_accept[192] =
+static yyconst short int yy_acclist[250] =
     {   0,
-       75,   75,   77,   75,    6,    1,   59,   75,   75,   65,
-       58,   75,   11,   12,   63,   62,    8,   61,   16,   64,
-       75,   75,   15,    7,   40,   67,   42,   74,   13,   14,
-       47,   74,   74,   74,   74,   74,   74,   74,   74,   74,
-       74,   74,   74,   74,    9,   66,   10,   60,   44,    0,
-        0,    0,    0,    0,   50,   45,   55,    0,    0,   48,
-       35,   51,   36,   52,    0,    0,    4,   49,   72,    0,
-        0,    0,   14,   13,   37,   39,   43,   41,   38,   74,
-       71,   74,    0,   56,   74,   74,   22,   74,   74,   74,
-       24,   74,   74,   74,   74,   74,   74,   74,   74,   74,
+       75,   75,   77,   75,   76,    6,   75,   76,    1,    6,
+       76,   59,   75,   76,   75,   76,   75,   76,   65,   75,
+       76,   58,   75,   76,   75,   76,   11,   75,   76,   12,
+       75,   76,   63,   75,   76,   62,   75,   76,    8,   75,
+       76,   61,   75,   76,   16,   75,   76,   64,   75,   76,
+       75,   76,   75,   76,   15,   75,   76,    7,   75,   76,
+       40,   75,   76,   67,   75,   76,   42,   75,   76,   74,
+       75,   76,   13,   75,   76,   14,   75,   76,   47,   75,
+       76,   74,   75,   76,   74,   75,   76,   74,   75,   76,
+       74,   75,   76,   74,   75,   76,   74,   75,   76,   74,
 
-       57,   46,   68,    0,    0,    0,    0,   73,    0,    0,
-        0,    4,   53,   54,   74,   74,   74,   74,   74,   23,
-       25,   74,   74,   74,   74,   74,   74,   74,   74,   74,
-        0,    0,   69,    0,    0,    0,    5,   74,   17,   74,
-       19,   74,   26,   74,   74,   74,   74,   74,   74,   33,
-       74,    0,    0,   70,   34,   74,   20,   74,   28,   74,
-       74,   74,   74,   21,    0,    0,   18,   27,   29,   30,
-       31,   74,    0,    0,   74,    0,    0,    0,   32,    0,
-        0,    0,    0,    0,    3,    2,    0,    0,    0,    0,
-        0
+       75,   76,   74,   75,   76,   74,   75,   76,   74,   75,
+       76,   74,   75,   76,   74,   75,   76,   74,   75,   76,
+        9,   75,   76,   66,   75,   76,   10,   75,   76,   60,
+       75,   76,   44,   50,   45,   55,   48,   35,   51,   36,
+       52,    4,   49,   72,   14,   13,   37,   39,   43,   41,
+       38,   74,   71,   74,   56,   74,   74,   22,   74,   74,
+       74,   74,   24,   74,   74,   74,   74,   74,   74,   74,
+       74,   74,   74,   57,   46,   68,   73,    4,   53,   54,
+       74,   74,   74,   74,   74,   23,   74,   25,   74,   74,
+       74,   74,   74,   74,   74,   74,   74,   74,   69,    5,
+
+       74,   17,   74,   74,   19,   74,   74,   26,   74,   74,
+       74,   74,   74,   74,   74,   33,   74,   74,   70,   34,
+       74,   74,   20,   74,   74,   28,   74,   74,   74,   74,
+       74,   21,   74,   18,   74,   27,   74,   29,   74,   30,
+       74,   31,   74,   74,   74,   32,   74,    3,    2
+    } ;
+
+static yyconst short int yy_accept[193] =
+    {   0,
+        1,    2,    3,    4,    6,    9,   12,   15,   17,   19,
+       22,   25,   27,   30,   33,   36,   39,   42,   45,   48,
+       51,   53,   55,   58,   61,   64,   67,   70,   73,   76,
+       79,   82,   85,   88,   91,   94,   97,  100,  103,  106,
+      109,  112,  115,  118,  121,  124,  127,  130,  133,  134,
+      134,  134,  134,  134,  134,  135,  136,  137,  137,  137,
+      138,  139,  140,  141,  142,  142,  142,  143,  144,  145,
+      145,  145,  145,  146,  147,  148,  149,  150,  151,  152,
+      153,  154,  155,  155,  156,  157,  158,  160,  161,  162,
+      163,  165,  166,  167,  168,  169,  170,  171,  172,  173,
+
+      174,  175,  176,  177,  177,  177,  177,  177,  178,  178,
+      178,  178,  179,  180,  181,  182,  183,  184,  185,  186,
+      188,  190,  191,  192,  193,  194,  195,  196,  197,  198,
+      199,  199,  199,  200,  200,  200,  200,  201,  202,  204,
+      205,  207,  208,  210,  211,  212,  213,  214,  215,  216,
+      218,  219,  219,  219,  220,  222,  223,  225,  226,  228,
+      229,  230,  231,  232,  234,  234,  234,  236,  238,  240,
+      242,  244,  245,  245,  245,  246,  246,  246,  246,  248,
+      248,  248,  248,  248,  248,  249,  250,  250,  250,  250,
+      250,  250
 
     } ;
 
@@ -598,20 +633,23 @@ static yyconst short int yy_chk[838] =
       191,  191,  191,  191,  191,  191,  191
     } ;
 
-static yy_state_type yy_last_accepting_state;
-static char *yy_last_accepting_cpos;
-
-/* The intent behind this definition is that it'll catch
- * any uses of REJECT which flex missed.
- */
-#define REJECT reject_used_but_not_detected
+static yy_state_type yy_state_buf[YY_BUF_SIZE + 2], *yy_state_ptr;
+static char *yy_full_match;
+static int yy_lp;
+#define REJECT \
+{ \
+*yy_cp = yy_hold_char; /* undo effects of setting up yytext */ \
+yy_cp = yy_full_match; /* restore poss. backed-over text */ \
+++yy_lp; \
+goto find_rule; \
+}
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 ".\\file.l"
+#line 1 ".\\filewind.l"
 #define INITIAL 0
-#line 2 ".\\file.l"
+#line 3 ".\\filewind.l"
 	#include <stdio.h>
 	#include <string.h>
 	#include "y.tab.h"
@@ -664,8 +702,8 @@ char *yytext;
 
 	int hash(char *str)
 	{
-		int value = 0;
-		for(int i = 0 ; i < strlen(str) ; i++)
+		int value = 0,i;
+		for(i = 0 ; i < strlen(str) ; i++)
 		{
 			value = 10*value + (str[i] - 'A');
 			value = value % 1001;
@@ -683,7 +721,8 @@ char *yytext;
 			return ST[value].brackets;
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i;
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,str1)==0)
 				{
@@ -695,7 +734,8 @@ char *yytext;
 	}
 
 	void setbrackets(char *str1, int brackets){
-		for(int i = 0 ; i < 1001 ; i++)
+		int i;
+		for(i = 0 ; i < 1001 ; i++)
 		{
 			if(strcmp(ST[i].name,str1)==0 )
 			{
@@ -720,7 +760,8 @@ char *yytext;
 		}
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i;
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,str)==0)
 				{
@@ -741,7 +782,8 @@ char *yytext;
 			return 1;
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i;	
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(CT[i].name,str)==0)
 				{
@@ -760,7 +802,8 @@ char *yytext;
 			ST[value].lineno = line;
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i;	
+			for(i = (value + 1) ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,str1)==0)
 				{
@@ -775,7 +818,8 @@ char *yytext;
 		int value = hash(str1);
 	    if(strcmp(ST[value].name,str1)==0)
 			{
-				for(int j=0;j<100;j++)
+				int j;
+				for(j=0;j<100;j++)
 				{
 					if(ST[value].params_types[j][0]=='\0')
 					{
@@ -786,11 +830,13 @@ char *yytext;
 			}
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i,j;
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,str1)==0)
 				{
-					for(int j=0;j<100;j++)
+					int j;
+					for(j=0;j<100;j++)
 					{
 						if(ST[i].params_types[j][0]=='\0')
 						{
@@ -806,15 +852,15 @@ char *yytext;
 
 	int check_params_type(char *str, char types[100][100], int n)
 	{
-		int value = hash(str);
+		int value = hash(str),j,k;
 	    if(strcmp(ST[value].name,str)==0)
 			{
-				for(int j=0;j<n;j++)
+				for(j=0;j<n;j++)
 				{
 					if(strcmp(ST[value].params_types[j],types[j]))
 					{
 						/*
-						for(int k=0;k<n;k++)
+						for(k=0;k<n;k++)
 						{
 							printf("\n%s\n",ST[value].params_types[j]);
 						}
@@ -826,11 +872,12 @@ char *yytext;
 			}
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i,j;
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,str)==0)
 				{
-					for(int j=0;j<n;j++)
+					for(j=0;j<n;j++)
 					{
 						if(strcmp(ST[i].params_types[j],types[j]))
 						{
@@ -868,6 +915,7 @@ char *yytext;
 			int value = hash(str1);
 			if(ST[value].length == 0)
 			{
+				int j;
 				strcpy(ST[value].name,str1);
 				strcpy(ST[value].class,str2);
 				ST[value].length = strlen(str1);
@@ -875,14 +923,14 @@ char *yytext;
 				ST[value].nestval = 9999;
 				ST[value].params_count = -1;
 				insertSTline(str1,yylineno);
-				for(int j=0;j<100;j++)
+				for(j=0;j<100;j++)
 					ST[value].params_types[j][0] = '\0';
 				return;
 			}
 
-			int pos = 0;
+			int pos = 0,i;
 
-			for (int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			for (i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(ST[i].length == 0)
 				{
@@ -897,7 +945,8 @@ char *yytext;
 			ST[pos].initnestval = 9999;
 			ST[pos].nestval = 9999;
 			ST[pos].params_count = -1;
-			for(int j=0;j<100;j++)
+			int j;
+			for(j=0;j<100;j++)
 				ST[value].params_types[j][0] = '\0';
 		}
 	}
@@ -909,7 +958,8 @@ char *yytext;
 			strcpy(ST[value].type,str2);
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i;
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,str1)==0)
 				{
@@ -928,7 +978,8 @@ char *yytext;
 			strcpy(ST[value].value,str2);
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i;
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,str1)==0 && ST[i].nestval == currnest)
 				{
@@ -946,7 +997,8 @@ char *yytext;
 		{
              int pos = 0;
              int value = hash(s);
-			for (int i = value + 1 ; i!=value ; i = (i+1)%1001)
+             int i;
+			for (i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(ST[i].length == 0)
 				{
@@ -965,7 +1017,8 @@ char *yytext;
 		}
 		else
 		{
-			for(int i = 0 ; i < 1001 ; i++)
+			int i;
+			for(i = 0 ; i < 1001 ; i++)
 			{
 				if(strcmp(ST[i].name,s)==0 )
 				{
@@ -983,7 +1036,8 @@ char *yytext;
 			ST[value].params_count = count;
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i;
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,s)==0)
 				{
@@ -1001,7 +1055,8 @@ char *yytext;
 			return ST[value].params_count;
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i;
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,s)==0)
 				{
@@ -1020,7 +1075,8 @@ char *yytext;
 			strcpy(ST[value].class,"Function");
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i;
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,s)==0)
 				{
@@ -1048,9 +1104,9 @@ char *yytext;
 				return;
 			}
 
-			int pos = 0;
+			int pos = 0,i;
 
-			for (int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			for (i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(CT[i].length == 0)
 				{
@@ -1067,7 +1123,8 @@ char *yytext;
 
 	void deletedata (int nesting)
 	{
-		for(int i = 0 ; i < 1001 ; i++)
+		int i;
+		for(i = 0 ; i < 1001 ; i++)
 		{
 			if(ST[i].nestval == nesting)
 			{
@@ -1081,8 +1138,8 @@ char *yytext;
 
 	int checkscope(char *s)
 	{
-		int flag = 0;
-		for(int i = 0 ; i < 1000 ; i++)
+		int flag = 0,i;
+		for(i = 0 ; i < 1000 ; i++)
 		{
 			if(strcmp(ST[i].name,s)==0)
 			{
@@ -1117,7 +1174,8 @@ char *yytext;
 		}
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i;
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,s)==0)
 				{
@@ -1141,7 +1199,8 @@ char *yytext;
 			}
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i;
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,s)==0)
 				{
@@ -1168,7 +1227,8 @@ char *yytext;
 			}
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i;
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,s)==0)
 				{
@@ -1193,7 +1253,8 @@ char *yytext;
 			}
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i;
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name, str) == 0 && strcmp(ST[i].class, "Function") == 0)
 				{
@@ -1212,7 +1273,8 @@ char *yytext;
 				return 1;
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i;
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name, str) == 0 && strcmp(ST[i].class, "Function") == 0 || strcmp(ST[i].name,"printf")==0)
 				{
@@ -1241,7 +1303,8 @@ char *yytext;
 			return ST[value].type[0];
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i;
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,s)==0)
 				{
@@ -1258,7 +1321,8 @@ char *yytext;
 			return ST[value].type;
 		else
 		{
-			for(int i = value + 1 ; i!=value ; i = (i+1)%1001)
+			int i;
+			for(i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(strcmp(ST[i].name,s)==0)
 				{
@@ -1271,12 +1335,13 @@ char *yytext;
 
 	void printST()
 	{
+		int i;
 		printf("%10s | %15s | %10s | %10s | %10s | %15s | %10s |\n","SYMBOL", "CLASS", "TYPE","VALUE", "LINE NO", "NESTING", "PARAMS COUNT");
-		for(int i=0;i<100;i++) {
+		for(i=0;i<100;i++) {
 			printf("-");
 		}
 		printf("\n");
-		for(int i = 0 ; i < 1001 ; i++)
+		for(i = 0 ; i < 1001 ; i++)
 		{
 			if(ST[i].length == 0)
 			{
@@ -1284,12 +1349,13 @@ char *yytext;
 			}
 			printf("%10s | %15s | %10s | %10s | %10d | %15d | %10d |\n",ST[i].name, ST[i].class, ST[i].type, ST[i].value, ST[i].lineno, ST[i].initnestval, ST[i].params_count);
 		}
-		for(int i=0;i<1001;i++)
+		for(i=0;i<1001;i++)
 		{
 			if(!strcmp(ST[i].class,"Function"))
 			{
+				int j;
 				printf("\n%s : ",ST[i].name);
-				for(int j=0;j<ST[i].params_count;j++)
+				for(j=0;j<ST[i].params_count;j++)
 				{
 					printf(" %s ",ST[i].params_types[j]);
 				}
@@ -1300,12 +1366,13 @@ char *yytext;
 
 	void printCT()
 	{
+		int i;
 		printf("%10s | %15s\n","NAME", "TYPE");
-		for(int i=0;i<81;i++) {
+		for(i=0;i<81;i++) {
 			printf("-");
 		}
 		printf("\n");
-		for(int i = 0 ; i < 1001 ; i++)
+		for(i = 0 ; i < 1001 ; i++)
 		{
 			if(CT[i].length == 0)
 				continue;
@@ -1317,7 +1384,7 @@ char *yytext;
 	char curtype[20];
 	char curval[20];
 
-#line 1321 "lex.yy.c"
+#line 1388 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -1468,9 +1535,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 712 ".\\file.l"
+#line 742 ".\\filewind.l"
 
-#line 1474 "lex.yy.c"
+#line 1541 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -1509,15 +1576,12 @@ YY_DECL
 		yy_bp = yy_cp;
 
 		yy_current_state = yy_start;
+		yy_state_ptr = yy_state_buf;
+		*yy_state_ptr++ = yy_current_state;
 yy_match:
 		do
 			{
 			register YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)];
-			if ( yy_accept[yy_current_state] )
-				{
-				yy_last_accepting_state = yy_current_state;
-				yy_last_accepting_cpos = yy_cp;
-				}
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
@@ -1525,37 +1589,48 @@ yy_match:
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
+			*yy_state_ptr++ = yy_current_state;
 			++yy_cp;
 			}
 		while ( yy_base[yy_current_state] != 781 );
 
 yy_find_action:
-		yy_act = yy_accept[yy_current_state];
-		if ( yy_act == 0 )
-			{ /* have to back up */
-			yy_cp = yy_last_accepting_cpos;
-			yy_current_state = yy_last_accepting_state;
-			yy_act = yy_accept[yy_current_state];
+		yy_current_state = *--yy_state_ptr;
+		yy_lp = yy_accept[yy_current_state];
+find_rule: /* we branch to this label when backing up */
+		for ( ; ; ) /* until we find what rule we matched */
+			{
+			if ( yy_lp && yy_lp < yy_accept[yy_current_state + 1] )
+				{
+				yy_act = yy_acclist[yy_lp];
+					{
+					yy_full_match = yy_cp;
+					break;
+					}
+				}
+			--yy_cp;
+			yy_current_state = *--yy_state_ptr;
+			yy_lp = yy_accept[yy_current_state];
 			}
 
 		YY_DO_BEFORE_ACTION;
 
+		if ( yy_act != YY_END_OF_BUFFER )
+			{
+			int yyl;
+			for ( yyl = 0; yyl < yyleng; ++yyl )
+				if ( yytext[yyl] == '\n' )
+					++yylineno;
+			}
 
 do_action:	/* This label is used only to access EOF actions. */
 
 
 		switch ( yy_act )
 	{ /* beginning of action switch */
-			case 0: /* must back up */
-			/* undo the effects of YY_DO_BEFORE_ACTION */
-			*yy_cp = yy_hold_char;
-			yy_cp = yy_last_accepting_cpos;
-			yy_current_state = yy_last_accepting_state;
-			goto yy_find_action;
-
 case 1:
 YY_RULE_SETUP
-#line 713 ".\\file.l"
+#line 743 ".\\filewind.l"
 {yylineno++;}
 	YY_BREAK
 case 2:
@@ -1563,7 +1638,7 @@ case 2:
 yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 714 ".\\file.l"
+#line 744 ".\\filewind.l"
 { }
 	YY_BREAK
 case 3:
@@ -1571,327 +1646,327 @@ case 3:
 yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 715 ".\\file.l"
+#line 745 ".\\filewind.l"
 { }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 716 ".\\file.l"
+#line 746 ".\\filewind.l"
 { }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 717 ".\\file.l"
+#line 747 ".\\filewind.l"
 { }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 718 ".\\file.l"
+#line 748 ".\\filewind.l"
 ;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 719 ".\\file.l"
+#line 749 ".\\filewind.l"
 { return(';'); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 720 ".\\file.l"
+#line 750 ".\\filewind.l"
 { return(','); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 721 ".\\file.l"
+#line 751 ".\\filewind.l"
 { return('{'); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 722 ".\\file.l"
+#line 752 ".\\filewind.l"
 { return('}'); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 723 ".\\file.l"
+#line 753 ".\\filewind.l"
 { return('('); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 724 ".\\file.l"
+#line 754 ".\\filewind.l"
 { return(')'); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 725 ".\\file.l"
+#line 755 ".\\filewind.l"
 { return('['); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 726 ".\\file.l"
+#line 756 ".\\filewind.l"
 { return(']'); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 727 ".\\file.l"
+#line 757 ".\\filewind.l"
 { return(':'); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 728 ".\\file.l"
+#line 758 ".\\filewind.l"
 { return('.'); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 730 ".\\file.l"
+#line 760 ".\\filewind.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword");return CHAR;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 731 ".\\file.l"
+#line 761 ".\\filewind.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return DOUBLE;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 732 ".\\file.l"
+#line 762 ".\\filewind.l"
 { insertST(yytext, "Keyword"); return ELSE;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 733 ".\\file.l"
+#line 763 ".\\filewind.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return FLOAT;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 734 ".\\file.l"
+#line 764 ".\\filewind.l"
 { insertST(yytext, "Keyword"); return WHILE;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 735 ".\\file.l"
+#line 765 ".\\filewind.l"
 { insertST(yytext, "Keyword"); return DO;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 736 ".\\file.l"
+#line 766 ".\\filewind.l"
 { insertST(yytext, "Keyword"); return FOR;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 737 ".\\file.l"
+#line 767 ".\\filewind.l"
 { insertST(yytext, "Keyword"); return IF;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 738 ".\\file.l"
+#line 768 ".\\filewind.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return INT;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 739 ".\\file.l"
+#line 769 ".\\filewind.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return LONG;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 740 ".\\file.l"
+#line 770 ".\\filewind.l"
 { insertST(yytext, "Keyword"); return RETURN;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 741 ".\\file.l"
+#line 771 ".\\filewind.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return SHORT;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 742 ".\\file.l"
+#line 772 ".\\filewind.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return SIGNED;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 743 ".\\file.l"
+#line 773 ".\\filewind.l"
 { insertST(yytext, "Keyword"); return SIZEOF;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 744 ".\\file.l"
+#line 774 ".\\filewind.l"
 { strcpy(curtype,yytext);   insertST(yytext, "Keyword");  return STRUCT;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 745 ".\\file.l"
+#line 775 ".\\filewind.l"
 { insertST(yytext, "Keyword");   return UNSIGNED;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 746 ".\\file.l"
+#line 776 ".\\filewind.l"
 { strcpy(curtype,yytext);   insertST(yytext, "Keyword");  return VOID;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 747 ".\\file.l"
+#line 777 ".\\filewind.l"
 { insertST(yytext, "Keyword");  return BREAK;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 751 ".\\file.l"
+#line 781 ".\\filewind.l"
 { return increment_operator; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 752 ".\\file.l"
+#line 782 ".\\filewind.l"
 { return decrement_operator; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 753 ".\\file.l"
+#line 783 ".\\filewind.l"
 { return leftshift_operator; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 754 ".\\file.l"
+#line 784 ".\\filewind.l"
 { return rightshift_operator; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 755 ".\\file.l"
+#line 785 ".\\filewind.l"
 { return lessthan_assignment_operator; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 756 ".\\file.l"
+#line 786 ".\\filewind.l"
 { return lessthan_operator; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 757 ".\\file.l"
+#line 787 ".\\filewind.l"
 { return greaterthan_assignment_operator; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 758 ".\\file.l"
+#line 788 ".\\filewind.l"
 { return greaterthan_operator; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 759 ".\\file.l"
+#line 789 ".\\filewind.l"
 { return equality_operator; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 760 ".\\file.l"
+#line 790 ".\\filewind.l"
 { return inequality_operator; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 761 ".\\file.l"
+#line 791 ".\\filewind.l"
 { return AND_operator; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 762 ".\\file.l"
+#line 792 ".\\filewind.l"
 { return OR_operator; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 763 ".\\file.l"
+#line 793 ".\\filewind.l"
 { return caret_operator; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 764 ".\\file.l"
+#line 794 ".\\filewind.l"
 { return multiplication_assignment_operator; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 765 ".\\file.l"
+#line 795 ".\\filewind.l"
 { return division_assignment_operator; }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 766 ".\\file.l"
+#line 796 ".\\filewind.l"
 { return modulo_assignment_operator; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 767 ".\\file.l"
+#line 797 ".\\filewind.l"
 { return addition_assignment_operator; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 768 ".\\file.l"
+#line 798 ".\\filewind.l"
 { return subtraction_assignment_operator; }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 769 ".\\file.l"
+#line 799 ".\\filewind.l"
 { return leftshift_assignment_operator; }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 770 ".\\file.l"
+#line 800 ".\\filewind.l"
 { return rightshift_assignment_operator; }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 771 ".\\file.l"
+#line 801 ".\\filewind.l"
 { return AND_assignment_operator; }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 772 ".\\file.l"
+#line 802 ".\\filewind.l"
 { return XOR_assignment_operator; }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 773 ".\\file.l"
+#line 803 ".\\filewind.l"
 { return OR_assignment_operator; }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 774 ".\\file.l"
+#line 804 ".\\filewind.l"
 { return amp_operator; }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 775 ".\\file.l"
+#line 805 ".\\filewind.l"
 { return exclamation_operator; }
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 776 ".\\file.l"
+#line 806 ".\\filewind.l"
 { return tilde_operator; }
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 777 ".\\file.l"
+#line 807 ".\\filewind.l"
 { return subtract_operator; }
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 778 ".\\file.l"
+#line 808 ".\\filewind.l"
 { return add_operator; }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 779 ".\\file.l"
+#line 809 ".\\filewind.l"
 { return multiplication_operator; }
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 780 ".\\file.l"
+#line 810 ".\\filewind.l"
 { return division_operator; }
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 781 ".\\file.l"
+#line 811 ".\\filewind.l"
 { return modulo_operator; }
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 782 ".\\file.l"
+#line 812 ".\\filewind.l"
 { return pipe_operator; }
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 783 ".\\file.l"
+#line 813 ".\\filewind.l"
 { return assignment_operator;}
 	YY_BREAK
 case 68:
@@ -1899,7 +1974,7 @@ case 68:
 yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 785 ".\\file.l"
+#line 815 ".\\filewind.l"
 {strcpy(curval,yytext); insertCT(yytext,"String Constant"); return string_constant;}
 	YY_BREAK
 case 69:
@@ -1907,7 +1982,7 @@ case 69:
 yy_c_buf_p = yy_cp = yy_bp + 3;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 786 ".\\file.l"
+#line 816 ".\\filewind.l"
 {strcpy(curval,yytext); insertCT(yytext,"Character Constant"); return character_constant;}
 	YY_BREAK
 case 70:
@@ -1915,7 +1990,7 @@ case 70:
 yy_c_buf_p = yy_cp = yy_bp + 4;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 787 ".\\file.l"
+#line 817 ".\\filewind.l"
 {strcpy(curval,yytext); insertCT(yytext,"Character Constant"); return character_constant;}
 	YY_BREAK
 case 71:
@@ -1923,7 +1998,7 @@ case 71:
 yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 788 ".\\file.l"
+#line 818 ".\\filewind.l"
 {strcpy(curid,yytext); insertST(yytext, "Array Identifier");  return array_identifier;}
 	YY_BREAK
 case 72:
@@ -1931,7 +2006,7 @@ case 72:
 yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 789 ".\\file.l"
+#line 819 ".\\filewind.l"
 {strcpy(curval,yytext); insertCT(yytext, "Number Constant"); yylval = atoi(yytext); return integer_constant;}
 	YY_BREAK
 case 73:
@@ -1939,17 +2014,17 @@ case 73:
 yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 790 ".\\file.l"
+#line 820 ".\\filewind.l"
 {strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); return float_constant;}
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 791 ".\\file.l"
+#line 821 ".\\filewind.l"
 {strcpy(curid,yytext); insertST(curid,"Identifier"); return identifier;}
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 792 ".\\file.l"
+#line 822 ".\\filewind.l"
 {
 		if(yytext[0]=='#')
 		{
@@ -1973,12 +2048,12 @@ YY_RULE_SETUP
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 813 ".\\file.l"
+#line 843 ".\\filewind.l"
 ECHO;
 	YY_BREAK
-#line 1980 "lex.yy.c"
-case YY_STATE_EOF(INITIAL):
-	yyterminate();
+#line 2055 "lex.yy.c"
+			case YY_STATE_EOF(INITIAL):
+				yyterminate();
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2256,15 +2331,12 @@ static yy_state_type yy_get_previous_state()
 	register char *yy_cp;
 
 	yy_current_state = yy_start;
+	yy_state_ptr = yy_state_buf;
+	*yy_state_ptr++ = yy_current_state;
 
 	for ( yy_cp = yytext_ptr + YY_MORE_ADJ; yy_cp < yy_c_buf_p; ++yy_cp )
 		{
 		register YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 1);
-		if ( yy_accept[yy_current_state] )
-			{
-			yy_last_accepting_state = yy_current_state;
-			yy_last_accepting_cpos = yy_cp;
-			}
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
@@ -2272,6 +2344,7 @@ static yy_state_type yy_get_previous_state()
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
+		*yy_state_ptr++ = yy_current_state;
 		}
 
 	return yy_current_state;
@@ -2292,14 +2365,8 @@ yy_state_type yy_current_state;
 #endif
 	{
 	register int yy_is_jam;
-	register char *yy_cp = yy_c_buf_p;
 
 	register YY_CHAR yy_c = 1;
-	if ( yy_accept[yy_current_state] )
-		{
-		yy_last_accepting_state = yy_current_state;
-		yy_last_accepting_cpos = yy_cp;
-		}
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
@@ -2308,6 +2375,8 @@ yy_state_type yy_current_state;
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 	yy_is_jam = (yy_current_state == 191);
+	if ( ! yy_is_jam )
+		*yy_state_ptr++ = yy_current_state;
 
 	return yy_is_jam ? 0 : yy_current_state;
 	}
@@ -2350,6 +2419,8 @@ register char *yy_bp;
 
 	*--yy_cp = (char) c;
 
+	if ( c == '\n' )
+		--yylineno;
 
 	yytext_ptr = yy_bp;
 	yy_hold_char = *yy_cp;
@@ -2426,6 +2497,8 @@ static int input()
 	*yy_c_buf_p = '\0';	/* preserve yytext */
 	yy_hold_char = *++yy_c_buf_p;
 
+	if ( c == '\n' )
+		++yylineno;
 
 	return c;
 	}
@@ -2862,5 +2935,5 @@ int main()
 	return 0;
 	}
 #endif
-#line 813 ".\\file.l"
+#line 843 ".\\filewind.l"
 
