@@ -245,7 +245,7 @@
 		{
 			if(strcmp(ST[lookupST(str1)].class,"Identifier")==0 && strcmp(str2,"Array Identifier")==0)
 			{
-				printf("Error use of array\n");
+				printf("ERROR: Non array used as array.\n");
 				exit(0);
 			}
 			return;
@@ -792,19 +792,19 @@ IN "include"
 (.?) {
 		if(yytext[0]=='#')
 		{
-			printf("Error in Pre-Processor directive at line no. %d\n",yylineno);
+			printf("ERROR : Pre-Processor directive at line no. %d couldn't be resolved.\n",yylineno);
 		}
 		else if(yytext[0]=='/')
 		{
-			printf("ERR_UNMATCHED_COMMENT at line no. %d\n",yylineno);
+			printf("ERROR : Unmatched comment at line no. %d\n",yylineno);
 		}
 		else if(yytext[0]=='"')
 		{
-			printf("ERR_INCOMPLETE_STRING at line no. %d\n",yylineno);
+			printf("ERROR : String not terminated, at line no. %d\n",yylineno);
 		}
 		else
 		{
-			printf("ERROR at line no. %d\n",yylineno);
+			printf("ERROR : Please check line no. %d\n",yylineno);
 		}
 		printf("%s\n", yytext);
 		return 0;

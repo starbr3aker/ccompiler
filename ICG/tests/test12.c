@@ -1,13 +1,20 @@
+//ERROR CASE: Void function returns a value. Array dimensions don't match. 
 #include <stdio.h>
 
-void func(int a, int b)
+void fubar(int a, int b)
 {
-	return a;
+	return 0; //Second error
 }
 
 int main()
 {
-	int z = 5;
-	func(5,z,z);
-	printf("wow\n");
+	int z[4][3];
+	
+	
+	int b = z[3]; //First error
+
+	fubar(5,2);
+	
+
+	return 0;
 }
