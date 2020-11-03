@@ -671,14 +671,25 @@
 			}
 			printf("%10s | %15s | %10s | %10s | %10d | %15d | %15d | %10d |\n",ST[i].name, ST[i].class, ST[i].type, ST[i].value, ST[i].lineno, ST[i].initnestval, ST[i].params_count, ST[i].brackets);
 		}
+
+
+		printf("\n%20s | %20s \n","FUNCTION","PARAMETER TYPES");
+		for(int k=0;k<100;k++)
+			printf("-");
+		printf("\n");
 		for(int i=0;i<1001;i++)
 		{
+
 			if(!strcmp(ST[i].class,"Function"))
 			{
-				printf("\n%s : ",ST[i].name);
-				for(int j=0;j<ST[i].params_count;j++)
+				if(!strcmp(ST[i].name,"printf")==0)
 				{
-					printf(" %s ",ST[i].params_types[j]);
+					printf("%20s |",ST[i].name);
+					for(int j=0;j<ST[i].params_count;j++)
+					{
+						printf(" %10s ",ST[i].params_types[j]);
+					}
+					printf("\n");
 				}
 			}
 		}
