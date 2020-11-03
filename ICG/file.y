@@ -142,7 +142,7 @@ identifier_array_type
 initilization_params
 			: integer_constant ']' {arrbrackets++;} initilization {if($$ < 1) {printf("ERROR : Array size is invalid at index %d\n", arrbrackets); exit(0);}  setbrackets(curid, arrbrackets); arrbrackets=0;}
 			| integer_constant ']' {arrbrackets++;} '[' initilization_params {if($$ < 1){printf("ERROR : Array size is invalid at index %d\n", arrbrackets);}}
-			| ']' string_initilization;
+			| ']' {arrbrackets++;} string_initilization {setbrackets(curid, arrbrackets); arrbrackets=0;};
 
 initilization
 			: string_initilization
