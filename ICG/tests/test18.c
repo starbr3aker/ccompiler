@@ -4,7 +4,7 @@ void main()
 {
 	int a,b,c,d;
 	int x[3][3];
-	x[1];
+	x[1][3];
 	while(a < 10)
 	{
 		if (a<3)

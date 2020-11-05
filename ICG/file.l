@@ -238,7 +238,7 @@
 		{
 			if(strcmp(ST[lookupST(str1)].class,"Identifier")==0 && strcmp(str2,"Array Identifier")==0)
 			{
-				printf("Error use of array\n");
+				printf("ERROR: Non array used as array.\n");
 				exit(0);
 			}
 			return;
@@ -651,7 +651,7 @@
 
 	void printST()
 	{
-		printf("%10s | %15s | %10s | %10s | %10s | %15s | %10s |\n","SYMBOL", "CLASS", "TYPE","VALUE", "LINE NO", "NESTING", "PARAMS COUNT");
+		printf("%10s | %15s | %10s | %10s | %10s | %15s | %15s | %10s |\n","SYMBOL", "CLASS", "TYPE","VALUE", "LINE NO", "NESTING", "PARAMS COUNT", "ARRAY DIM.");
 		for(int i=0;i<100;i++) {
 			printf("-");
 		}
@@ -662,7 +662,7 @@
 			{
 				continue;
 			}
-			printf("%10s | %15s | %10s | %10s | %10d | %15d | %10d |\n",ST[i].name, ST[i].class, ST[i].type, ST[i].value, ST[i].lineno, ST[i].initnestval, ST[i].params_count);
+			printf("%10s | %15s | %10s | %10s | %10d | %15d | %15d | %10d |\n",ST[i].name, ST[i].class, ST[i].type, ST[i].value, ST[i].lineno, ST[i].initnestval, ST[i].params_count, ST[i].brackets);
 		}
 		for(int i=0;i<1001;i++)
 		{
@@ -785,19 +785,19 @@ IN "include"
 (.?) {
 		if(yytext[0]=='#')
 		{
-			printf("Error in Pre-Processor directive at line no. %d\n",yylineno);
+			printf("ERROR : Pre-Processor directive at line no. %d couldn't be resolved.\n",yylineno);
 		}
 		else if(yytext[0]=='/')
 		{
-			printf("ERR_UNMATCHED_COMMENT at line no. %d\n",yylineno);
+			printf("ERROR : Unmatched comment at line no. %d\n",yylineno);
 		}
 		else if(yytext[0]=='"')
 		{
-			printf("ERR_INCOMPLETE_STRING at line no. %d\n",yylineno);
+			printf("ERROR : String not terminated, at line no. %d\n",yylineno);
 		}
 		else
 		{
-			printf("ERROR at line no. %d\n",yylineno);
+			printf("ERROR : Please check line no. %d\n",yylineno);
 		}
 		printf("%s\n", yytext);
 		return 0;

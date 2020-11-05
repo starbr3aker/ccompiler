@@ -1,4 +1,4 @@
-// Implicit Error that our Language doesn't support
+// Explicit Error that our Language doesn't support '@' as a character to start identifiers.
 //fail
 #include<stdio.h>
 
