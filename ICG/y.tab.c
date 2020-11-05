@@ -79,10 +79,6 @@
 	void ins();
 	void insV();
 	int flag=0;
-	#define ANSI_COLOR_RED		"\x1b[31m"
-	#define ANSI_COLOR_GREEN	"\x1b[32m"
-	#define ANSI_COLOR_CYAN		"\x1b[36m"
-	#define ANSI_COLOR_RESET	"\x1b[0m"
 	extern char curid[20];
 	extern char curtype[20];
 	extern char curval[20];
@@ -139,7 +135,7 @@
 
 
 /* Line 189 of yacc.c  */
-#line 143 "y.tab.c"
+#line 139 "y.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -305,7 +301,7 @@ typedef int YYSTYPE;
 
 
 /* Line 264 of yacc.c  */
-#line 309 "y.tab.c"
+#line 305 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -650,23 +646,23 @@ static const yytype_int16 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   111,   111,   114,   117,   118,   121,   122,   125,   128,
-     128,   131,   131,   132,   132,   136,   136,   139,   140,   143,
-     143,   144,   144,   145,   148,   149,   150,   153,   153,   153,
-     153,   154,   155,   156,   157,   158,   161,   161,   161,   161,
-     164,   164,   164,   164,   167,   167,   170,   170,   173,   176,
-     179,   179,   179,   182,   182,   185,   185,   188,   191,   192,
-     195,   195,   198,   199,   202,   202,   203,   203,   204,   204,
-     205,   208,   208,   211,   212,   215,   216,   219,   219,   219,
-     222,   223,   226,   226,   226,   227,   227,   227,   228,   228,
-     228,   230,   231,   244,   247,   250,   253,   256,   257,   260,
-     260,   269,   269,   276,   276,   283,   283,   290,   290,   296,
-     296,   303,   304,   305,   309,   309,   310,   313,   313,   314,
-     318,   318,   319,   322,   323,   326,   326,   326,   326,   326,
-     326,   329,   330,   333,   334,   337,   338,   341,   341,   341,
-     344,   345,   348,   361,   362,   361,   369,   369,   370,   378,
-     379,   380,   383,   383,   432,   432,   435,   436,   438,   448,
-     458,   468,   478,   490,   491,   492,   493
+       0,   107,   107,   110,   113,   114,   117,   118,   121,   124,
+     124,   127,   127,   128,   128,   132,   132,   135,   136,   139,
+     139,   140,   140,   141,   144,   145,   146,   149,   149,   149,
+     149,   150,   151,   152,   153,   154,   157,   157,   157,   157,
+     160,   160,   160,   160,   163,   163,   166,   166,   169,   172,
+     175,   175,   175,   178,   178,   181,   181,   184,   187,   188,
+     191,   191,   194,   195,   198,   198,   199,   199,   200,   200,
+     201,   204,   204,   207,   208,   211,   212,   215,   215,   215,
+     218,   219,   222,   222,   222,   223,   223,   223,   224,   224,
+     224,   226,   227,   240,   243,   246,   249,   252,   253,   256,
+     256,   265,   265,   272,   272,   279,   279,   286,   286,   292,
+     292,   299,   300,   301,   305,   305,   306,   309,   309,   310,
+     314,   314,   315,   318,   319,   322,   322,   322,   322,   322,
+     322,   325,   326,   329,   330,   333,   334,   337,   337,   337,
+     340,   341,   344,   357,   358,   357,   365,   365,   366,   374,
+     375,   376,   379,   379,   428,   428,   431,   432,   434,   444,
+     454,   464,   474,   486,   487,   488,   489
 };
 #endif
 
@@ -1776,210 +1772,210 @@ yyreduce:
         case 11:
 
 /* Line 1455 of yacc.c  */
-#line 131 ".\\file.y"
+#line 127 ".\\file.y"
     {if(duplicate(curid)){printf("ERROR : Duplicate initialisation\n");exit(0);}insertSTnest(curid,currnest); ins();  }
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 132 ".\\file.y"
+#line 128 ".\\file.y"
     {if(duplicate(curid)){printf("ERROR : Duplicate initialisation\n");exit(0);}insertSTnest(curid,currnest); ins();  }
     break;
 
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 143 ".\\file.y"
+#line 139 ".\\file.y"
     {arrbrackets++;}
     break;
 
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 143 ".\\file.y"
+#line 139 ".\\file.y"
     {if((yyval) < 1) {printf("ERROR : Array size is invalid at index %d\n", arrbrackets); exit(0);}  setbrackets(curid, arrbrackets); arrbrackets=0;}
     break;
 
   case 21:
 
 /* Line 1455 of yacc.c  */
-#line 144 ".\\file.y"
+#line 140 ".\\file.y"
     {arrbrackets++;}
     break;
 
   case 22:
 
 /* Line 1455 of yacc.c  */
-#line 144 ".\\file.y"
+#line 140 ".\\file.y"
     {if((yyval) < 1){printf("ERROR : Array size is invalid at index %d\n", arrbrackets);}}
     break;
 
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 176 ".\\file.y"
+#line 172 ".\\file.y"
     { strcpy(currfunctype, curtype); strcpy(currfunc, curid); check_duplicate(curid); insertSTF(curid); ins(); }
     break;
 
   case 50:
 
 /* Line 1455 of yacc.c  */
-#line 179 ".\\file.y"
+#line 175 ".\\file.y"
     {params_count=0;}
     break;
 
   case 51:
 
 /* Line 1455 of yacc.c  */
-#line 179 ".\\file.y"
+#line 175 ".\\file.y"
     {funcgen();}
     break;
 
   case 52:
 
 /* Line 1455 of yacc.c  */
-#line 179 ".\\file.y"
+#line 175 ".\\file.y"
     {funcgenend();}
     break;
 
   case 53:
 
 /* Line 1455 of yacc.c  */
-#line 182 ".\\file.y"
+#line 178 ".\\file.y"
     { insertSTparamscount(currfunc, params_count); }
     break;
 
   case 54:
 
 /* Line 1455 of yacc.c  */
-#line 182 ".\\file.y"
+#line 178 ".\\file.y"
     { insertSTparamscount(currfunc, params_count); }
     break;
 
   case 55:
 
 /* Line 1455 of yacc.c  */
-#line 185 ".\\file.y"
+#line 181 ".\\file.y"
     { check_params(curtype);}
     break;
 
   case 60:
 
 /* Line 1455 of yacc.c  */
-#line 195 ".\\file.y"
+#line 191 ".\\file.y"
     { ins();insertSTnest(curid,1); params_count++; insertSTparamstype(currfunc, curtype); }
     break;
 
   case 71:
 
 /* Line 1455 of yacc.c  */
-#line 208 ".\\file.y"
+#line 204 ".\\file.y"
     {currnest++;}
     break;
 
   case 72:
 
 /* Line 1455 of yacc.c  */
-#line 208 ".\\file.y"
+#line 204 ".\\file.y"
     {deletedata(currnest);currnest--;}
     break;
 
   case 77:
 
 /* Line 1455 of yacc.c  */
-#line 219 ".\\file.y"
+#line 215 ".\\file.y"
     {label1();if((yyvsp[(3) - (4)])!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}}
     break;
 
   case 78:
 
 /* Line 1455 of yacc.c  */
-#line 219 ".\\file.y"
+#line 215 ".\\file.y"
     {label2();}
     break;
 
   case 80:
 
 /* Line 1455 of yacc.c  */
-#line 222 ".\\file.y"
+#line 218 ".\\file.y"
     {label3();}
     break;
 
   case 81:
 
 /* Line 1455 of yacc.c  */
-#line 223 ".\\file.y"
+#line 219 ".\\file.y"
     {label3();}
     break;
 
   case 82:
 
 /* Line 1455 of yacc.c  */
-#line 226 ".\\file.y"
+#line 222 ".\\file.y"
     {label4();}
     break;
 
   case 83:
 
 /* Line 1455 of yacc.c  */
-#line 226 ".\\file.y"
+#line 222 ".\\file.y"
     {label1();if((yyvsp[(4) - (5)])!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}}
     break;
 
   case 84:
 
 /* Line 1455 of yacc.c  */
-#line 226 ".\\file.y"
+#line 222 ".\\file.y"
     {label5();}
     break;
 
   case 85:
 
 /* Line 1455 of yacc.c  */
-#line 227 ".\\file.y"
+#line 223 ".\\file.y"
     {label4();}
     break;
 
   case 86:
 
 /* Line 1455 of yacc.c  */
-#line 227 ".\\file.y"
+#line 223 ".\\file.y"
     {label1();if((yyvsp[(6) - (7)])!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}}
     break;
 
   case 87:
 
 /* Line 1455 of yacc.c  */
-#line 227 ".\\file.y"
+#line 223 ".\\file.y"
     {label5();}
     break;
 
   case 88:
 
 /* Line 1455 of yacc.c  */
-#line 228 ".\\file.y"
+#line 224 ".\\file.y"
     {label4();}
     break;
 
   case 89:
 
 /* Line 1455 of yacc.c  */
-#line 228 ".\\file.y"
+#line 224 ".\\file.y"
     {label1();label5();if((yyvsp[(6) - (7)])!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}}
     break;
 
   case 91:
 
 /* Line 1455 of yacc.c  */
-#line 230 ".\\file.y"
+#line 226 ".\\file.y"
     {if(strcmp(currfunctype,"void")) {printf("ERROR : No return value found for non-void function.\n"); exit(0);}}
     break;
 
   case 92:
 
 /* Line 1455 of yacc.c  */
-#line 231 ".\\file.y"
+#line 227 ".\\file.y"
     { 	if(!strcmp(currfunctype, "void"))
 										{
 											yyerror("ERROR : Void function calls return statement.\n");
@@ -1996,21 +1992,21 @@ yyreduce:
   case 94:
 
 /* Line 1455 of yacc.c  */
-#line 247 ".\\file.y"
+#line 243 ".\\file.y"
     {insV();}
     break;
 
   case 99:
 
 /* Line 1455 of yacc.c  */
-#line 260 ".\\file.y"
+#line 256 ".\\file.y"
     {push("=");}
     break;
 
   case 100:
 
 /* Line 1455 of yacc.c  */
-#line 260 ".\\file.y"
+#line 256 ".\\file.y"
     {
 					if((yyvsp[(1) - (4)])==1 && (yyvsp[(4) - (4)])==1)
 					{
@@ -2025,14 +2021,14 @@ yyreduce:
   case 101:
 
 /* Line 1455 of yacc.c  */
-#line 269 ".\\file.y"
+#line 265 ".\\file.y"
     {push("+=");}
     break;
 
   case 102:
 
 /* Line 1455 of yacc.c  */
-#line 269 ".\\file.y"
+#line 265 ".\\file.y"
     {
 					if((yyvsp[(1) - (4)])==1 && (yyvsp[(4) - (4)])==1)
 					(yyval)=1;
@@ -2045,14 +2041,14 @@ yyreduce:
   case 103:
 
 /* Line 1455 of yacc.c  */
-#line 276 ".\\file.y"
+#line 272 ".\\file.y"
     {push("-=");}
     break;
 
   case 104:
 
 /* Line 1455 of yacc.c  */
-#line 276 ".\\file.y"
+#line 272 ".\\file.y"
     {
 					if((yyvsp[(1) - (4)])==1 && (yyvsp[(4) - (4)])==1)
 					(yyval)=1;
@@ -2065,14 +2061,14 @@ yyreduce:
   case 105:
 
 /* Line 1455 of yacc.c  */
-#line 283 ".\\file.y"
+#line 279 ".\\file.y"
     {push("*=");}
     break;
 
   case 106:
 
 /* Line 1455 of yacc.c  */
-#line 283 ".\\file.y"
+#line 279 ".\\file.y"
     {
 					if((yyvsp[(1) - (4)])==1 && (yyvsp[(4) - (4)])==1)
 					(yyval)=1;
@@ -2085,14 +2081,14 @@ yyreduce:
   case 107:
 
 /* Line 1455 of yacc.c  */
-#line 290 ".\\file.y"
+#line 286 ".\\file.y"
     {push("/=");}
     break;
 
   case 108:
 
 /* Line 1455 of yacc.c  */
-#line 290 ".\\file.y"
+#line 286 ".\\file.y"
     {
 					if((yyvsp[(1) - (4)])==1 && (yyvsp[(4) - (4)])==1)
 					(yyval)=1;
@@ -2104,14 +2100,14 @@ yyreduce:
   case 109:
 
 /* Line 1455 of yacc.c  */
-#line 296 ".\\file.y"
+#line 292 ".\\file.y"
     {push("%=");}
     break;
 
   case 110:
 
 /* Line 1455 of yacc.c  */
-#line 296 ".\\file.y"
+#line 292 ".\\file.y"
     {
 					if((yyvsp[(1) - (4)])==1 && (yyvsp[(3) - (4)])==1)
 					(yyval)=1;
@@ -2124,224 +2120,224 @@ yyreduce:
   case 111:
 
 /* Line 1455 of yacc.c  */
-#line 303 ".\\file.y"
+#line 299 ".\\file.y"
     { push("++");if((yyvsp[(1) - (2)]) == 1) (yyval)=1; else (yyval)=-1; genunary();}
     break;
 
   case 112:
 
 /* Line 1455 of yacc.c  */
-#line 304 ".\\file.y"
+#line 300 ".\\file.y"
     {push("--");if((yyvsp[(1) - (2)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 113:
 
 /* Line 1455 of yacc.c  */
-#line 305 ".\\file.y"
+#line 301 ".\\file.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 114:
 
 /* Line 1455 of yacc.c  */
-#line 309 ".\\file.y"
+#line 305 ".\\file.y"
     {push("||");}
     break;
 
   case 115:
 
 /* Line 1455 of yacc.c  */
-#line 309 ".\\file.y"
+#line 305 ".\\file.y"
     {if((yyvsp[(1) - (4)]) == 1 && (yyvsp[(3) - (4)])==1) (yyval)=1; else (yyval)=-1; codegen();}
     break;
 
   case 116:
 
 /* Line 1455 of yacc.c  */
-#line 310 ".\\file.y"
+#line 306 ".\\file.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 117:
 
 /* Line 1455 of yacc.c  */
-#line 313 ".\\file.y"
+#line 309 ".\\file.y"
     {push("&&");}
     break;
 
   case 118:
 
 /* Line 1455 of yacc.c  */
-#line 313 ".\\file.y"
+#line 309 ".\\file.y"
     {if((yyvsp[(1) - (4)]) == 1 && (yyvsp[(3) - (4)])==1) (yyval)=1; else (yyval)=-1; codegen();}
     break;
 
   case 119:
 
 /* Line 1455 of yacc.c  */
-#line 314 ".\\file.y"
+#line 310 ".\\file.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 120:
 
 /* Line 1455 of yacc.c  */
-#line 318 ".\\file.y"
+#line 314 ".\\file.y"
     {push("!");}
     break;
 
   case 121:
 
 /* Line 1455 of yacc.c  */
-#line 318 ".\\file.y"
+#line 314 ".\\file.y"
     {if((yyvsp[(2) - (3)])==1) (yyval)=1; else (yyval)=-1; codegen();}
     break;
 
   case 122:
 
 /* Line 1455 of yacc.c  */
-#line 319 ".\\file.y"
+#line 315 ".\\file.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 123:
 
 /* Line 1455 of yacc.c  */
-#line 322 ".\\file.y"
+#line 318 ".\\file.y"
     {if((yyvsp[(1) - (3)]) == 1 && (yyvsp[(3) - (3)])==1) (yyval)=1; else (yyval)=-1; codegen();}
     break;
 
   case 124:
 
 /* Line 1455 of yacc.c  */
-#line 323 ".\\file.y"
+#line 319 ".\\file.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 125:
 
 /* Line 1455 of yacc.c  */
-#line 326 ".\\file.y"
+#line 322 ".\\file.y"
     {push(">=");}
     break;
 
   case 126:
 
 /* Line 1455 of yacc.c  */
-#line 326 ".\\file.y"
+#line 322 ".\\file.y"
     {push("<=");}
     break;
 
   case 127:
 
 /* Line 1455 of yacc.c  */
-#line 326 ".\\file.y"
+#line 322 ".\\file.y"
     {push(">");}
     break;
 
   case 128:
 
 /* Line 1455 of yacc.c  */
-#line 326 ".\\file.y"
+#line 322 ".\\file.y"
     {push("<");}
     break;
 
   case 129:
 
 /* Line 1455 of yacc.c  */
-#line 326 ".\\file.y"
+#line 322 ".\\file.y"
     {push("==");}
     break;
 
   case 130:
 
 /* Line 1455 of yacc.c  */
-#line 326 ".\\file.y"
+#line 322 ".\\file.y"
     {push("!=");}
     break;
 
   case 131:
 
 /* Line 1455 of yacc.c  */
-#line 329 ".\\file.y"
+#line 325 ".\\file.y"
     {if((yyvsp[(1) - (3)]) == 1 && (yyvsp[(3) - (3)])==1) (yyval)=1; else (yyval)=-1; codegen();}
     break;
 
   case 132:
 
 /* Line 1455 of yacc.c  */
-#line 330 ".\\file.y"
+#line 326 ".\\file.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 133:
 
 /* Line 1455 of yacc.c  */
-#line 333 ".\\file.y"
+#line 329 ".\\file.y"
     {push("+");}
     break;
 
   case 134:
 
 /* Line 1455 of yacc.c  */
-#line 334 ".\\file.y"
+#line 330 ".\\file.y"
     {push("-");}
     break;
 
   case 135:
 
 /* Line 1455 of yacc.c  */
-#line 337 ".\\file.y"
+#line 333 ".\\file.y"
     {if((yyvsp[(1) - (3)]) == 1 && (yyvsp[(3) - (3)])==1) (yyval)=1; else (yyval)=-1; codegen();}
     break;
 
   case 136:
 
 /* Line 1455 of yacc.c  */
-#line 338 ".\\file.y"
+#line 334 ".\\file.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 137:
 
 /* Line 1455 of yacc.c  */
-#line 341 ".\\file.y"
+#line 337 ".\\file.y"
     {push("*");}
     break;
 
   case 138:
 
 /* Line 1455 of yacc.c  */
-#line 341 ".\\file.y"
+#line 337 ".\\file.y"
     {push("/");}
     break;
 
   case 139:
 
 /* Line 1455 of yacc.c  */
-#line 341 ".\\file.y"
+#line 337 ".\\file.y"
     {push("%");}
     break;
 
   case 140:
 
 /* Line 1455 of yacc.c  */
-#line 344 ".\\file.y"
+#line 340 ".\\file.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 141:
 
 /* Line 1455 of yacc.c  */
-#line 345 ".\\file.y"
+#line 341 ".\\file.y"
     {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 142:
 
 /* Line 1455 of yacc.c  */
-#line 348 ".\\file.y"
+#line 344 ".\\file.y"
     {
 						  push(curid);
 						  if(check_id_is_func(curid))
@@ -2360,14 +2356,14 @@ yyreduce:
   case 143:
 
 /* Line 1455 of yacc.c  */
-#line 361 ".\\file.y"
+#line 357 ".\\file.y"
     {if(!checkscope(curid)){printf("%s\n",curid);printf("ERROR : Identifier used in undeclared\n");exit(0);}}
     break;
 
   case 144:
 
 /* Line 1455 of yacc.c  */
-#line 362 ".\\file.y"
+#line 358 ".\\file.y"
     {	if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
 								(yyval) = 1;
 							else
@@ -2379,14 +2375,14 @@ yyreduce:
   case 146:
 
 /* Line 1455 of yacc.c  */
-#line 369 ".\\file.y"
+#line 365 ".\\file.y"
     {totbrackets--;}
     break;
 
   case 148:
 
 /* Line 1455 of yacc.c  */
-#line 370 ".\\file.y"
+#line 366 ".\\file.y"
     {
 										totbrackets--;
 										if(totbrackets!=0){
@@ -2398,28 +2394,28 @@ yyreduce:
   case 149:
 
 /* Line 1455 of yacc.c  */
-#line 378 ".\\file.y"
+#line 374 ".\\file.y"
     {if((yyvsp[(2) - (3)])==1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 150:
 
 /* Line 1455 of yacc.c  */
-#line 379 ".\\file.y"
+#line 375 ".\\file.y"
     {if((yyvsp[(1) - (1)])==-1) (yyval)=-1; else (yyval)=1;}
     break;
 
   case 151:
 
 /* Line 1455 of yacc.c  */
-#line 380 ".\\file.y"
+#line 376 ".\\file.y"
     {if((yyvsp[(1) - (1)])==1) (yyval)=1; else (yyval)=-1;}
     break;
 
   case 152:
 
 /* Line 1455 of yacc.c  */
-#line 383 ".\\file.y"
+#line 379 ".\\file.y"
     {
 
 			             if(!check_declaration(curid, "Function"))
@@ -2441,7 +2437,7 @@ yyreduce:
   case 153:
 
 /* Line 1455 of yacc.c  */
-#line 400 ".\\file.y"
+#line 396 ".\\file.y"
     { if(strcmp(currfunccall,"printf"))
 							{
 								if(getSTparamscount(currfunccall)!=call_params_count)
@@ -2477,21 +2473,21 @@ yyreduce:
   case 156:
 
 /* Line 1455 of yacc.c  */
-#line 435 ".\\file.y"
+#line 431 ".\\file.y"
     {  call_params_count++; }
     break;
 
   case 157:
 
 /* Line 1455 of yacc.c  */
-#line 436 ".\\file.y"
+#line 432 ".\\file.y"
     { call_params_count++; }
     break;
 
   case 158:
 
 /* Line 1455 of yacc.c  */
-#line 438 ".\\file.y"
+#line 434 ".\\file.y"
     {  arggen(1);
 										for(int i=0;i<100;i++)
 										{
@@ -2507,7 +2503,7 @@ yyreduce:
   case 159:
 
 /* Line 1455 of yacc.c  */
-#line 448 ".\\file.y"
+#line 444 ".\\file.y"
     {  arggen(2);
 														for(int i=0;i<100;i++)
 														{
@@ -2523,7 +2519,7 @@ yyreduce:
   case 160:
 
 /* Line 1455 of yacc.c  */
-#line 458 ".\\file.y"
+#line 454 ".\\file.y"
     { arggen(3);
 													for(int i=0;i<100;i++)
 													{
@@ -2539,7 +2535,7 @@ yyreduce:
   case 161:
 
 /* Line 1455 of yacc.c  */
-#line 468 ".\\file.y"
+#line 464 ".\\file.y"
     {  arggen(4);
 													for(int i=0;i<100;i++)
 													{
@@ -2555,7 +2551,7 @@ yyreduce:
   case 162:
 
 /* Line 1455 of yacc.c  */
-#line 478 ".\\file.y"
+#line 474 ".\\file.y"
     {  arggen(5);
 															for(int i=0;i<100;i++)
 															{
@@ -2571,35 +2567,35 @@ yyreduce:
   case 163:
 
 /* Line 1455 of yacc.c  */
-#line 490 ".\\file.y"
+#line 486 ".\\file.y"
     {  insV(); codegencon(); (yyval)=1; }
     break;
 
   case 164:
 
 /* Line 1455 of yacc.c  */
-#line 491 ".\\file.y"
+#line 487 ".\\file.y"
     {  insV(); codegencon();(yyval)=-1;}
     break;
 
   case 165:
 
 /* Line 1455 of yacc.c  */
-#line 492 ".\\file.y"
+#line 488 ".\\file.y"
     {  insV(); codegencon();}
     break;
 
   case 166:
 
 /* Line 1455 of yacc.c  */
-#line 493 ".\\file.y"
+#line 489 ".\\file.y"
     {  insV(); codegencon();(yyval)=1; }
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 2603 "y.tab.c"
+#line 2599 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2811,7 +2807,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 495 ".\\file.y"
+#line 491 ".\\file.y"
 
 
 extern FILE *yyin;

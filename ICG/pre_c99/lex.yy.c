@@ -654,13 +654,7 @@ char *yytext;
 	#include <string.h>
 	#include "y.tab.h"
 
-	#define ANSI_COLOR_RED		"\x1b[31m"
-	#define ANSI_COLOR_GREEN	"\x1b[32m"
-	#define ANSI_COLOR_YELLOW	"\x1b[33m"
-	#define ANSI_COLOR_BLUE		"\x1b[34m"
-	#define ANSI_COLOR_MAGENTA	"\x1b[35m"
-	#define ANSI_COLOR_CYAN		"\x1b[36m"
-	#define ANSI_COLOR_RESET	"\x1b[0m"
+
 
 	struct symboltable
 	{
@@ -1384,7 +1378,7 @@ char *yytext;
 	char curtype[20];
 	char curval[20];
 
-#line 1388 "lex.yy.c"
+#line 1382 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -1535,9 +1529,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 742 ".\\filewind.l"
+#line 736 ".\\filewind.l"
 
-#line 1541 "lex.yy.c"
+#line 1535 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -1630,7 +1624,7 @@ do_action:	/* This label is used only to access EOF actions. */
 	{ /* beginning of action switch */
 case 1:
 YY_RULE_SETUP
-#line 743 ".\\filewind.l"
+#line 737 ".\\filewind.l"
 {yylineno++;}
 	YY_BREAK
 case 2:
@@ -1638,7 +1632,7 @@ case 2:
 yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 744 ".\\filewind.l"
+#line 738 ".\\filewind.l"
 { }
 	YY_BREAK
 case 3:
@@ -1646,327 +1640,327 @@ case 3:
 yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 745 ".\\filewind.l"
+#line 739 ".\\filewind.l"
 { }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 746 ".\\filewind.l"
+#line 740 ".\\filewind.l"
 { }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 747 ".\\filewind.l"
+#line 741 ".\\filewind.l"
 { }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 748 ".\\filewind.l"
+#line 742 ".\\filewind.l"
 ;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 749 ".\\filewind.l"
+#line 743 ".\\filewind.l"
 { return(';'); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 750 ".\\filewind.l"
+#line 744 ".\\filewind.l"
 { return(','); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 751 ".\\filewind.l"
+#line 745 ".\\filewind.l"
 { return('{'); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 752 ".\\filewind.l"
+#line 746 ".\\filewind.l"
 { return('}'); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 753 ".\\filewind.l"
+#line 747 ".\\filewind.l"
 { return('('); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 754 ".\\filewind.l"
+#line 748 ".\\filewind.l"
 { return(')'); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 755 ".\\filewind.l"
+#line 749 ".\\filewind.l"
 { return('['); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 756 ".\\filewind.l"
+#line 750 ".\\filewind.l"
 { return(']'); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 757 ".\\filewind.l"
+#line 751 ".\\filewind.l"
 { return(':'); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 758 ".\\filewind.l"
+#line 752 ".\\filewind.l"
 { return('.'); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 760 ".\\filewind.l"
+#line 754 ".\\filewind.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword");return CHAR;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 761 ".\\filewind.l"
+#line 755 ".\\filewind.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return DOUBLE;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 762 ".\\filewind.l"
+#line 756 ".\\filewind.l"
 { insertST(yytext, "Keyword"); return ELSE;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 763 ".\\filewind.l"
+#line 757 ".\\filewind.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return FLOAT;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 764 ".\\filewind.l"
+#line 758 ".\\filewind.l"
 { insertST(yytext, "Keyword"); return WHILE;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 765 ".\\filewind.l"
+#line 759 ".\\filewind.l"
 { insertST(yytext, "Keyword"); return DO;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 766 ".\\filewind.l"
+#line 760 ".\\filewind.l"
 { insertST(yytext, "Keyword"); return FOR;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 767 ".\\filewind.l"
+#line 761 ".\\filewind.l"
 { insertST(yytext, "Keyword"); return IF;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 768 ".\\filewind.l"
+#line 762 ".\\filewind.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return INT;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 769 ".\\filewind.l"
+#line 763 ".\\filewind.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return LONG;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 770 ".\\filewind.l"
+#line 764 ".\\filewind.l"
 { insertST(yytext, "Keyword"); return RETURN;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 771 ".\\filewind.l"
+#line 765 ".\\filewind.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return SHORT;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 772 ".\\filewind.l"
+#line 766 ".\\filewind.l"
 { strcpy(curtype,yytext); insertST(yytext, "Keyword"); return SIGNED;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 773 ".\\filewind.l"
+#line 767 ".\\filewind.l"
 { insertST(yytext, "Keyword"); return SIZEOF;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 774 ".\\filewind.l"
+#line 768 ".\\filewind.l"
 { strcpy(curtype,yytext);   insertST(yytext, "Keyword");  return STRUCT;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 775 ".\\filewind.l"
+#line 769 ".\\filewind.l"
 { insertST(yytext, "Keyword");   return UNSIGNED;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 776 ".\\filewind.l"
+#line 770 ".\\filewind.l"
 { strcpy(curtype,yytext);   insertST(yytext, "Keyword");  return VOID;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 777 ".\\filewind.l"
+#line 771 ".\\filewind.l"
 { insertST(yytext, "Keyword");  return BREAK;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 781 ".\\filewind.l"
+#line 775 ".\\filewind.l"
 { return increment_operator; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 782 ".\\filewind.l"
+#line 776 ".\\filewind.l"
 { return decrement_operator; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 783 ".\\filewind.l"
+#line 777 ".\\filewind.l"
 { return leftshift_operator; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 784 ".\\filewind.l"
+#line 778 ".\\filewind.l"
 { return rightshift_operator; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 785 ".\\filewind.l"
+#line 779 ".\\filewind.l"
 { return lessthan_assignment_operator; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 786 ".\\filewind.l"
+#line 780 ".\\filewind.l"
 { return lessthan_operator; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 787 ".\\filewind.l"
+#line 781 ".\\filewind.l"
 { return greaterthan_assignment_operator; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 788 ".\\filewind.l"
+#line 782 ".\\filewind.l"
 { return greaterthan_operator; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 789 ".\\filewind.l"
+#line 783 ".\\filewind.l"
 { return equality_operator; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 790 ".\\filewind.l"
+#line 784 ".\\filewind.l"
 { return inequality_operator; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 791 ".\\filewind.l"
+#line 785 ".\\filewind.l"
 { return AND_operator; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 792 ".\\filewind.l"
+#line 786 ".\\filewind.l"
 { return OR_operator; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 793 ".\\filewind.l"
+#line 787 ".\\filewind.l"
 { return caret_operator; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 794 ".\\filewind.l"
+#line 788 ".\\filewind.l"
 { return multiplication_assignment_operator; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 795 ".\\filewind.l"
+#line 789 ".\\filewind.l"
 { return division_assignment_operator; }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 796 ".\\filewind.l"
+#line 790 ".\\filewind.l"
 { return modulo_assignment_operator; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 797 ".\\filewind.l"
+#line 791 ".\\filewind.l"
 { return addition_assignment_operator; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 798 ".\\filewind.l"
+#line 792 ".\\filewind.l"
 { return subtraction_assignment_operator; }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 799 ".\\filewind.l"
+#line 793 ".\\filewind.l"
 { return leftshift_assignment_operator; }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 800 ".\\filewind.l"
+#line 794 ".\\filewind.l"
 { return rightshift_assignment_operator; }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 801 ".\\filewind.l"
+#line 795 ".\\filewind.l"
 { return AND_assignment_operator; }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 802 ".\\filewind.l"
+#line 796 ".\\filewind.l"
 { return XOR_assignment_operator; }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 803 ".\\filewind.l"
+#line 797 ".\\filewind.l"
 { return OR_assignment_operator; }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 804 ".\\filewind.l"
+#line 798 ".\\filewind.l"
 { return amp_operator; }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 805 ".\\filewind.l"
+#line 799 ".\\filewind.l"
 { return exclamation_operator; }
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 806 ".\\filewind.l"
+#line 800 ".\\filewind.l"
 { return tilde_operator; }
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 807 ".\\filewind.l"
+#line 801 ".\\filewind.l"
 { return subtract_operator; }
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 808 ".\\filewind.l"
+#line 802 ".\\filewind.l"
 { return add_operator; }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 809 ".\\filewind.l"
+#line 803 ".\\filewind.l"
 { return multiplication_operator; }
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 810 ".\\filewind.l"
+#line 804 ".\\filewind.l"
 { return division_operator; }
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 811 ".\\filewind.l"
+#line 805 ".\\filewind.l"
 { return modulo_operator; }
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 812 ".\\filewind.l"
+#line 806 ".\\filewind.l"
 { return pipe_operator; }
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 813 ".\\filewind.l"
+#line 807 ".\\filewind.l"
 { return assignment_operator;}
 	YY_BREAK
 case 68:
@@ -1974,7 +1968,7 @@ case 68:
 yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 815 ".\\filewind.l"
+#line 809 ".\\filewind.l"
 {strcpy(curval,yytext); insertCT(yytext,"String Constant"); return string_constant;}
 	YY_BREAK
 case 69:
@@ -1982,7 +1976,7 @@ case 69:
 yy_c_buf_p = yy_cp = yy_bp + 3;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 816 ".\\filewind.l"
+#line 810 ".\\filewind.l"
 {strcpy(curval,yytext); insertCT(yytext,"Character Constant"); return character_constant;}
 	YY_BREAK
 case 70:
@@ -1990,7 +1984,7 @@ case 70:
 yy_c_buf_p = yy_cp = yy_bp + 4;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 817 ".\\filewind.l"
+#line 811 ".\\filewind.l"
 {strcpy(curval,yytext); insertCT(yytext,"Character Constant"); return character_constant;}
 	YY_BREAK
 case 71:
@@ -1998,7 +1992,7 @@ case 71:
 yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 818 ".\\filewind.l"
+#line 812 ".\\filewind.l"
 {strcpy(curid,yytext); insertST(yytext, "Array Identifier");  return array_identifier;}
 	YY_BREAK
 case 72:
@@ -2006,7 +2000,7 @@ case 72:
 yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 819 ".\\filewind.l"
+#line 813 ".\\filewind.l"
 {strcpy(curval,yytext); insertCT(yytext, "Number Constant"); yylval = atoi(yytext); return integer_constant;}
 	YY_BREAK
 case 73:
@@ -2014,17 +2008,17 @@ case 73:
 yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 820 ".\\filewind.l"
+#line 814 ".\\filewind.l"
 {strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); return float_constant;}
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 821 ".\\filewind.l"
+#line 815 ".\\filewind.l"
 {strcpy(curid,yytext); insertST(curid,"Identifier"); return identifier;}
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 822 ".\\filewind.l"
+#line 816 ".\\filewind.l"
 {
 		if(yytext[0]=='#')
 		{
@@ -2048,10 +2042,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 843 ".\\filewind.l"
+#line 837 ".\\filewind.l"
 ECHO;
 	YY_BREAK
-#line 2055 "lex.yy.c"
+#line 2049 "lex.yy.c"
 			case YY_STATE_EOF(INITIAL):
 				yyterminate();
 
@@ -2935,5 +2929,5 @@ int main()
 	return 0;
 	}
 #endif
-#line 843 ".\\filewind.l"
+#line 837 ".\\filewind.l"
 
