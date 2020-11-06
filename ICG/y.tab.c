@@ -131,17 +131,8 @@
 	int top = 0,count=0,ltop=0,lno=0;
 	char temp[3] = "t";
 
-#line 139 "y.tab.c"
+#line 135 "y.tab.c"
 
-<<<<<<< HEAD
-/* Line 189 of yacc.c  */
-#line 139 "y.tab.c"
-
-/* Enabling traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 0
-#endif
-=======
 # ifndef YY_CAST
 #  ifdef __cplusplus
 #   define YY_CAST(Type, Val) static_cast<Type> (Val)
@@ -162,7 +153,6 @@
 #   define YY_NULLPTR ((void*)0)
 #  endif
 # endif
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 
 /* Enabling verbose error messages.  */
 #ifdef YYERROR_VERBOSE
@@ -328,11 +318,6 @@ int yyparse (void);
 #endif /* !YY_YY_Y_TAB_H_INCLUDED  */
 
 
-<<<<<<< HEAD
-/* Line 264 of yacc.c  */
-#line 305 "y.tab.c"
-=======
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 
 #ifdef short
 # undef short
@@ -698,43 +683,23 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-<<<<<<< HEAD
        0,   107,   107,   110,   113,   114,   117,   118,   121,   124,
      124,   127,   127,   128,   128,   132,   132,   135,   136,   139,
-     139,   140,   140,   141,   144,   145,   146,   149,   149,   149,
-     149,   150,   151,   152,   153,   154,   157,   157,   157,   157,
-     160,   160,   160,   160,   163,   163,   166,   166,   169,   172,
-     175,   175,   175,   178,   178,   181,   181,   184,   187,   188,
-     191,   191,   194,   195,   198,   198,   199,   199,   200,   200,
-     201,   204,   204,   207,   208,   211,   212,   215,   215,   215,
-     218,   219,   222,   222,   222,   223,   223,   223,   224,   224,
-     224,   226,   227,   240,   243,   246,   249,   252,   253,   256,
-     256,   265,   265,   272,   272,   279,   279,   286,   286,   292,
-     292,   299,   300,   301,   305,   305,   306,   309,   309,   310,
-     314,   314,   315,   318,   319,   322,   322,   322,   322,   322,
-     322,   325,   326,   329,   330,   333,   334,   337,   337,   337,
-     340,   341,   344,   357,   358,   357,   365,   365,   366,   374,
-     375,   376,   379,   379,   428,   428,   431,   432,   434,   444,
-     454,   464,   474,   486,   487,   488,   489
-=======
-       0,   111,   111,   114,   117,   118,   121,   122,   125,   128,
-     128,   131,   131,   132,   132,   136,   136,   139,   140,   143,
-     143,   144,   144,   145,   145,   148,   149,   150,   153,   153,
-     153,   153,   154,   155,   156,   157,   158,   161,   161,   161,
-     161,   164,   164,   164,   164,   167,   167,   170,   170,   173,
-     176,   179,   179,   179,   182,   182,   185,   185,   188,   191,
-     192,   195,   195,   198,   199,   202,   202,   203,   203,   204,
-     204,   205,   208,   208,   211,   212,   215,   216,   219,   219,
-     219,   222,   223,   226,   226,   226,   227,   227,   227,   228,
-     228,   228,   230,   231,   244,   247,   250,   253,   256,   257,
-     260,   260,   269,   269,   276,   276,   283,   283,   290,   290,
-     296,   296,   303,   304,   305,   309,   309,   310,   313,   313,
-     314,   318,   318,   319,   322,   323,   326,   326,   326,   326,
-     326,   326,   329,   330,   333,   334,   337,   338,   341,   341,
-     341,   344,   345,   348,   361,   362,   361,   369,   369,   370,
-     378,   379,   380,   383,   383,   432,   432,   435,   436,   438,
-     448,   458,   468,   478,   490,   491,   492,   493
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
+     139,   140,   140,   141,   141,   144,   145,   146,   149,   149,
+     149,   149,   150,   151,   152,   153,   154,   157,   157,   157,
+     157,   160,   160,   160,   160,   163,   163,   166,   166,   169,
+     172,   175,   175,   175,   178,   178,   181,   181,   184,   187,
+     188,   191,   191,   194,   195,   198,   198,   199,   199,   200,
+     200,   201,   204,   204,   207,   208,   211,   212,   215,   215,
+     215,   218,   219,   222,   222,   222,   223,   223,   223,   224,
+     224,   224,   226,   227,   240,   243,   246,   249,   252,   253,
+     256,   256,   265,   265,   272,   272,   279,   279,   286,   286,
+     292,   292,   299,   300,   301,   305,   305,   306,   309,   309,
+     310,   314,   314,   315,   318,   319,   322,   322,   322,   322,
+     322,   322,   325,   326,   329,   330,   333,   334,   337,   337,
+     337,   340,   341,   344,   357,   358,   357,   365,   365,   366,
+     374,   375,   376,   379,   379,   428,   428,   431,   432,   434,
+     444,   454,   464,   474,   486,   487,   488,   489
 };
 #endif
 
@@ -1732,404 +1697,195 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-<<<<<<< HEAD
-        case 11:
-
-/* Line 1455 of yacc.c  */
-#line 127 ".\\file.y"
-    {if(duplicate(curid)){printf("ERROR : Duplicate initialisation\n");exit(0);}insertSTnest(curid,currnest); ins();  }
-    break;
-
-  case 13:
-
-/* Line 1455 of yacc.c  */
-#line 128 ".\\file.y"
-    {if(duplicate(curid)){printf("ERROR : Duplicate initialisation\n");exit(0);}insertSTnest(curid,currnest); ins();  }
-    break;
-
-  case 19:
-
-/* Line 1455 of yacc.c  */
-#line 139 ".\\file.y"
-    {arrbrackets++;}
-    break;
-
-  case 20:
-
-/* Line 1455 of yacc.c  */
-#line 139 ".\\file.y"
-    {if((yyval) < 1) {printf("ERROR : Array size is invalid at index %d\n", arrbrackets); exit(0);}  setbrackets(curid, arrbrackets); arrbrackets=0;}
-    break;
-
-  case 21:
-
-/* Line 1455 of yacc.c  */
-#line 140 ".\\file.y"
-    {arrbrackets++;}
-    break;
-
-  case 22:
-
-/* Line 1455 of yacc.c  */
-#line 140 ".\\file.y"
-    {if((yyval) < 1){printf("ERROR : Array size is invalid at index %d\n", arrbrackets);}}
-=======
   case 11:
-#line 131 "file.y"
+#line 127 "file.y"
                                      {if(duplicate(curid)){printf("ERROR : Duplicate initialisation\n");exit(0);}insertSTnest(curid,currnest); ins();  }
-#line 1708 "y.tab.c"
+#line 1704 "y.tab.c"
     break;
 
   case 13:
-#line 132 "file.y"
+#line 128 "file.y"
                                            {if(duplicate(curid)){printf("ERROR : Duplicate initialisation\n");exit(0);}insertSTnest(curid,currnest); ins();  }
-#line 1714 "y.tab.c"
+#line 1710 "y.tab.c"
     break;
 
   case 19:
-#line 143 "file.y"
+#line 139 "file.y"
                                                {arrbrackets++;}
-#line 1720 "y.tab.c"
+#line 1716 "y.tab.c"
     break;
 
   case 20:
-#line 143 "file.y"
+#line 139 "file.y"
                                                                               {if(yyval < 1) {printf("ERROR : Array size is invalid at index %d\n", arrbrackets); exit(0);}  setbrackets(curid, arrbrackets); arrbrackets=0;}
-#line 1726 "y.tab.c"
+#line 1722 "y.tab.c"
     break;
 
   case 21:
-#line 144 "file.y"
+#line 140 "file.y"
                                                {arrbrackets++;}
-#line 1732 "y.tab.c"
+#line 1728 "y.tab.c"
     break;
 
   case 22:
-#line 144 "file.y"
+#line 140 "file.y"
                                                                                          {if(yyval < 1){printf("ERROR : Array size is invalid at index %d\n", arrbrackets);}}
-#line 1738 "y.tab.c"
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
+#line 1734 "y.tab.c"
     break;
 
   case 23:
-#line 145 "file.y"
+#line 141 "file.y"
                               {arrbrackets++;}
-#line 1744 "y.tab.c"
+#line 1740 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-/* Line 1455 of yacc.c  */
-#line 172 ".\\file.y"
-    { strcpy(currfunctype, curtype); strcpy(currfunc, curid); check_duplicate(curid); insertSTF(curid); ins(); }
-    break;
-
-  case 50:
-
-/* Line 1455 of yacc.c  */
-#line 175 ".\\file.y"
-    {params_count=0;}
-    break;
-
-  case 51:
-
-/* Line 1455 of yacc.c  */
-#line 175 ".\\file.y"
-    {funcgen();}
-    break;
-
-  case 52:
-
-/* Line 1455 of yacc.c  */
-#line 175 ".\\file.y"
-    {funcgenend();}
-    break;
-
-  case 53:
-
-/* Line 1455 of yacc.c  */
-#line 178 ".\\file.y"
-    { insertSTparamscount(currfunc, params_count); }
-    break;
-
-  case 54:
-
-/* Line 1455 of yacc.c  */
-#line 178 ".\\file.y"
-    { insertSTparamscount(currfunc, params_count); }
-    break;
-
-  case 55:
-
-/* Line 1455 of yacc.c  */
-#line 181 ".\\file.y"
-    { check_params(curtype);}
-    break;
-
-  case 60:
-
-/* Line 1455 of yacc.c  */
-#line 191 ".\\file.y"
-    { ins();insertSTnest(curid,1); params_count++; insertSTparamstype(currfunc, curtype); }
-    break;
-
-  case 71:
-
-/* Line 1455 of yacc.c  */
-#line 204 ".\\file.y"
-    {currnest++;}
-    break;
-
-  case 72:
-
-/* Line 1455 of yacc.c  */
-#line 204 ".\\file.y"
-    {deletedata(currnest);currnest--;}
-    break;
-
-  case 77:
-
-/* Line 1455 of yacc.c  */
-#line 215 ".\\file.y"
-    {label1();if((yyvsp[(3) - (4)])!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}}
-    break;
-
-  case 78:
-
-/* Line 1455 of yacc.c  */
-#line 215 ".\\file.y"
-    {label2();}
-    break;
-
-  case 80:
-
-/* Line 1455 of yacc.c  */
-#line 218 ".\\file.y"
-    {label3();}
-    break;
-
-  case 81:
-
-/* Line 1455 of yacc.c  */
-#line 219 ".\\file.y"
-    {label3();}
-    break;
-
-  case 82:
-
-/* Line 1455 of yacc.c  */
-#line 222 ".\\file.y"
-    {label4();}
-    break;
-
-  case 83:
-
-/* Line 1455 of yacc.c  */
-#line 222 ".\\file.y"
-    {label1();if((yyvsp[(4) - (5)])!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}}
-    break;
-
-  case 84:
-
-/* Line 1455 of yacc.c  */
-#line 222 ".\\file.y"
-    {label5();}
-    break;
-
-  case 85:
-
-/* Line 1455 of yacc.c  */
-#line 223 ".\\file.y"
-    {label4();}
-    break;
-
-  case 86:
-
-/* Line 1455 of yacc.c  */
-#line 223 ".\\file.y"
-    {label1();if((yyvsp[(6) - (7)])!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}}
-    break;
-
-  case 87:
-
-/* Line 1455 of yacc.c  */
-#line 223 ".\\file.y"
-    {label5();}
-    break;
-
-  case 88:
-
-/* Line 1455 of yacc.c  */
-#line 224 ".\\file.y"
-    {label4();}
-    break;
-
-  case 89:
-
-/* Line 1455 of yacc.c  */
-#line 224 ".\\file.y"
-    {label1();label5();if((yyvsp[(6) - (7)])!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}}
-    break;
-
-  case 91:
-
-/* Line 1455 of yacc.c  */
-#line 226 ".\\file.y"
-    {if(strcmp(currfunctype,"void")) {printf("ERROR : No return value found for non-void function.\n"); exit(0);}}
-=======
   case 24:
-#line 145 "file.y"
+#line 141 "file.y"
                                                                     {setbrackets(curid, arrbrackets); arrbrackets=0;}
-#line 1750 "y.tab.c"
+#line 1746 "y.tab.c"
     break;
 
   case 50:
-#line 176 "file.y"
+#line 172 "file.y"
                                                          { strcpy(currfunctype, curtype); strcpy(currfunc, curid); check_duplicate(curid); insertSTF(curid); ins(); }
-#line 1756 "y.tab.c"
+#line 1752 "y.tab.c"
     break;
 
   case 51:
-#line 179 "file.y"
+#line 175 "file.y"
                           {params_count=0;}
-#line 1762 "y.tab.c"
+#line 1758 "y.tab.c"
     break;
 
   case 52:
-#line 179 "file.y"
+#line 175 "file.y"
                                                       {funcgen();}
-#line 1768 "y.tab.c"
+#line 1764 "y.tab.c"
     break;
 
   case 53:
-#line 179 "file.y"
+#line 175 "file.y"
                                                                              {funcgenend();}
-#line 1774 "y.tab.c"
+#line 1770 "y.tab.c"
     break;
 
   case 54:
-#line 182 "file.y"
+#line 178 "file.y"
                                           { insertSTparamscount(currfunc, params_count); }
-#line 1780 "y.tab.c"
+#line 1776 "y.tab.c"
     break;
 
   case 55:
-#line 182 "file.y"
+#line 178 "file.y"
                                                                                             { insertSTparamscount(currfunc, params_count); }
-#line 1786 "y.tab.c"
+#line 1782 "y.tab.c"
     break;
 
   case 56:
-#line 185 "file.y"
+#line 181 "file.y"
                                          { check_params(curtype);}
-#line 1792 "y.tab.c"
+#line 1788 "y.tab.c"
     break;
 
   case 61:
-#line 195 "file.y"
+#line 191 "file.y"
                                      { ins();insertSTnest(curid,1); params_count++; insertSTparamstype(currfunc, curtype); }
-#line 1798 "y.tab.c"
+#line 1794 "y.tab.c"
     break;
 
   case 72:
-#line 208 "file.y"
+#line 204 "file.y"
                           {currnest++;}
-#line 1804 "y.tab.c"
+#line 1800 "y.tab.c"
     break;
 
   case 73:
-#line 208 "file.y"
+#line 204 "file.y"
                                                                 {deletedata(currnest);currnest--;}
-#line 1810 "y.tab.c"
+#line 1806 "y.tab.c"
     break;
 
   case 78:
-#line 219 "file.y"
+#line 215 "file.y"
                                                        {label1();if(yyvsp[-1]!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}}
-#line 1816 "y.tab.c"
+#line 1812 "y.tab.c"
     break;
 
   case 79:
-#line 219 "file.y"
+#line 215 "file.y"
                                                                                                                                                                          {label2();}
-#line 1822 "y.tab.c"
+#line 1818 "y.tab.c"
     break;
 
   case 81:
-#line 222 "file.y"
+#line 218 "file.y"
                                          {label3();}
-#line 1828 "y.tab.c"
+#line 1824 "y.tab.c"
     break;
 
   case 82:
-#line 223 "file.y"
+#line 219 "file.y"
                           {label3();}
-#line 1834 "y.tab.c"
+#line 1830 "y.tab.c"
     break;
 
   case 83:
-#line 226 "file.y"
+#line 222 "file.y"
                                     {label4();}
-#line 1840 "y.tab.c"
+#line 1836 "y.tab.c"
     break;
 
   case 84:
-#line 226 "file.y"
+#line 222 "file.y"
                                                                       {label1();if(yyvsp[-1]!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}}
-#line 1846 "y.tab.c"
+#line 1842 "y.tab.c"
     break;
 
   case 85:
-#line 226 "file.y"
+#line 222 "file.y"
                                                                                                                                                                                         {label5();}
-#line 1852 "y.tab.c"
+#line 1848 "y.tab.c"
     break;
 
   case 86:
-#line 227 "file.y"
+#line 223 "file.y"
                                                  {label4();}
-#line 1858 "y.tab.c"
+#line 1854 "y.tab.c"
     break;
 
   case 87:
-#line 227 "file.y"
+#line 223 "file.y"
                                                                                    {label1();if(yyvsp[-1]!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}}
-#line 1864 "y.tab.c"
+#line 1860 "y.tab.c"
     break;
 
   case 88:
-#line 227 "file.y"
+#line 223 "file.y"
                                                                                                                                                                                                                    {label5();}
-#line 1870 "y.tab.c"
+#line 1866 "y.tab.c"
     break;
 
   case 89:
-#line 228 "file.y"
+#line 224 "file.y"
                           {label4();}
-#line 1876 "y.tab.c"
+#line 1872 "y.tab.c"
     break;
 
   case 90:
-#line 228 "file.y"
+#line 224 "file.y"
                                                                                  {label1();label5();if(yyvsp[-1]!=1){printf("ERROR : Expression in if condition is not resolvable to int.\n");exit(0);}}
-#line 1882 "y.tab.c"
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
+#line 1878 "y.tab.c"
     break;
 
   case 92:
-#line 230 "file.y"
+#line 226 "file.y"
                                      {if(strcmp(currfunctype,"void")) {printf("ERROR : No return value found for non-void function.\n"); exit(0);}}
-#line 1888 "y.tab.c"
+#line 1884 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-/* Line 1455 of yacc.c  */
-#line 227 ".\\file.y"
-    { 	if(!strcmp(currfunctype, "void"))
-=======
   case 93:
-#line 231 "file.y"
+#line 227 "file.y"
                                                 { 	if(!strcmp(currfunctype, "void"))
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 										{
 											yyerror("ERROR : Void function calls return statement.\n");
 										}
@@ -2140,47 +1896,25 @@ yyreduce:
 										}
 
 									}
-#line 1904 "y.tab.c"
+#line 1900 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-  case 94:
-
-/* Line 1455 of yacc.c  */
-#line 243 ".\\file.y"
-    {insV();}
-    break;
-
-  case 99:
-
-/* Line 1455 of yacc.c  */
-#line 256 ".\\file.y"
-    {push("=");}
-=======
   case 95:
-#line 247 "file.y"
+#line 243 "file.y"
                                                               {insV();}
-#line 1910 "y.tab.c"
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
+#line 1906 "y.tab.c"
     break;
 
   case 100:
-#line 260 "file.y"
+#line 256 "file.y"
                                                       {push("=");}
-#line 1916 "y.tab.c"
+#line 1912 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-/* Line 1455 of yacc.c  */
-#line 256 ".\\file.y"
-    {
-					if((yyvsp[(1) - (4)])==1 && (yyvsp[(4) - (4)])==1)
-=======
   case 101:
-#line 260 "file.y"
+#line 256 "file.y"
                                                                                 {
 					if(yyvsp[-3]==1 && yyvsp[0]==1)
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 					{
 					yyval=1;
 					}
@@ -2188,604 +1922,287 @@ yyreduce:
 					{yyval=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);}
 					codeassign();
 				}
-<<<<<<< HEAD
-    break;
-
-  case 101:
-
-/* Line 1455 of yacc.c  */
-#line 265 ".\\file.y"
-    {push("+=");}
-=======
-#line 1930 "y.tab.c"
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
+#line 1926 "y.tab.c"
     break;
 
   case 102:
-#line 269 "file.y"
+#line 265 "file.y"
                                                                {push("+=");}
-#line 1936 "y.tab.c"
+#line 1932 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-/* Line 1455 of yacc.c  */
-#line 265 ".\\file.y"
-    {
-					if((yyvsp[(1) - (4)])==1 && (yyvsp[(4) - (4)])==1)
-					(yyval)=1;
-=======
   case 103:
-#line 269 "file.y"
+#line 265 "file.y"
                                                                                        {
 					if(yyvsp[-3]==1 && yyvsp[0]==1)
 					yyval=1;
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 					else
 					{yyval=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);}
 					codeassign();
 				}
-<<<<<<< HEAD
-    break;
-
-  case 103:
-
-/* Line 1455 of yacc.c  */
-#line 272 ".\\file.y"
-    {push("-=");}
-=======
-#line 1948 "y.tab.c"
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
+#line 1944 "y.tab.c"
     break;
 
   case 104:
-#line 276 "file.y"
+#line 272 "file.y"
                                                                   {push("-=");}
-#line 1954 "y.tab.c"
+#line 1950 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-/* Line 1455 of yacc.c  */
-#line 272 ".\\file.y"
-    {
-					if((yyvsp[(1) - (4)])==1 && (yyvsp[(4) - (4)])==1)
-					(yyval)=1;
-=======
   case 105:
-#line 276 "file.y"
+#line 272 "file.y"
                                                                                           {
 					if(yyvsp[-3]==1 && yyvsp[0]==1)
 					yyval=1;
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 					else
 					{yyval=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);}
 					codeassign();
 				}
-<<<<<<< HEAD
-    break;
-
-  case 105:
-
-/* Line 1455 of yacc.c  */
-#line 279 ".\\file.y"
-    {push("*=");}
-=======
-#line 1966 "y.tab.c"
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
+#line 1962 "y.tab.c"
     break;
 
   case 106:
-#line 283 "file.y"
+#line 279 "file.y"
                                                                      {push("*=");}
-#line 1972 "y.tab.c"
+#line 1968 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-/* Line 1455 of yacc.c  */
-#line 279 ".\\file.y"
-    {
-					if((yyvsp[(1) - (4)])==1 && (yyvsp[(4) - (4)])==1)
-					(yyval)=1;
-=======
   case 107:
-#line 283 "file.y"
+#line 279 "file.y"
                                                                                               {
 					if(yyvsp[-3]==1 && yyvsp[0]==1)
 					yyval=1;
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 					else
 					{yyval=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);}
 					codeassign();
 				}
-<<<<<<< HEAD
-    break;
-
-  case 107:
-
-/* Line 1455 of yacc.c  */
-#line 286 ".\\file.y"
-    {push("/=");}
+#line 1980 "y.tab.c"
     break;
 
   case 108:
-
-/* Line 1455 of yacc.c  */
-#line 286 ".\\file.y"
-    {
-					if((yyvsp[(1) - (4)])==1 && (yyvsp[(4) - (4)])==1)
-					(yyval)=1;
-					else
-					{(yyval)=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);}
-				}
-    break;
-
-  case 109:
-
-/* Line 1455 of yacc.c  */
-#line 292 ".\\file.y"
-    {push("%=");}
-=======
-#line 1984 "y.tab.c"
-    break;
-
-  case 108:
-#line 290 "file.y"
+#line 286 "file.y"
                                                                {push("/=");}
-#line 1990 "y.tab.c"
+#line 1986 "y.tab.c"
     break;
 
   case 109:
-#line 290 "file.y"
+#line 286 "file.y"
                                                                                                 {
 					if(yyvsp[-3]==1 && yyvsp[0]==1)
 					yyval=1;
 					else
 					{yyval=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);}
 				}
-#line 2001 "y.tab.c"
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
+#line 1997 "y.tab.c"
     break;
 
   case 110:
-#line 296 "file.y"
+#line 292 "file.y"
                                                              {push("%=");}
-#line 2007 "y.tab.c"
+#line 2003 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-/* Line 1455 of yacc.c  */
-#line 292 ".\\file.y"
-    {
-					if((yyvsp[(1) - (4)])==1 && (yyvsp[(3) - (4)])==1)
-					(yyval)=1;
-=======
   case 111:
-#line 296 "file.y"
+#line 292 "file.y"
                                                                                                 {
 					if(yyvsp[-3]==1 && yyvsp[-1]==1)
 					yyval=1;
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 					else
 					{yyval=-1; printf("ERROR : Operands are of non-resolvable types.\n"); exit(0);}
 					codeassign();
 				}
-<<<<<<< HEAD
-    break;
-
-  case 111:
-
-/* Line 1455 of yacc.c  */
-#line 299 ".\\file.y"
-    { push("++");if((yyvsp[(1) - (2)]) == 1) (yyval)=1; else (yyval)=-1; genunary();}
+#line 2015 "y.tab.c"
     break;
 
   case 112:
-
-/* Line 1455 of yacc.c  */
-#line 300 ".\\file.y"
-    {push("--");if((yyvsp[(1) - (2)]) == 1) (yyval)=1; else (yyval)=-1;}
-    break;
-
-  case 113:
-
-/* Line 1455 of yacc.c  */
-#line 301 ".\\file.y"
-    {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
-    break;
-
-  case 114:
-
-/* Line 1455 of yacc.c  */
-#line 305 ".\\file.y"
-    {push("||");}
-    break;
-
-  case 115:
-
-/* Line 1455 of yacc.c  */
-#line 305 ".\\file.y"
-    {if((yyvsp[(1) - (4)]) == 1 && (yyvsp[(3) - (4)])==1) (yyval)=1; else (yyval)=-1; codegen();}
-    break;
-
-  case 116:
-
-/* Line 1455 of yacc.c  */
-#line 306 ".\\file.y"
-    {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
-    break;
-
-  case 117:
-
-/* Line 1455 of yacc.c  */
-#line 309 ".\\file.y"
-    {push("&&");}
-    break;
-
-  case 118:
-
-/* Line 1455 of yacc.c  */
-#line 309 ".\\file.y"
-    {if((yyvsp[(1) - (4)]) == 1 && (yyvsp[(3) - (4)])==1) (yyval)=1; else (yyval)=-1; codegen();}
-    break;
-
-  case 119:
-
-/* Line 1455 of yacc.c  */
-#line 310 ".\\file.y"
-    {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
-    break;
-
-  case 120:
-
-/* Line 1455 of yacc.c  */
-#line 314 ".\\file.y"
-    {push("!");}
-    break;
-
-  case 121:
-
-/* Line 1455 of yacc.c  */
-#line 314 ".\\file.y"
-    {if((yyvsp[(2) - (3)])==1) (yyval)=1; else (yyval)=-1; codegen();}
-    break;
-
-  case 122:
-
-/* Line 1455 of yacc.c  */
-#line 315 ".\\file.y"
-    {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
-    break;
-
-  case 123:
-
-/* Line 1455 of yacc.c  */
-#line 318 ".\\file.y"
-    {if((yyvsp[(1) - (3)]) == 1 && (yyvsp[(3) - (3)])==1) (yyval)=1; else (yyval)=-1; codegen();}
-    break;
-
-  case 124:
-
-/* Line 1455 of yacc.c  */
-#line 319 ".\\file.y"
-    {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
-    break;
-
-  case 125:
-
-/* Line 1455 of yacc.c  */
-#line 322 ".\\file.y"
-    {push(">=");}
-    break;
-
-  case 126:
-
-/* Line 1455 of yacc.c  */
-#line 322 ".\\file.y"
-    {push("<=");}
-    break;
-
-  case 127:
-
-/* Line 1455 of yacc.c  */
-#line 322 ".\\file.y"
-    {push(">");}
-    break;
-
-  case 128:
-
-/* Line 1455 of yacc.c  */
-#line 322 ".\\file.y"
-    {push("<");}
-    break;
-
-  case 129:
-
-/* Line 1455 of yacc.c  */
-#line 322 ".\\file.y"
-    {push("==");}
-    break;
-
-  case 130:
-
-/* Line 1455 of yacc.c  */
-#line 322 ".\\file.y"
-    {push("!=");}
-    break;
-
-  case 131:
-
-/* Line 1455 of yacc.c  */
-#line 325 ".\\file.y"
-    {if((yyvsp[(1) - (3)]) == 1 && (yyvsp[(3) - (3)])==1) (yyval)=1; else (yyval)=-1; codegen();}
-    break;
-
-  case 132:
-
-/* Line 1455 of yacc.c  */
-#line 326 ".\\file.y"
-    {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
-    break;
-
-  case 133:
-
-/* Line 1455 of yacc.c  */
-#line 329 ".\\file.y"
-    {push("+");}
-    break;
-
-  case 134:
-
-/* Line 1455 of yacc.c  */
-#line 330 ".\\file.y"
-    {push("-");}
-    break;
-
-  case 135:
-
-/* Line 1455 of yacc.c  */
-#line 333 ".\\file.y"
-    {if((yyvsp[(1) - (3)]) == 1 && (yyvsp[(3) - (3)])==1) (yyval)=1; else (yyval)=-1; codegen();}
-    break;
-
-  case 136:
-
-/* Line 1455 of yacc.c  */
-#line 334 ".\\file.y"
-    {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
-    break;
-
-  case 137:
-
-/* Line 1455 of yacc.c  */
-#line 337 ".\\file.y"
-    {push("*");}
-    break;
-
-  case 138:
-
-/* Line 1455 of yacc.c  */
-#line 337 ".\\file.y"
-    {push("/");}
-    break;
-
-  case 139:
-
-/* Line 1455 of yacc.c  */
-#line 337 ".\\file.y"
-    {push("%");}
-    break;
-
-  case 140:
-
-/* Line 1455 of yacc.c  */
-#line 340 ".\\file.y"
-    {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
-    break;
-
-  case 141:
-
-/* Line 1455 of yacc.c  */
-#line 341 ".\\file.y"
-    {if((yyvsp[(1) - (1)]) == 1) (yyval)=1; else (yyval)=-1;}
-=======
-#line 2019 "y.tab.c"
-    break;
-
-  case 112:
-#line 303 "file.y"
+#line 299 "file.y"
                                                                                                         { push("++");if(yyvsp[-1] == 1) yyval=1; else yyval=-1; genunary();}
-#line 2025 "y.tab.c"
+#line 2021 "y.tab.c"
     break;
 
   case 113:
-#line 304 "file.y"
+#line 300 "file.y"
                                                                                                         {push("--");if(yyvsp[-1] == 1) yyval=1; else yyval=-1;}
-#line 2031 "y.tab.c"
+#line 2027 "y.tab.c"
     break;
 
   case 114:
-#line 305 "file.y"
+#line 301 "file.y"
                                             {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 2037 "y.tab.c"
+#line 2033 "y.tab.c"
     break;
 
   case 115:
-#line 309 "file.y"
+#line 305 "file.y"
                                                                        {push("||");}
-#line 2043 "y.tab.c"
+#line 2039 "y.tab.c"
     break;
 
   case 116:
-#line 309 "file.y"
+#line 305 "file.y"
                                                                                      {if(yyvsp[-3] == 1 && yyvsp[-1]==1) yyval=1; else yyval=-1; codegen();}
-#line 2049 "y.tab.c"
+#line 2045 "y.tab.c"
     break;
 
   case 117:
-#line 310 "file.y"
+#line 306 "file.y"
                                          {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 2055 "y.tab.c"
+#line 2051 "y.tab.c"
     break;
 
   case 118:
-#line 313 "file.y"
+#line 309 "file.y"
                                                       {push("&&");}
-#line 2061 "y.tab.c"
+#line 2057 "y.tab.c"
     break;
 
   case 119:
-#line 313 "file.y"
+#line 309 "file.y"
                                                                                                {if(yyvsp[-3] == 1 && yyvsp[-1]==1) yyval=1; else yyval=-1; codegen();}
-#line 2067 "y.tab.c"
+#line 2063 "y.tab.c"
     break;
 
   case 120:
-#line 314 "file.y"
+#line 310 "file.y"
                                                      {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 2073 "y.tab.c"
+#line 2069 "y.tab.c"
     break;
 
   case 121:
-#line 318 "file.y"
+#line 314 "file.y"
                                                {push("!");}
-#line 2079 "y.tab.c"
+#line 2075 "y.tab.c"
     break;
 
   case 122:
-#line 318 "file.y"
+#line 314 "file.y"
                                                                                       {if(yyvsp[-1]==1) yyval=1; else yyval=-1; codegen();}
-#line 2085 "y.tab.c"
+#line 2081 "y.tab.c"
     break;
 
   case 123:
-#line 319 "file.y"
+#line 315 "file.y"
                                              {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 2091 "y.tab.c"
+#line 2087 "y.tab.c"
     break;
 
   case 124:
-#line 322 "file.y"
+#line 318 "file.y"
                                                                                  {if(yyvsp[-2] == 1 && yyvsp[0]==1) yyval=1; else yyval=-1; codegen();}
-#line 2097 "y.tab.c"
+#line 2093 "y.tab.c"
     break;
 
   case 125:
-#line 323 "file.y"
+#line 319 "file.y"
                                            {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 2103 "y.tab.c"
+#line 2099 "y.tab.c"
     break;
 
   case 126:
-#line 326 "file.y"
+#line 322 "file.y"
                                                           {push(">=");}
-#line 2109 "y.tab.c"
+#line 2105 "y.tab.c"
     break;
 
   case 127:
-#line 326 "file.y"
+#line 322 "file.y"
                                                                                                        {push("<=");}
-#line 2115 "y.tab.c"
+#line 2111 "y.tab.c"
     break;
 
   case 128:
-#line 326 "file.y"
+#line 322 "file.y"
                                                                                                                                             {push(">");}
-#line 2121 "y.tab.c"
+#line 2117 "y.tab.c"
     break;
 
   case 129:
-#line 326 "file.y"
+#line 322 "file.y"
                                                                                                                                                                             {push("<");}
-#line 2127 "y.tab.c"
+#line 2123 "y.tab.c"
     break;
 
   case 130:
-#line 326 "file.y"
+#line 322 "file.y"
                                                                                                                                                                                                             {push("==");}
-#line 2133 "y.tab.c"
+#line 2129 "y.tab.c"
     break;
 
   case 131:
-#line 326 "file.y"
+#line 322 "file.y"
                                                                                                                                                                                                                                                {push("!=");}
-#line 2139 "y.tab.c"
+#line 2135 "y.tab.c"
     break;
 
   case 132:
-#line 329 "file.y"
+#line 325 "file.y"
                                                              {if(yyvsp[-2] == 1 && yyvsp[0]==1) yyval=1; else yyval=-1; codegen();}
-#line 2145 "y.tab.c"
+#line 2141 "y.tab.c"
     break;
 
   case 133:
-#line 330 "file.y"
+#line 326 "file.y"
                                {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 2151 "y.tab.c"
+#line 2147 "y.tab.c"
     break;
 
   case 134:
-#line 333 "file.y"
+#line 329 "file.y"
                                        {push("+");}
-#line 2157 "y.tab.c"
+#line 2153 "y.tab.c"
     break;
 
   case 135:
-#line 334 "file.y"
+#line 330 "file.y"
                                             {push("-");}
-#line 2163 "y.tab.c"
+#line 2159 "y.tab.c"
     break;
 
   case 136:
-#line 337 "file.y"
+#line 333 "file.y"
                                             {if(yyvsp[-2] == 1 && yyvsp[0]==1) yyval=1; else yyval=-1; codegen();}
-#line 2169 "y.tab.c"
+#line 2165 "y.tab.c"
     break;
 
   case 137:
-#line 338 "file.y"
+#line 334 "file.y"
                                  {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 2175 "y.tab.c"
+#line 2171 "y.tab.c"
     break;
 
   case 138:
-#line 341 "file.y"
+#line 337 "file.y"
                                                   {push("*");}
-#line 2181 "y.tab.c"
+#line 2177 "y.tab.c"
     break;
 
   case 139:
-#line 341 "file.y"
+#line 337 "file.y"
                                                                                   {push("/");}
-#line 2187 "y.tab.c"
+#line 2183 "y.tab.c"
     break;
 
   case 140:
-#line 341 "file.y"
+#line 337 "file.y"
                                                                                                                  {push("%");}
-#line 2193 "y.tab.c"
+#line 2189 "y.tab.c"
     break;
 
   case 141:
-#line 344 "file.y"
+#line 340 "file.y"
                                     {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 2199 "y.tab.c"
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
+#line 2195 "y.tab.c"
     break;
 
   case 142:
-#line 345 "file.y"
+#line 341 "file.y"
                                   {if(yyvsp[0] == 1) yyval=1; else yyval=-1;}
-#line 2205 "y.tab.c"
+#line 2201 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-/* Line 1455 of yacc.c  */
-#line 344 ".\\file.y"
-    {
-=======
   case 143:
-#line 348 "file.y"
+#line 344 "file.y"
                                      {
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 						  push(curid);
 						  if(check_id_is_func(curid))
 						  {printf("ERROR : Identifier used has been declared as function.\n"); exit(8);}
@@ -2798,126 +2215,64 @@ yyreduce:
 			              else
 			              yyval = -1;
 			              }
-<<<<<<< HEAD
-    break;
-
-  case 143:
-
-/* Line 1455 of yacc.c  */
-#line 357 ".\\file.y"
-    {if(!checkscope(curid)){printf("%s\n",curid);printf("ERROR : Identifier used in undeclared\n");exit(0);}}
-=======
-#line 2223 "y.tab.c"
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
+#line 2219 "y.tab.c"
     break;
 
   case 144:
-#line 361 "file.y"
+#line 357 "file.y"
                                            {if(!checkscope(curid)){printf("%s\n",curid);printf("ERROR : Identifier used in undeclared\n");exit(0);}}
-#line 2229 "y.tab.c"
+#line 2225 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-/* Line 1455 of yacc.c  */
-#line 358 ".\\file.y"
-    {	if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
-								(yyval) = 1;
-=======
   case 145:
-#line 362 "file.y"
+#line 358 "file.y"
                                                 {	if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
 								yyval = 1;
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 							else
 								yyval = -1;
 							totbrackets = getbrackets(curid);
 						}
-#line 2240 "y.tab.c"
+#line 2236 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-  case 146:
-
-/* Line 1455 of yacc.c  */
-#line 365 ".\\file.y"
-    {totbrackets--;}
-    break;
-
-  case 148:
-
-/* Line 1455 of yacc.c  */
-#line 366 ".\\file.y"
-    {
-=======
   case 147:
-#line 369 "file.y"
+#line 365 "file.y"
                                      {totbrackets--;}
-#line 2246 "y.tab.c"
+#line 2242 "y.tab.c"
     break;
 
   case 149:
-#line 370 "file.y"
+#line 366 "file.y"
                                                 {
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 										totbrackets--;
 										if(totbrackets!=0){
 										printf("ERROR : Dimension of array resolution doesn't match declaration, difference of %d\n", totbrackets);
 										exit(0);
 									}}
-<<<<<<< HEAD
-    break;
-
-  case 149:
-
-/* Line 1455 of yacc.c  */
-#line 374 ".\\file.y"
-    {if((yyvsp[(2) - (3)])==1) (yyval)=1; else (yyval)=-1;}
+#line 2253 "y.tab.c"
     break;
 
   case 150:
-
-/* Line 1455 of yacc.c  */
-#line 375 ".\\file.y"
-    {if((yyvsp[(1) - (1)])==-1) (yyval)=-1; else (yyval)=1;}
-    break;
-
-  case 151:
-
-/* Line 1455 of yacc.c  */
-#line 376 ".\\file.y"
-    {if((yyvsp[(1) - (1)])==1) (yyval)=1; else (yyval)=-1;}
-=======
-#line 2257 "y.tab.c"
-    break;
-
-  case 150:
-#line 378 "file.y"
+#line 374 "file.y"
                                              {if(yyvsp[-1]==1) yyval=1; else yyval=-1;}
-#line 2263 "y.tab.c"
+#line 2259 "y.tab.c"
     break;
 
   case 151:
-#line 379 "file.y"
+#line 375 "file.y"
                                {if(yyvsp[0]==-1) yyval=-1; else yyval=1;}
-#line 2269 "y.tab.c"
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
+#line 2265 "y.tab.c"
     break;
 
   case 152:
-#line 380 "file.y"
+#line 376 "file.y"
                                    {if(yyvsp[0]==1) yyval=1; else yyval=-1;}
-#line 2275 "y.tab.c"
+#line 2271 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-/* Line 1455 of yacc.c  */
-#line 379 ".\\file.y"
-    {
-=======
   case 153:
-#line 383 "file.y"
+#line 379 "file.y"
                                         {
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 
 			             if(!check_declaration(curid, "Function"))
 			             { printf("ERROR : Function declaration not found.\n"); exit(0);}
@@ -2933,20 +2288,12 @@ yyreduce:
 												 for(int i=0;i<100;i++) call_params_types[i][0]='\0';
 
 			             }
-#line 2296 "y.tab.c"
+#line 2292 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-  case 153:
-
-/* Line 1455 of yacc.c  */
-#line 396 ".\\file.y"
-    { if(strcmp(currfunccall,"printf"))
-=======
   case 154:
-#line 400 "file.y"
+#line 396 "file.y"
                                                  { if(strcmp(currfunccall,"printf"))
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 							{
 								if(getSTparamscount(currfunccall)!=call_params_count)
 								{
@@ -2976,47 +2323,24 @@ yyreduce:
 							}
 							callgen();
 						 }
-<<<<<<< HEAD
-    break;
-
-  case 156:
-
-/* Line 1455 of yacc.c  */
-#line 431 ".\\file.y"
-    {  call_params_count++; }
+#line 2327 "y.tab.c"
     break;
 
   case 157:
-
-/* Line 1455 of yacc.c  */
-#line 432 ".\\file.y"
-    { call_params_count++; }
-=======
-#line 2331 "y.tab.c"
-    break;
-
-  case 157:
-#line 435 "file.y"
+#line 431 "file.y"
                                                  {  call_params_count++; }
-#line 2337 "y.tab.c"
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
+#line 2333 "y.tab.c"
     break;
 
   case 158:
-#line 436 "file.y"
+#line 432 "file.y"
                               { call_params_count++; }
-#line 2343 "y.tab.c"
+#line 2339 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-/* Line 1455 of yacc.c  */
-#line 434 ".\\file.y"
-    {  arggen(1);
-=======
   case 159:
-#line 438 "file.y"
+#line 434 "file.y"
                  {  arggen(1);
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 										for(int i=0;i<100;i++)
 										{
 											if(call_params_types[i][0]=='\0')
@@ -3026,20 +2350,12 @@ yyreduce:
 											}
 										}
 									}
-#line 2358 "y.tab.c"
+#line 2354 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-  case 159:
-
-/* Line 1455 of yacc.c  */
-#line 444 ".\\file.y"
-    {  arggen(2);
-=======
   case 160:
-#line 448 "file.y"
+#line 444 "file.y"
                                            {  arggen(2);
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 														for(int i=0;i<100;i++)
 														{
 															if(call_params_types[i][0]=='\0')
@@ -3049,20 +2365,12 @@ yyreduce:
 															}
 														}
 													}
-#line 2373 "y.tab.c"
+#line 2369 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-  case 160:
-
-/* Line 1455 of yacc.c  */
-#line 454 ".\\file.y"
-    { arggen(3);
-=======
   case 161:
-#line 458 "file.y"
+#line 454 "file.y"
                                           { arggen(3);
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 													for(int i=0;i<100;i++)
 													{
 														if(call_params_types[i][0]=='\0')
@@ -3072,20 +2380,12 @@ yyreduce:
 														}
 													}
 												}
-#line 2388 "y.tab.c"
+#line 2384 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-  case 161:
-
-/* Line 1455 of yacc.c  */
-#line 464 ".\\file.y"
-    {  arggen(4);
-=======
   case 162:
-#line 468 "file.y"
+#line 464 "file.y"
                                          {  arggen(4);
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 													for(int i=0;i<100;i++)
 													{
 														if(call_params_types[i][0]=='\0')
@@ -3095,20 +2395,12 @@ yyreduce:
 														}
 													}
 												}
-#line 2403 "y.tab.c"
+#line 2399 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-  case 162:
-
-/* Line 1455 of yacc.c  */
-#line 474 ".\\file.y"
-    {  arggen(5);
-=======
   case 163:
-#line 478 "file.y"
+#line 474 "file.y"
                                              {  arggen(5);
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
 															for(int i=0;i<100;i++)
 															{
 																if(call_params_types[i][0]=='\0')
@@ -3118,71 +2410,36 @@ yyreduce:
 																}
 															}
 														}
-<<<<<<< HEAD
-    break;
-
-  case 163:
-
-/* Line 1455 of yacc.c  */
-#line 486 ".\\file.y"
-    {  insV(); codegencon(); (yyval)=1; }
+#line 2414 "y.tab.c"
     break;
 
   case 164:
-
-/* Line 1455 of yacc.c  */
-#line 487 ".\\file.y"
-    {  insV(); codegencon();(yyval)=-1;}
-    break;
-
-  case 165:
-
-/* Line 1455 of yacc.c  */
-#line 488 ".\\file.y"
-    {  insV(); codegencon();}
-=======
-#line 2418 "y.tab.c"
-    break;
-
-  case 164:
-#line 490 "file.y"
+#line 486 "file.y"
                                                 {  insV(); codegencon(); yyval=1; }
-#line 2424 "y.tab.c"
+#line 2420 "y.tab.c"
     break;
 
   case 165:
-#line 491 "file.y"
+#line 487 "file.y"
                                                 {  insV(); codegencon();yyval=-1;}
-#line 2430 "y.tab.c"
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
+#line 2426 "y.tab.c"
     break;
 
   case 166:
-#line 492 "file.y"
+#line 488 "file.y"
                                                 {  insV(); codegencon();}
-#line 2436 "y.tab.c"
+#line 2432 "y.tab.c"
     break;
 
-<<<<<<< HEAD
-/* Line 1455 of yacc.c  */
-#line 489 ".\\file.y"
-    {  insV(); codegencon();(yyval)=1; }
-=======
   case 167:
-#line 493 "file.y"
+#line 489 "file.y"
                                             {  insV(); codegencon();yyval=1; }
-#line 2442 "y.tab.c"
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
+#line 2438 "y.tab.c"
     break;
 
 
-#line 2446 "y.tab.c"
+#line 2442 "y.tab.c"
 
-<<<<<<< HEAD
-/* Line 1455 of yacc.c  */
-#line 2599 "y.tab.c"
-=======
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -3413,15 +2670,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-<<<<<<< HEAD
-
-
-
-/* Line 1675 of yacc.c  */
-#line 491 ".\\file.y"
-=======
-#line 495 "file.y"
->>>>>>> 8b4507ee4ecb9cfcef2827dd1131acf05aca2b20
+#line 491 "file.y"
 
 
 extern FILE *yyin;
@@ -3675,12 +2924,12 @@ int main(int argc , char **argv)
 
 	if(flag == 0)
 	{
-		printf(ANSI_COLOR_GREEN "Status: Parsing Complete - Valid" ANSI_COLOR_RESET "\n");
-		printf("%30s" ANSI_COLOR_CYAN "SYMBOL TABLE" ANSI_COLOR_RESET "\n", " ");
+		printf("Status: Parsing Complete - Valid" "\n");
+		printf("%30sSYMBOL TABLE\n", " ");
 		printf("%30s %s\n", " ", "------------");
 		printST();
 
-		printf("\n\n%30s" ANSI_COLOR_CYAN "CONSTANT TABLE" ANSI_COLOR_RESET "\n", " ");
+		printf("\n\n%30sCONSTANT TABLE\n", " ");
 		printf("%30s %s\n", " ", "--------------");
 		printCT();
 	}
