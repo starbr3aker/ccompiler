@@ -15,10 +15,10 @@ void main()
 		for(i=0;i<b;i++)
 		{
 			b++;
-			myfunc(a,b);
+			b=myfunc(a,b);
 
 		}
 		a++;
 	}
-	
+
 }
