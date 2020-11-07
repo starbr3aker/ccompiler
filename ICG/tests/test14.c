@@ -1,15 +1,22 @@
+//PASS CASE: multiple function calls
 
 #include<stdio.h>
 
-void myfunc(int a)
+int funct()
+{
+  return 1;
+}
+int myfunc(int a, char b)
 {
     return a;
 }
 
 void main()
 {
-    int i,n;
-
-    myfunc(i);
-    
+  int i;
+  char n;
+  double s;
+  int x= funct();
+  printf("\n");
+  myfunc(i,n);
 }
